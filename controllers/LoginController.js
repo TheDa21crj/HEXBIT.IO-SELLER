@@ -203,8 +203,6 @@ const AddStore = async (req, res, next) => {
         { $push: { Store: StoreID } }
       );
 
-      console.log(StoreID);
-
       res.status(202).json({ success: true, User: upUser, store: createduser });
     } catch (err) {
       const error = new HttpError("User not found", 500);
