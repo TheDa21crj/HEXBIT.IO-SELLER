@@ -26,6 +26,8 @@ router.post(
   LoginController.login
 );
 
+router.use(auth);
+
 // Add Store
 router.post(
   "/AddStore",
