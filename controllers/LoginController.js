@@ -138,6 +138,23 @@ const login = async (req, res, next) => {
 };
 
 const AddStore = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const {
+    StoreName,
+    StoreType,
+    Website,
+    StoreDescription,
+    name,
+    city,
+    state,
+    country,
+    area_code,
+  } = req.body;
+
   res.status(202).json("Hello");
 };
 
