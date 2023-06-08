@@ -137,5 +137,10 @@ const login = async (req, res, next) => {
   }
 };
 
+const AddStore = async (req, res, next) => {
+  res.status(202).json("Hello");
+};
+
 exports.login = login;
+exports.AddStore = AddStore;
 exports.registerUser = registerUser;
