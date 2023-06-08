@@ -19,6 +19,8 @@ const select = async (req, res) => {
     },
   };
 
+  console.log(selectData);
+
   // Prepare the response payload
   const response = {
     context: {
