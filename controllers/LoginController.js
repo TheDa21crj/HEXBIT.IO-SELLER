@@ -207,6 +207,16 @@ const AddStore = async (req, res, next) => {
   }
 };
 
+const AddItem = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  res.status(202).json("res");
+};
+
 exports.login = login;
+exports.AddItem = AddItem;
 exports.AddStore = AddStore;
 exports.registerUser = registerUser;
