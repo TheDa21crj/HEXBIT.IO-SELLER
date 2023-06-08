@@ -28,11 +28,16 @@ router.post(
 
 // Add Store
 router.post(
-  "/login",
+  "/AddStore",
   [check("StoreName", "StoreName is Required").not().isEmpty()],
   [check("StoreType", "StoreType is Required").not().isEmpty()],
   [check("Website", "Website is Required").not().isEmpty()],
   [check("StoreDescription", "StoreDescription is Required").not().isEmpty()],
+  [check("name", "name is Required").not().isEmpty()],
+  [check("city", "city is Required").not().isEmpty()],
+  [check("state", "state is Required").not().isEmpty()],
+  [check("country", "country is Required").not().isEmpty()],
+  [check("area_code", "area_code is Required").not().isEmpty()],
   LoginController.AddStore
 );
 
