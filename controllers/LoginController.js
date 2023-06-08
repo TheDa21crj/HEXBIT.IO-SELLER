@@ -2,6 +2,7 @@ const express = require("express");
 const { validationResult } = require("express-validator");
 const Seller = require("./../models/Seller");
 const Store = require("./../models/Store");
+const Items = require("./../models/Items");
 const gravatar = require("gravatar");
 const HttpError = require("./../models/HttpError");
 const jwt = require("jsonwebtoken");
@@ -170,7 +171,7 @@ const AddStore = async (req, res, next) => {
 
   if (users) {
     try {
-      const newUser = new Store({
+      const newUser = new Items({
         StoreName,
         StoreType,
         Website,
@@ -211,6 +212,40 @@ const AddItem = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { name, price, stock, StoreID } = req.body;
+
+  try {
+    try {
+      users = await Seller.findOne({ email: res.locals.userData.userEmail });
+    } catch (err) {
+      const error = new HttpError("User not found", 500);
+      return next(error);
+    }
+
+    if (users) {
+      const newUser = new Store({
+        name,
+        price,
+        stock,
+        StoreID,
+        SellerID: users._id,
+      });
+
+      let createduser = await newUser.save();
+    }
+
+    // try {
+    //   users = await Seller.findOne({ email: res.locals.userData.userEmail });
+    // } catch (err) {
+    //   const error = new HttpError("User not found", 500);
+    //   return next(error);
+    // }
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Item not Added", 500);
+    return next(error);
   }
 
   res.status(202).json("res");
