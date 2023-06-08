@@ -1,3 +1,4 @@
+const axios = require("axios");
 const { validationResult } = require("express-validator");
 
 // /select - buyer app specifies the items & quantity selected by a buyer;
@@ -8,6 +9,15 @@ const select = async (req, res) => {
   }
 
   const { context, message } = req.body;
+
+  // get the item and quantity
+  const selectData = {
+    orderID: message.order.id,
+    itemsID: {
+      id: message.item[0].id,
+      quantity: message.item[0].quantity.count,
+    },
+  };
 
   // Prepare the response payload
   const response = {
@@ -25,20 +35,16 @@ const select = async (req, res) => {
       ttl: context.ttl,
     },
     message: {
-      sellers: sellersInCity,
-      finder_fee: finderFee,
+      order: selectData.orderID,
+      items: selectData.itemsID,
     },
   };
 
-  const responseData = await axios.post(
-    "https://virtserver.swaggerhub.com/ONDCTech/ONDC-Protocol-Core/1.0.0/select",
-    response,
-    {
-      headers: {
-        Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
-      },
-    }
-  );
+  const responseData = await axios.post(process.env.SELECT, response, {
+    headers: {
+      Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
+    },
+  });
 
   // Send the response
   console.log(responseData);
