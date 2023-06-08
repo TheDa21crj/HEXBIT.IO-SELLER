@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/test", (req, res) => {
-  res.send("hello from the world of web");
+  res.send("Hello World");
 });
 
 app.use((req, res, next) => {
