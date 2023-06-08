@@ -15,7 +15,11 @@ const ItemSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    required: true,
+    default: 0,
+  },
+  totalSold: {
+    type: Number,
+    default: 0,
   },
   StoreID: {
     type: mongoose.Types.ObjectId,
