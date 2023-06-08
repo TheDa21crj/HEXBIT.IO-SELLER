@@ -171,7 +171,7 @@ const AddStore = async (req, res, next) => {
 
   if (users) {
     try {
-      const newUser = new Items({
+      const newUser = new Store({
         StoreName,
         StoreType,
         Website,
@@ -225,7 +225,7 @@ const AddItem = async (req, res, next) => {
     }
 
     if (users) {
-      const newUser = new Store({
+      const newUser = new Items({
         name,
         price,
         stock,
@@ -236,19 +236,14 @@ const AddItem = async (req, res, next) => {
       let createduser = await newUser.save();
     }
 
-    // try {
-    //   users = await Seller.findOne({ email: res.locals.userData.userEmail });
-    // } catch (err) {
-    //   const error = new HttpError("User not found", 500);
-    //   return next(error);
-    // }
+    console.log(createduser);
+
+    res.status(202).json({ success: true, createduser: "createduser" });
   } catch (err) {
     console.log(err);
     const error = new HttpError("Item not Added", 500);
     return next(error);
   }
-
-  res.status(202).json("res");
 };
 
 exports.login = login;
