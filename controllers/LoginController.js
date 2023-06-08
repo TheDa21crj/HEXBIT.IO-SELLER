@@ -234,11 +234,11 @@ const AddItem = async (req, res, next) => {
       });
 
       let createduser = await newUser.save();
+
+      console.log(createduser);
+
+      res.status(202).json({ success: true, createduser: "createduser" });
     }
-
-    console.log(createduser);
-
-    res.status(202).json({ success: true, createduser: "createduser" });
   } catch (err) {
     console.log(err);
     const error = new HttpError("Item not Added", 500);
