@@ -17,6 +17,14 @@ const ItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  StoreID: {
+    type: mongoose.Types.ObjectId,
+    ref: "Store",
+  },
+  SellerID: {
+    type: mongoose.Types.ObjectId,
+    ref: "users",
+  },
 });
 
 const ItemList = new mongoose.model("Item", ItemSchema);
