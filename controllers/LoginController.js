@@ -235,6 +235,13 @@ const AddItem = async (req, res, next) => {
 
       let createduser = await newUser.save();
 
+      //   let storeFind = await Store.dind
+
+      let storeFind = await Store.findOneAndUpdate(
+        { _id: StoreID },
+        { $push: { Store: StoreID } }
+      );
+
       res.status(202).json({ success: true, createduser });
     }
   } catch (err) {
