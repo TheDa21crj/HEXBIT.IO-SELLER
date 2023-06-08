@@ -1,6 +1,7 @@
 const express = require("express");
 const { validationResult } = require("express-validator");
 const Seller = require("./../models/Seller");
+const Store = require("./../models/Store");
 const gravatar = require("gravatar");
 const HttpError = require("./../models/HttpError");
 const jwt = require("jsonwebtoken");
@@ -160,11 +161,54 @@ const AddStore = async (req, res, next) => {
     area_code,
   } = req.body;
 
-  const userEmail = res.locals.userData.userEmail;
+  var users;
+  try {
+    users = await Seller.findOne({ email: res.locals.userData.userEmail });
+  } catch (err) {
+    const error = new HttpError("User not found", 500);
+    return next(error);
+  }
 
-  console.log(userEmail);
+  if (users) {
+    try {
+      const newUser = new Store({
+        StoreName,
+        StoreType,
+        Website,
+        StoreDescription,
+        Address: {
+          door,
+          name,
+          building,
+          street,
+          locality,
+          ward,
+          city,
+          state,
+          country,
+          area_code,
+        },
+      });
 
-  res.status(202).json("Hello");
+      let createduser = await newUser.save();
+
+      console.log(users);
+      console.log("--------createduser--------");
+      console.log(createduser._id);
+
+      let StoreID = createduser._id;
+      let upUser = await Seller.findAndModify(
+        { email: res.locals.userData.userEmail },
+        { $push: { Store: StoreID } }
+      );
+
+      res.status(202).json({ success: true, User: upUser, store: createduser });
+    } catch (err) {
+      const error = new HttpError("User not found", 500);
+      console.log(err);
+      return next(error);
+    }
+  }
 };
 
 exports.login = login;
