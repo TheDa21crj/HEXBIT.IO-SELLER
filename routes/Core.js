@@ -18,4 +18,6 @@ router.post(
 // select
 router.post("/select", selectController.select);
 
+router.post("/onSelect", selectController.onSelect);
+
 module.exports = router;
