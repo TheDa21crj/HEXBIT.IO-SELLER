@@ -235,9 +235,7 @@ const AddItem = async (req, res, next) => {
 
       let createduser = await newUser.save();
 
-      console.log(createduser);
-
-      res.status(202).json({ success: true, createduser: "createduser" });
+      res.status(202).json({ success: true, createduser });
     }
   } catch (err) {
     console.log(err);
