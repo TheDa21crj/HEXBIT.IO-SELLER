@@ -57,15 +57,11 @@ const search = async (req, res) => {
     },
   };
 
-  const responseData = await axios.post(
-    "https://virtserver.swaggerhub.com/ONDCTech/ONDC-Protocol-Core/1.0.0/search",
-    response,
-    {
-      headers: {
-        Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
-      },
-    }
-  );
+  const responseData = await axios.post(process.env.SEARCH, response, {
+    headers: {
+      Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
+    },
+  });
 
   // Send the response
   console.log(responseData);
