@@ -31,7 +31,7 @@ app.get("/test", (req, res) => {
 });
 
 // route
-app.use("/api/Search", require("./routes/Search"));
+app.use("/api/Core", require("./routes/Core"));
 
 app.use((req, res, next) => {
   console.log(req.url);
