@@ -6,16 +6,17 @@ module.exports = (req, res, next) => {
     return next();
   }
   try {
-    const token = req.headers.authorization; // Authorization: 'Bearer TOKEN'
+    // Authorization: 'Bearer TOKEN'
+    const token = req.headers.authorization;
 
     if (!token) {
       const error = new HttpError("Authentication failed!", 401);
       return next(error);
     }
     const decodedToken = jwt.verify(token, process.env.JWT_SECRATE);
+
     res.locals.userData = {
       userEmail: decodedToken.userEmail,
-      userLevel: decodedToken.designation,
     };
     next();
   } catch (err) {
