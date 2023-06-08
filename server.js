@@ -3,10 +3,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const HttpError = require("./models/HttpError");
+const connectDB = require("./config/db");
 
 dotenv.config();
 
 const app = express();
+
+// connect to DB
+connectDB();
 
 app.use(bodyParser.json());
 
