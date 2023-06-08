@@ -55,4 +55,3 @@ const select = async (req, res) => {
 };
 
 exports.select = select;
-exports.onSelect = onSelect;
