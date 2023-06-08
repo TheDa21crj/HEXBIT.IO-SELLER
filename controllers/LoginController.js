@@ -58,7 +58,6 @@ const registerUser = async (req, res, next) => {
       Store: [],
     });
     try {
-      // console.log(newEvent)
       const createduser = await newUser.save();
       let token;
       try {
@@ -191,10 +190,6 @@ const AddStore = async (req, res, next) => {
       });
 
       let createduser = await newUser.save();
-
-      console.log(users);
-      console.log("--------createduser--------");
-      console.log(createduser._id);
 
       let StoreID = {};
       StoreID.StoreID = createduser._id;
