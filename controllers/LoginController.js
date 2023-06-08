@@ -196,11 +196,14 @@ const AddStore = async (req, res, next) => {
       console.log("--------createduser--------");
       console.log(createduser._id);
 
-      let StoreID = createduser._id;
-      let upUser = await Seller.findAndModify(
+      let StoreID = {};
+      StoreID.StoreID = createduser._id;
+      let upUser = await Seller.findOneAndUpdate(
         { email: res.locals.userData.userEmail },
         { $push: { Store: StoreID } }
       );
+
+      console.log(StoreID);
 
       res.status(202).json({ success: true, User: upUser, store: createduser });
     } catch (err) {
