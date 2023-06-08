@@ -20,15 +20,7 @@ router.post(
   "/select",
   check("context", "context is Required").not().isEmpty(),
   check("message", "message is Required").not().isEmpty(),
-
   selectController.select
 );
-check("context", "context is Required").not().isEmpty(),
-  check("message", "message is Required").not().isEmpty(),
-  router.post(
-    "/onSelect",
-
-    selectController.onSelect
-  );
 
 module.exports = router;
