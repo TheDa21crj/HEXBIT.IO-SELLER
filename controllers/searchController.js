@@ -1,9 +1,15 @@
 const xlsx = require("xlsx");
 const path = require("path");
 const axios = require("axios");
+const { validationResult } = require("express-validator");
 
 // Define the route for the /search API
 const search = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const filePath = path.join(
     __dirname,
     "..",
