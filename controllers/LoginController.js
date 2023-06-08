@@ -236,12 +236,15 @@ const AddItem = async (req, res, next) => {
 
       let createduser = await newUser.save();
 
-      let ItemID;
+      let Item = {};
+      Item.ItemID = createduser._id;
 
       let storeFind = await Store.findOneAndUpdate(
         { _id: StoreID },
-        { $push: { Items: StoreID } }
+        { $push: { Items: Item } }
       );
+
+      console.log(storeFind);
 
       res.status(202).json({ success: true, createduser });
     }
