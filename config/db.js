@@ -6,7 +6,7 @@ const connectDB = async () => {
     await mongoose.connect(process.env.MONGOURI, {
       useNewUrlParser: true,
     });
-    console.log("DataBase Connected");
+    console.log("HEXBIT.IO DB Connected");
   } catch (error) {
     console.log("Error");
     console.log(error);
