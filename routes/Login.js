@@ -27,5 +27,13 @@ router.post(
 );
 
 // Add Store
+router.post(
+  "/login",
+  [check("StoreName", "StoreName is Required").not().isEmpty()],
+  [check("StoreType", "StoreType is Required").not().isEmpty()],
+  [check("Website", "Website is Required").not().isEmpty()],
+  [check("StoreDescription", "StoreDescription is Required").not().isEmpty()],
+  LoginController.AddStore
+);
 
 module.exports = router;
