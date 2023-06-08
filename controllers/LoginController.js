@@ -160,6 +160,10 @@ const AddStore = async (req, res, next) => {
     area_code,
   } = req.body;
 
+  const userEmail = res.locals.userData.userEmail;
+
+  console.log(userEmail);
+
   res.status(202).json("Hello");
 };
 
