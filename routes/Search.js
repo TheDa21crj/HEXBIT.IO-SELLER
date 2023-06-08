@@ -7,8 +7,6 @@ const router = express.Router();
 
 // Define the route for the /search API
 router.post("/", async (req, res) => {
-  // Read the city codes from the Excel file
-
   const filePath = path.join(
     __dirname,
     "..",
@@ -67,7 +65,8 @@ router.post("/", async (req, res) => {
 
   // Send the response
   console.log(responseData);
-  res.status(202).json("responseData");
+
+  res.status(202).json(responseData.data);
 });
 
 // Helper function to search for sellers in the given city
