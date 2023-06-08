@@ -19,21 +19,9 @@ const StoreSchema = new mongoose.Schema({
   },
   Items: [
     {
-      name: {
-        type: String,
-        required: true,
-      },
-      price: {
-        type: Number,
-        required: true,
-      },
-      stock: {
-        type: Number,
-        required: true,
-      },
-      rating: {
-        type: Number,
-        required: true,
+      id: {
+        type: mongoose.Types.ObjectId,
+        ref: "Item",
       },
     },
   ],
