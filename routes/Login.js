@@ -44,4 +44,14 @@ router.post(
   LoginController.AddStore
 );
 
+// Add Store
+router.post(
+  "/AddItem",
+  [check("name", "name is Required").not().isEmpty()],
+  [check("price", "price is Required").not().isEmpty()],
+  [check("stock", "stock is Required").not().isEmpty()],
+  [check("rating", "rating is Required").not().isEmpty()],
+  LoginController.AddItem
+);
+
 module.exports = router;
