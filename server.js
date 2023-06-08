@@ -30,6 +30,9 @@ app.get("/test", (req, res) => {
   res.send("Hello World");
 });
 
+// route
+app.use("/api/Search", require("./routes/Search"));
+
 app.use((req, res, next) => {
   console.log(req.url);
   const error = new HttpError("Route not found", 404);
@@ -38,6 +41,7 @@ app.use((req, res, next) => {
 
 const port = process.env.PORT || 5000;
 
+// listen
 app.listen(port, () => {
   console.log("HEXBIT.IO Server is listining on port " + port);
 });
