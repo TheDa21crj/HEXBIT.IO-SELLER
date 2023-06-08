@@ -54,14 +54,5 @@ const select = async (req, res) => {
   res.status(202).json(responseData.data);
 };
 
-const onSelect = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  res.status(202).json("responseData.data");
-};
-
 exports.select = select;
 exports.onSelect = onSelect;
