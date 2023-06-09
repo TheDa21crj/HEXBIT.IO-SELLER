@@ -29,6 +29,8 @@ const search = async (req, res) => {
   // Perform the search operation based on the city
   const sellersInCity = searchSellersByCity(city, cityCodes);
 
+  console.table(sellersInCity);
+
   // Process buyer app finder fee calculations
   const finderFeeType =
     message.intent.payment["@ondc/org/buyer_app_finder_fee_type"];
