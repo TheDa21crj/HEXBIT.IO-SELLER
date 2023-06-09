@@ -39,6 +39,10 @@ const search = async (req, res) => {
     message.intent.payment["@ondc/org/buyer_app_finder_fee_type"];
   const finderFeeAmount =
     message.intent.payment["@ondc/org/buyer_app_finder_fee_amount"];
+
+  console.log("---finderFeeType, finderFeeAmount---");
+  console.log(finderFeeType, finderFeeAmount);
+
   const finderFee = calculateFinderFee(finderFeeType, finderFeeAmount);
 
   // Prepare the response payload
