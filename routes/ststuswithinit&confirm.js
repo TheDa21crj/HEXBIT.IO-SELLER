@@ -7,7 +7,12 @@ const router = express.Router();
 const ststuswithinit = require("../controllers/ststuswithinit&confirm");
 
 // Endpoint for /on_init
-router.post("/on_init", ststuswithinit.on_init);
+router.post(
+  "/on_init",
+  [check("context", "context is Required").not().isEmpty()],
+  [check("message", "message is Required").not().isEmpty()],
+  ststuswithinit.on_init
+);
 
 // Endpoint for /confirm
 router.post("/confirm", ststuswithinit.confirm);
