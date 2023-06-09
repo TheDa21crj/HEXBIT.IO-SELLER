@@ -10,6 +10,6 @@ const updatedsearch4cat = require("../controllers/updatedsearch4cat");
 router.post("/search/item", updatedsearch4cat.searchItem);
 
 // Search by city
-router.post("/search/city", updatedsearch4cat.searchItem);
+router.post("/search/city", updatedsearch4cat.searchCity);
 
 module.exports = router;
