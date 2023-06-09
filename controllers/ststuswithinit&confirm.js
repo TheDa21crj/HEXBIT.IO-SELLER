@@ -5,6 +5,11 @@ const Store = require("./../models/Store");
 const Items = require("./../models/Items");
 const HttpError = require("./../models/HttpError");
 
+// models
+const Seller = require("./../models/Seller");
+const Store = require("./../models/Store");
+const Items = require("./../models/Items");
+
 // Endpoint for /on_init
 const on_init = async (req, res, next) => {
   // Extract the necessary information from the request
