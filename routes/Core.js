@@ -24,12 +24,4 @@ router.post(
   selectController.select
 );
 
-// confirmwithCOD
-router.post(
-  "/confirmwithCOD",
-  check("context", "context is Required").not().isEmpty(),
-  check("message", "message is Required").not().isEmpty(),
-  confirmwithCOD.confirmwithCOD
-);
-
 module.exports = router;
