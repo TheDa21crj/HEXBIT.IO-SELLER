@@ -1,9 +1,11 @@
 const express = require("express");
 const { validationResult } = require("express-validator");
+const HttpError = require("./../models/HttpError");
+
+// models
 const Seller = require("./../models/Seller");
 const Store = require("./../models/Store");
 const Items = require("./../models/Items");
-const HttpError = require("./../models/HttpError");
 
 // Endpoint for /search
 const search = async (req, res, next) => {
