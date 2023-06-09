@@ -63,15 +63,25 @@ const search = async (req, res) => {
     },
   });
 
-  // Send the response
-  console.log(responseData);
-
   res.status(202).json(responseData.data);
 };
 
 // Helper function to search for sellers in the given city
 function searchSellersByCity(city, cityCodes) {
   // Perform the search logic based on the city
+
+  console.log("--------city--------");
+  console.log(city);
+
+  let final = cityCodes.filter((e) => {
+    if (e[0] == city) {
+      return e[1];
+    }
+  });
+
+  console.log("--------final--------");
+  console.log(final);
+
   const sellersInCity = []; // Placeholder, implement your actual search logic here
 
   return sellersInCity;
