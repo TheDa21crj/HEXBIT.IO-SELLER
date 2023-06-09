@@ -74,7 +74,7 @@ function searchSellersByCity(city, cityCodes) {
   console.log(city);
 
   console.log("--------cityCodes--------");
-  let final = cityCodes.filter((e) => {
+  var finalCode = cityCodes.filter((e) => {
     if (e[0] == city) {
       console.log(e[1]);
       return e[1];
@@ -82,7 +82,7 @@ function searchSellersByCity(city, cityCodes) {
   });
 
   console.log("--------final--------");
-  console.log(final);
+  console.log(finalCode[0][1]);
 
   const sellersInCity = []; // Placeholder, implement your actual search logic here
 
