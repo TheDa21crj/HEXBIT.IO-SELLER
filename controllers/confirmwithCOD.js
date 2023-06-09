@@ -117,7 +117,7 @@ const on_status = async (req, res, next) => {
 
 exports.search = search;
 exports.select = select;
-exports.on_search = on_search;
 exports.confirm = confirm;
 exports.on_status = on_status;
+exports.on_search = on_search;
 exports.on_confirm = on_confirm;
