@@ -41,5 +41,11 @@ const searchCity = async (req, res) => {
   res.json({ searchResults, finderFee });
 };
 
+// Search by category
+const searchCategory = async (req, res) => {};
+const searchFulfillment = async (req, res) => {};
+
+exports.searchFulfillment = searchFulfillment;
+exports.searchCategory = searchCategory;
 exports.searchCity = searchCity;
 exports.searchItem = searchItem;
