@@ -77,19 +77,11 @@ const search = async (req, res) => {
 const searchSellersByCity = async (city, cityCodes) => {
   // Perform the search logic based on the city
 
-  console.log("--------city--------");
-  console.log(city);
-
-  console.log("--------cityCodes--------");
   var finalCode = cityCodes.filter((e) => {
     if (e[0] == city) {
-      console.log(e[1]);
       return e[1];
     }
   });
-
-  console.log("--------final--------");
-  console.log(finalCode[0][1]);
 
   // Placeholder, implement your actual search logic here
   const sellers = await Store.find({
