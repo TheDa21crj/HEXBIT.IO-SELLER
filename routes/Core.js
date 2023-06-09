@@ -6,7 +6,6 @@ const router = express.Router();
 // controllers
 const searchController = require("../controllers/searchController");
 const selectController = require("../controllers/selectController");
-const confirmwithCOD = require("../controllers/confirmwithCOD");
 
 // search
 router.post(
