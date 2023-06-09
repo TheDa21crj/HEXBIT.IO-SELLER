@@ -194,6 +194,7 @@ const AddStore = async (req, res, next) => {
           country,
           area_code: code,
         },
+        sellerID: users._id,
       });
 
       let createduser = await newUser.save();
