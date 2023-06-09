@@ -3,6 +3,12 @@ const path = require("path");
 const axios = require("axios");
 const { validationResult } = require("express-validator");
 
+// models
+const Seller = require("./../models/Seller");
+const Store = require("./../models/Store");
+const Items = require("./../models/Items");
+
+
 // Define the route for the /search API
 const search = async (req, res) => {
   const errors = validationResult(req);
@@ -87,6 +93,8 @@ function searchSellersByCity(city, cityCodes) {
   console.log(finalCode[0][1]);
 
   // Placeholder, implement your actual search logic here
+  const sellers = await St
+  
   const sellersInCity = [];
 
   return sellersInCity;
