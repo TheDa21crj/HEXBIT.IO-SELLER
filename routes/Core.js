@@ -27,6 +27,8 @@ router.post(
 
 // support
 router.post("/support", supportController.support);
+
+// track
 router.post("/track", trackController.track);
 
 module.exports = router;
