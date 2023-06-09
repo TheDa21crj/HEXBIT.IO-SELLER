@@ -112,7 +112,6 @@ const calculateFinderFee = async (type) => {
     const gstProduct = gstProductRate * e.price;
     const gstDeliveryCharges = gstDeliveryChargesRate * deliveryCharges;
 
-    // if (e === type) {
     e.price = (
       totalOrderValue +
       buyerFinderFee +
@@ -120,8 +119,6 @@ const calculateFinderFee = async (type) => {
       gstProduct +
       gstDeliveryCharges
     ).toFixed(2);
-
-    // }
   });
 
   console.log(items);
