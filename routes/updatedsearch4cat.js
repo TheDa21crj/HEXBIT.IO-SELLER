@@ -16,6 +16,6 @@ router.post("/search/city", updatedsearch4cat.searchCity);
 router.post("/search/category", updatedsearch4cat.searchCategory);
 
 // Search by fulfillment end location
-router.post("/search/category", updatedsearch4cat.searchCategory);
+router.post("/search/fulfillment", updatedsearch4cat.searchFulfillment);
 
 module.exports = router;
