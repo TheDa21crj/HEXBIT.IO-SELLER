@@ -60,6 +60,7 @@ const searchCategory = async (req, res) => {
   // Return search results and finder fee
   res.json({ searchResults, finderFee });
 };
+
 const searchFulfillment = async (req, res) => {};
 
 exports.searchFulfillment = searchFulfillment;
