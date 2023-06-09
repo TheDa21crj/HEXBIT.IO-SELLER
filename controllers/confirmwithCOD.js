@@ -68,8 +68,10 @@ const select = async (req, res, next) => {
     stock: { $gt: qt - 1 },
   });
 
+  let response = {};
+
   if (stockItem.length > 0) {
-    const response = {
+    response = {
       context: {
         domain: context.domain,
         country: context.country,
@@ -85,12 +87,59 @@ const select = async (req, res, next) => {
       },
       message: {
         order: {
-          id: selectData.orderID,
-          items: selectData.itemsID,
+          id: message.order.id,
+          items: [
+            {
+              id: message.order.item[0].id,
+              quantity: {
+                available: {
+                  count: stockItem[0].stock,
+                },
+              },
+            },
+          ],
           fulfillment: {
             state: {
               descriptor: {
                 code: "Serviceable",
+              },
+            },
+          },
+        },
+      },
+    };
+  } else {
+    response = {
+      context: {
+        domain: context.domain,
+        country: context.country,
+        city: context.city,
+        action: context.action,
+        core_version: context.core_version,
+        bap_id: context.bap_id,
+        bap_uri: context.bap_uri,
+        transaction_id: context.transaction_id,
+        message_id: context.message_id,
+        timestamp: context.timestamp,
+        ttl: context.ttl,
+      },
+      message: {
+        order: {
+          id: message.order.item[0].id,
+          items: [
+            {
+              id: message.order.item[0].id,
+              quantity: {
+                available: {
+                  count: 0,
+                },
+              },
+            },
+          ],
+          fulfillment: {
+            state: {
+              descriptor: {
+                code: "Non-serviceable",
               },
             },
           },
@@ -104,39 +153,9 @@ const select = async (req, res, next) => {
       },
     });
 
-    res.status(202).json(responseData);
-  } else {
-    const response = {
-      context: {
-        domain: context.domain,
-        country: context.country,
-        city: context.city,
-        action: context.action,
-        core_version: context.core_version,
-        bap_id: context.bap_id,
-        bap_uri: context.bap_uri,
-        transaction_id: context.transaction_id,
-        message_id: context.message_id,
-        timestamp: context.timestamp,
-        ttl: context.ttl,
-      },
-      message: {
-        order: {
-          id: selectData.orderID,
-          items: selectData.itemsID,
-          fulfillment: {
-            state: {
-              descriptor: {
-                code: "Non-serviceable",
-              },
-            },
-          },
-        },
-      },
-    };
-
-    console.log("no such Id");
-    return res.status(304).json({ message: "no such Id" });
+    // console.log("no such Id");
+    res.status(202).json(responseData, response);
+    // return res.status(304).json({ message: "no such Id" });
   }
 };
 
