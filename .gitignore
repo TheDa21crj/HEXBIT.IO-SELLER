@@ -1,4 +1,7 @@
-node_modules
+# node_modules
+ondc-main/node_modules
+ONDC/node_modules
 
-# env
-.env
+# VSCode
+ondc-main/.vscode
+ONDC/.vscode
