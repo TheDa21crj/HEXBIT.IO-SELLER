@@ -52,6 +52,33 @@ const confirm = async (req, res, next) => {
 const select = async (req, res, next) => {
   // Set payment mode as ON-FULFILLMENT
   req.body.order.payment.type = "ON-FULFILLMENT";
+
+  const response = {
+    context: {
+      domain: context.domain,
+      country: context.country,
+      city: context.city,
+      action: context.action,
+      core_version: context.core_version,
+      bap_id: context.bap_id,
+      bap_uri: context.bap_uri,
+      transaction_id: context.transaction_id,
+      message_id: context.message_id,
+      timestamp: context.timestamp,
+      ttl: context.ttl,
+    },
+    message: {
+      order: selectData.orderID,
+      items: selectData.itemsID,
+    },
+  };
+
+  const responseData = await axios.post(process.env.SELECT, response, {
+    headers: {
+      Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
+    },
+  });
+
   res.json(req.body);
 };
 
