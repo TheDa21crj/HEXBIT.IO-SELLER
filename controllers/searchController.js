@@ -95,7 +95,12 @@ const searchSellersByCity = async (city, cityCodes) => {
 // Helper function to calculate the buyer app finder fee
 function calculateFinderFee(type, amount) {
   // Perform the finder fee calculation logic based on the type and amount
-  const finderFee = {}; // Placeholder, implement your actual calculation logic here
+
+  console.log(type);
+  console.log(amount);
+
+  // Placeholder, implement your actual calculation logic here
+  const finderFee = {};
 
   return finderFee;
 }
