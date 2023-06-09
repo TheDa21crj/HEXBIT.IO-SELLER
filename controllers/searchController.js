@@ -89,9 +89,6 @@ const searchSellersByCity = async (city, cityCodes) => {
     "Address.area_code": finalCode[0][1],
   }).populate("sellerID");
 
-  console.log("----------sellers----------");
-  console.log(sellers);
-
   return sellers;
 };
 
@@ -100,7 +97,11 @@ const calculateFinderFee = async (type) => {
   // Perform the finder fee calculation logic based on the type and amount
   let items = await Items.find({ type });
 
-  console.log(items);
+  console.log("------items------");
+
+  items.forEach((e) => {
+    console.log(e);
+  });
 
   // Placeholder, implement your actual calculation logic here
   const finderFee = {};
