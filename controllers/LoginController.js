@@ -175,44 +175,44 @@ const AddStore = async (req, res, next) => {
 
   console.log(code);
 
-  // if (users) {
-  //   try {
-  //     const newUser = new Store({
-  //       StoreName,
-  //       StoreType,
-  //       Website,
-  //       StoreDescription,
-  //       Address: {
-  //         door,
-  //         name,
-  //         building,
-  //         street,
-  //         locality,
-  //         ward,
-  //         city,
-  //         state,
-  //         country,
-  //         area_code,
-  //       },
-  //     });
+  if (users) {
+    try {
+      const newUser = new Store({
+        StoreName,
+        StoreType,
+        Website,
+        StoreDescription,
+        Address: {
+          door,
+          name,
+          building,
+          street,
+          locality,
+          ward,
+          city,
+          state,
+          country,
+          area_code: code,
+        },
+      });
 
-  //     let createduser = await newUser.save();
+      let createduser = await newUser.save();
 
-  //     let StoreID = {};
-  //     StoreID.StoreID = createduser._id;
+      let StoreID = {};
+      StoreID.StoreID = createduser._id;
 
-  //     let upUser = await Seller.findOneAndUpdate(
-  //       { email: res.locals.userData.userEmail },
-  //       { $push: { Store: StoreID } }
-  //     );
+      let upUser = await Seller.findOneAndUpdate(
+        { email: res.locals.userData.userEmail },
+        { $push: { Store: StoreID } }
+      );
 
-  //     res.status(202).json({ success: true, User: upUser, store: createduser });
-  //   } catch (err) {
-  //     const error = new HttpError("User not found", 500);
-  //     console.log(err);
-  //     return next(error);
-  //   }
-  // }
+      res.status(202).json({ success: true, User: upUser, store: createduser });
+    } catch (err) {
+      const error = new HttpError("User not found", 500);
+      console.log(err);
+      return next(error);
+    }
+  }
 };
 
 const AddItem = async (req, res, next) => {
