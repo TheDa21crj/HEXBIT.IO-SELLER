@@ -13,7 +13,12 @@ router.post("/search", confirmwithCOD.search);
 router.post("/on_search", confirmwithCOD.on_search);
 
 // Endpoint for /select
-router.post("/select", confirmwithCOD.select);
+router.post(
+  "/select",
+  [check("context", "context is Required").not().isEmpty()],
+  [check("message", "message is Required").not().isEmpty()],
+  confirmwithCOD.select
+);
 
 // Endpoint for /confirm
 router.post("/confirm", confirmwithCOD.confirm);
