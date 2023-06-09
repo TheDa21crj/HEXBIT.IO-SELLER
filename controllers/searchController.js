@@ -99,9 +99,32 @@ const calculateFinderFee = async (type) => {
 
   console.log("------items------");
 
+  const deliveryCharges = 50; // ₹50
+  const buyerFinderFeeRate = 0.05; // 5%
+  const gstBffRate = 0.18; // 18%
+  const gstProductRate = 0.05; // 5%
+  const gstDeliveryChargesRate = 0.05; // 5%
+
   items.forEach((e) => {
-    console.log(e);
+    const totalOrderValue = e.price + deliveryCharges;
+    const buyerFinderFee = buyerFinderFeeRate * totalOrderValue;
+    const gstBff = gstBffRate * buyerFinderFee;
+    const gstProduct = gstProductRate * e.price;
+    const gstDeliveryCharges = gstDeliveryChargesRate * deliveryCharges;
+
+    // if (e === type) {
+    e.price = (
+      totalOrderValue +
+      buyerFinderFee +
+      gstBff +
+      gstProduct +
+      gstDeliveryCharges
+    ).toFixed(2);
+
+    // }
   });
+
+  console.log(items);
 
   // Placeholder, implement your actual calculation logic here
   const finderFee = {};
