@@ -1,0 +1,74 @@
+const express = require("express");
+const { validationResult } = require("express-validator");
+const Seller = require("./../models/Seller");
+const Store = require("./../models/Store");
+const Items = require("./../models/Items");
+const HttpError = require("./../models/HttpError");
+
+// Endpoint for /on_init
+const on_init = async (req, res, next) => {
+  // Extract the necessary information from the request
+  const orderId = req.body.message.order.id;
+  const transactionId = req.body.context.transaction_id;
+
+  // Perform any necessary logic or validations for order initialization
+
+  // Prepare the response
+  const response = {
+    context: req.body.context,
+    message: {
+      order_id: orderId,
+      transaction_id: transactionId,
+      status: "INITIALIZED",
+    },
+  };
+
+  res.json(response);
+};
+
+// Endpoint for /confirm
+const confirm = async (req, res, next) => {
+  // Extract the necessary information from the request
+  const orderId = req.body.message.order.id;
+  const transactionId = req.body.context.transaction_id;
+
+  // Perform any necessary logic or validations for order confirmation
+
+  // Prepare the response
+  const response = {
+    context: req.body.context,
+    message: {
+      order_id: orderId,
+      transaction_id: transactionId,
+      status: "CONFIRMED",
+    },
+  };
+
+  res.json(response);
+};
+
+// Endpoint for /status
+const status = async (req, res, next) => {
+  // Extract the order ID from the request
+  const orderId = req.body.message.order_id;
+
+  // Query the status of the order using the transaction ID
+  const transactionId = req.body.context.transaction_id;
+  const status = queryOrderStatus(transactionId);
+
+  // Prepare the response
+  const response = {
+    context: req.body.context,
+    message: {
+      order_id: orderId,
+      transaction_id: transactionId,
+      status: status,
+    },
+  };
+
+  res.json(response);
+};
+
+exports.status = status;
+exports.confirm = confirm;
+exports.on_init = on_init;
