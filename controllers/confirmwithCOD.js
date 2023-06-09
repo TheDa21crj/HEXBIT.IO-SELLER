@@ -52,36 +52,92 @@ const confirm = async (req, res, next) => {
 
 // Endpoint for /select
 const select = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  let { context, message } = req.body;
+
   // Set payment mode as ON-FULFILLMENT
-  req.body.order.payment.type = "ON-FULFILLMENT";
+  message.order.payment.type = "ON-FULFILLMENT";
+  let qt = message.order.item[0].quantity.count;
 
-  const response = {
-    context: {
-      domain: context.domain,
-      country: context.country,
-      city: context.city,
-      action: context.action,
-      core_version: context.core_version,
-      bap_id: context.bap_id,
-      bap_uri: context.bap_uri,
-      transaction_id: context.transaction_id,
-      message_id: context.message_id,
-      timestamp: context.timestamp,
-      ttl: context.ttl,
-    },
-    message: {
-      order: selectData.orderID,
-      items: selectData.itemsID,
-    },
-  };
-
-  const responseData = await axios.post(process.env.SELECT, response, {
-    headers: {
-      Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
-    },
+  let stockItem = await Items.find({
+    _id: message.order.item[0].id,
+    stock: { $gt: qt - 1 },
   });
 
-  res.json(req.body);
+  if (stockItem.length > 0) {
+    const response = {
+      context: {
+        domain: context.domain,
+        country: context.country,
+        city: context.city,
+        action: context.action,
+        core_version: context.core_version,
+        bap_id: context.bap_id,
+        bap_uri: context.bap_uri,
+        transaction_id: context.transaction_id,
+        message_id: context.message_id,
+        timestamp: context.timestamp,
+        ttl: context.ttl,
+      },
+      message: {
+        order: {
+          id: selectData.orderID,
+          items: selectData.itemsID,
+          fulfillment: {
+            state: {
+              descriptor: {
+                code: "Serviceable",
+              },
+            },
+          },
+        },
+      },
+    };
+
+    const responseData = await axios.post(process.env.SELECT, response, {
+      headers: {
+        Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
+      },
+    });
+
+    res.status(202).json(responseData);
+  } else {
+    const response = {
+      context: {
+        domain: context.domain,
+        country: context.country,
+        city: context.city,
+        action: context.action,
+        core_version: context.core_version,
+        bap_id: context.bap_id,
+        bap_uri: context.bap_uri,
+        transaction_id: context.transaction_id,
+        message_id: context.message_id,
+        timestamp: context.timestamp,
+        ttl: context.ttl,
+      },
+      message: {
+        order: {
+          id: selectData.orderID,
+          items: selectData.itemsID,
+          fulfillment: {
+            state: {
+              descriptor: {
+                code: "Non-serviceable",
+              },
+            },
+          },
+        },
+      },
+    };
+
+    console.log("no such Id");
+    return res.status(304).json({ message: "no such Id" });
+  }
 };
 
 // Endpoint for /on_confirm
