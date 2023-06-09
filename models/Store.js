@@ -67,6 +67,10 @@ const StoreSchema = new mongoose.Schema({
       required: true,
     },
   },
+  sellerID: {
+    type: mongoose.Types.ObjectId,
+    ref: "users",
+  },
 });
 
 const StoreList = new mongoose.model("Store", StoreSchema);
