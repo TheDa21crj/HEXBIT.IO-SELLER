@@ -15,6 +15,7 @@ router.post("/on_search", confirmwithCOD.on_search);
 // Endpoint for /select
 router.post("/select", confirmwithCOD.select);
 
+// Endpoint for /confirm
 router.post("/confirm", confirmwithCOD.confirm);
 
 // Endpoint for /on_confirm
