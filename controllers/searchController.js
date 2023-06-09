@@ -40,10 +40,9 @@ const search = async (req, res) => {
   const finderFeeAmount =
     message.intent.payment["@ondc/org/buyer_app_finder_fee_amount"];
 
-  console.log("---finderFeeType, finderFeeAmount---");
-  console.log(finderFeeType, finderFeeAmount);
+  // console.log("---finderFeeType, finderFeeAmount---");
 
-  const finderFee = calculateFinderFee(finderFeeType, finderFeeAmount);
+  const finderFee = calculateFinderFee(finderFeeType);
 
   // Prepare the response payload
   const response = {
@@ -97,16 +96,16 @@ const searchSellersByCity = async (city, cityCodes) => {
 };
 
 // Helper function to calculate the buyer app finder fee
-function calculateFinderFee(type, amount) {
+const calculateFinderFee = async (type) => {
   // Perform the finder fee calculation logic based on the type and amount
+  let items = await Items.find({ type });
 
-  console.log(type);
-  console.log(amount);
+  console.log(items);
 
   // Placeholder, implement your actual calculation logic here
   const finderFee = {};
 
   return finderFee;
-}
+};
 
 exports.search = search;
