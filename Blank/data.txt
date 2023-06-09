@@ -1,7 +1,5 @@
 Pre-order APIs:
 
-/select: Buyer app specifies the items and quantity selected.
-/on_select: Seller app responds with serviceability information, quote, and order-to-delivery time for the selected items.
 /init and /on_init: Buyer and seller apps specify and agree to the terms and conditions before placing the order.
 /confirm: Buyer app places the order on behalf of the buyer.
 /on_confirm: Seller app responds to the order placed, either through auto-acceptance, deferred acceptance, or rejection of the order.
