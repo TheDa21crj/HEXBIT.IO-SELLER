@@ -13,6 +13,10 @@ const ItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
   rating: {
     type: Number,
     default: 0,
