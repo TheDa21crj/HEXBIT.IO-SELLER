@@ -5,30 +5,6 @@ const Store = require("./../models/Store");
 const Items = require("./../models/Items");
 const HttpError = require("./../models/HttpError");
 
-// Endpoint for /on_search
-const on_search = async (req, res, next) => {
-  // Identify catalog items available on CoD
-  const codItems = req.body.items.filter(
-    (item) => item["@ondc/org/available_on_cod"] === true
-  );
-  res.json({ codItems });
-};
-
-// Endpoint for /select
-const select = async (req, res, next) => {
-  // Set payment mode as ON-FULFILLMENT
-  req.body.order.payment.type = "ON-FULFILLMENT";
-  res.json(req.body);
-};
-
-// Endpoint for /search
-const search = async (req, res, next) => {
-  // Set fulfillment type as CoD and collection amount
-  req.body.intent.fulfillment.type = "CoD";
-  req.body.payment["@ondc/org/collection_amount"] = "150";
-  res.json(req.body);
-};
-
 // Endpoint for /confirm
 const confirm = async (req, res, next) => {
   // Update payment details and settlement information
@@ -52,6 +28,30 @@ const confirm = async (req, res, next) => {
       branch_name: "xxxx",
     },
   ];
+  res.json(req.body);
+};
+
+// Endpoint for /on_search
+const on_search = async (req, res, next) => {
+  // Identify catalog items available on CoD
+  const codItems = req.body.items.filter(
+    (item) => item["@ondc/org/available_on_cod"] === true
+  );
+  res.json({ codItems });
+};
+
+// Endpoint for /select
+const select = async (req, res, next) => {
+  // Set payment mode as ON-FULFILLMENT
+  req.body.order.payment.type = "ON-FULFILLMENT";
+  res.json(req.body);
+};
+
+// Endpoint for /search
+const search = async (req, res, next) => {
+  // Set fulfillment type as CoD and collection amount
+  req.body.intent.fulfillment.type = "CoD";
+  req.body.payment["@ondc/org/collection_amount"] = "150";
   res.json(req.body);
 };
 
