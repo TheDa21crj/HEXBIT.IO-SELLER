@@ -11,6 +11,8 @@ router.post("/on_init", ststuswithinit.on_init);
 
 // Endpoint for /confirm
 router.post("/confirm", ststuswithinit.confirm);
+
+// Function to query the order status using the transaction ID
 router.post("/status", ststuswithinit.status);
 
 module.exports = router;
