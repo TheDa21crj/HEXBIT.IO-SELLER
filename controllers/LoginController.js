@@ -7,6 +7,8 @@ const gravatar = require("gravatar");
 const HttpError = require("./../models/HttpError");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const xlsx = require("xlsx");
+const path = require("path");
 
 const registerUser = async (req, res, next) => {
   const errors = validationResult(req);
@@ -169,44 +171,48 @@ const AddStore = async (req, res, next) => {
     return next(error);
   }
 
-  if (users) {
-    try {
-      const newUser = new Store({
-        StoreName,
-        StoreType,
-        Website,
-        StoreDescription,
-        Address: {
-          door,
-          name,
-          building,
-          street,
-          locality,
-          ward,
-          city,
-          state,
-          country,
-          area_code,
-        },
-      });
+  let code = await searchSellersByCity(city);
 
-      let createduser = await newUser.save();
+  console.log(code);
 
-      let StoreID = {};
-      StoreID.StoreID = createduser._id;
+  // if (users) {
+  //   try {
+  //     const newUser = new Store({
+  //       StoreName,
+  //       StoreType,
+  //       Website,
+  //       StoreDescription,
+  //       Address: {
+  //         door,
+  //         name,
+  //         building,
+  //         street,
+  //         locality,
+  //         ward,
+  //         city,
+  //         state,
+  //         country,
+  //         area_code,
+  //       },
+  //     });
 
-      let upUser = await Seller.findOneAndUpdate(
-        { email: res.locals.userData.userEmail },
-        { $push: { Store: StoreID } }
-      );
+  //     let createduser = await newUser.save();
 
-      res.status(202).json({ success: true, User: upUser, store: createduser });
-    } catch (err) {
-      const error = new HttpError("User not found", 500);
-      console.log(err);
-      return next(error);
-    }
-  }
+  //     let StoreID = {};
+  //     StoreID.StoreID = createduser._id;
+
+  //     let upUser = await Seller.findOneAndUpdate(
+  //       { email: res.locals.userData.userEmail },
+  //       { $push: { Store: StoreID } }
+  //     );
+
+  //     res.status(202).json({ success: true, User: upUser, store: createduser });
+  //   } catch (err) {
+  //     const error = new HttpError("User not found", 500);
+  //     console.log(err);
+  //     return next(error);
+  //   }
+  // }
 };
 
 const AddItem = async (req, res, next) => {
@@ -253,6 +259,28 @@ const AddItem = async (req, res, next) => {
     const error = new HttpError("Item not Added", 500);
     return next(error);
   }
+};
+
+const searchSellersByCity = async (city) => {
+  const filePath = path.join(
+    __dirname,
+    "..",
+    "Data",
+    "ONDC-city-state-codes.xlsx"
+  );
+
+  const workbook = xlsx.readFile(filePath);
+  const sheet = workbook.Sheets[workbook.SheetNames[0]];
+  const cityCodes = xlsx.utils.sheet_to_json(sheet, { header: 1 });
+
+  // Perform the search logic based on the city
+  var finalCode = cityCodes.filter((e) => {
+    if (e[0] == city) {
+      return e[1];
+    }
+  });
+
+  return finalCode[0][1];
 };
 
 exports.login = login;
