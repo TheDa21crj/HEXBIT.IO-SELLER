@@ -38,6 +38,10 @@ app.get("/test", (req, res) => {
 app.use("/api/Core", require("./routes/Core"));
 app.use("/api/User", require("./routes/Login"));
 app.use("/api/confirmwithCOD", require("./routes/confirmwithCOD"));
+app.use(
+  "/api/ststuswithinit&confirm",
+  require("./routes/ststuswithinit&confirm")
+);
 
 app.use((req, res, next) => {
   console.log(req.url);
