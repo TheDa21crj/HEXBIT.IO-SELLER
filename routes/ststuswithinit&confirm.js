@@ -6,7 +6,7 @@ const router = express.Router();
 // controllers
 const ststuswithinit = require("../controllers/ststuswithinit&confirm");
 
-// search
+// Endpoint for /on_init
 router.post("/on_init", ststuswithinit.on_init);
 
 module.exports = router;
