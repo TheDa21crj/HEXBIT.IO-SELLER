@@ -21,4 +21,45 @@ const track = async (req, res) => {
   });
 };
 
+// Function to track an order
+function trackOrder(order_id, callback_url) {
+  // Perform necessary actions to track the order in your system
+  // ...
+
+  // Example: Send a callback to the provided URL with the tracking details
+  const trackingDetails = getTrackingDetails(order_id);
+  sendCallback(callback_url, trackingDetails);
+}
+
+// Example function to get the tracking details of an order
+function getTrackingDetails(order_id) {
+  // Query the tracking details of the order based on the order ID
+  // ...
+
+  // Return the tracking details
+  return {
+    order_id: order_id,
+    tracking_number: "TR123456789",
+    status: "In Transit",
+    estimated_delivery_date: "2023-02-10",
+  };
+}
+
+// Example function to send a callback to the provided URL
+function sendCallback(callback_url, data) {
+  // Perform actions to send a callback to the provided URL with the data
+  // ...
+
+  // Example: Using the `axios` library for making an HTTP POST request
+  const axios = require("axios");
+  axios
+    .post(callback_url, data)
+    .then((response) => {
+      console.log("Callback sent successfully");
+    })
+    .catch((error) => {
+      console.error("Error sending callback:", error.message);
+    });
+}
+
 exports.track = track;
