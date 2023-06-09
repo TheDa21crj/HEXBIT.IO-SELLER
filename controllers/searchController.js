@@ -73,8 +73,10 @@ function searchSellersByCity(city, cityCodes) {
   console.log("--------city--------");
   console.log(city);
 
+  console.log("--------cityCodes--------");
   let final = cityCodes.filter((e) => {
     if (e[0] == city) {
+      console.log(e[1]);
       return e[1];
     }
   });
