@@ -47,14 +47,6 @@ const select = async (req, res, next) => {
   res.json(req.body);
 };
 
-// Endpoint for /search
-const search = async (req, res, next) => {
-  // Set fulfillment type as CoD and collection amount
-  req.body.intent.fulfillment.type = "CoD";
-  req.body.payment["@ondc/org/collection_amount"] = "150";
-  res.json(req.body);
-};
-
 // Endpoint for /on_confirm
 const on_confirm = async (req, res, next) => {
   // Update payment details and settlement information
