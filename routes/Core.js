@@ -8,6 +8,7 @@ const searchController = require("../controllers/searchController");
 const selectController = require("../controllers/selectController");
 const supportController = require("../controllers/support");
 const trackController = require("../controllers/track");
+const updateController = require("../controllers/update");
 
 // search
 router.post(
@@ -30,5 +31,8 @@ router.post("/support", supportController.support);
 
 // track
 router.post("/track", trackController.track);
+
+// update
+router.post("/update", updateController.update);
 
 module.exports = router;
