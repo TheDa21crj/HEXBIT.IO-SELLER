@@ -14,6 +14,7 @@ router.post("/search/city", updatedsearch4cat.searchCity);
 
 // Search by category
 router.post("/search/category", updatedsearch4cat.searchCategory);
+
 // Search by fulfillment end location
 router.post("/search/category", updatedsearch4cat.searchCategory);
 
