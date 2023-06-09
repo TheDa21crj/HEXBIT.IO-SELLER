@@ -42,7 +42,24 @@ const searchCity = async (req, res) => {
 };
 
 // Search by category
-const searchCategory = async (req, res) => {};
+const searchCategory = async (req, res) => {
+  const { category, fulfillment, payment } = req.body.message.intent;
+
+  const categoryCode = category.id;
+  const gps = fulfillment.end.location.gps;
+  const areaCode = fulfillment.end.location.address.area_code;
+  const finderFeeType = payment["@ondc/org/buyer_app_finder_fee_type"];
+  const finderFeeAmount = payment["@ondc/org/buyer_app_finder_fee_amount"];
+
+  // Perform search logic based on category code, GPS, and area code
+  const searchResults = performSearchByCategory(categoryCode, gps, areaCode);
+
+  // Calculate finder fee based on the finder fee type and amount
+  const finderFee = calculateFinderFee(finderFeeType, finderFeeAmount);
+
+  // Return search results and finder fee
+  res.json({ searchResults, finderFee });
+};
 const searchFulfillment = async (req, res) => {};
 
 exports.searchFulfillment = searchFulfillment;
