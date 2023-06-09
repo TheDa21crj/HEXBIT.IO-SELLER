@@ -1,14 +1,16 @@
 const express = require("express");
 const { validationResult } = require("express-validator");
-const Seller = require("./../models/Seller");
-const Store = require("./../models/Store");
-const Items = require("./../models/Items");
 const gravatar = require("gravatar");
 const HttpError = require("./../models/HttpError");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const xlsx = require("xlsx");
 const path = require("path");
+
+// models
+const Seller = require("./../models/Seller");
+const Store = require("./../models/Store");
+const Items = require("./../models/Items");
 
 const registerUser = async (req, res, next) => {
   const errors = validationResult(req);
