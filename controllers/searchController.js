@@ -97,8 +97,6 @@ const calculateFinderFee = async (type) => {
   // Perform the finder fee calculation logic based on the type and amount
   let items = await Items.find({ type });
 
-  console.log("------items------");
-
   const deliveryCharges = 50; // ₹50
   const buyerFinderFeeRate = 0.05; // 5%
   const gstBffRate = 0.18; // 18%
@@ -121,12 +119,7 @@ const calculateFinderFee = async (type) => {
     ).toFixed(2);
   });
 
-  console.log(items);
-
-  // Placeholder, implement your actual calculation logic here
-  const finderFee = {};
-
-  return finderFee;
+  return items;
 };
 
 exports.search = search;
