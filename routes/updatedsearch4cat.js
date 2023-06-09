@@ -6,6 +6,10 @@ const router = express.Router();
 // controllers
 const updatedsearch4cat = require("../controllers/updatedsearch4cat");
 
+// Search by item
 router.post("/search/item", updatedsearch4cat.searchItem);
+
+// Search by city
+router.post("/search/city", updatedsearch4cat.searchItem);
 
 module.exports = router;
