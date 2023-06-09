@@ -61,6 +61,7 @@ const searchCategory = async (req, res) => {
   res.json({ searchResults, finderFee });
 };
 
+// Search by fulfillment end location
 const searchFulfillment = async (req, res) => {};
 
 exports.searchFulfillment = searchFulfillment;
