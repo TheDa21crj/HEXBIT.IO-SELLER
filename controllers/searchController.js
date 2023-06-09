@@ -32,9 +32,7 @@ const search = async (req, res) => {
   const { city } = context;
 
   // Perform the search operation based on the city
-  const sellersInCity = searchSellersByCity(city, cityCodes);
-
-  console.table(sellersInCity);
+  const sellersInCity = await searchSellersByCity(city, cityCodes);
 
   // Process buyer app finder fee calculations
   const finderFeeType =
@@ -87,6 +85,9 @@ const searchSellersByCity = async (city, cityCodes) => {
   const sellers = await Store.find({
     "Address.area_code": finalCode[0][1],
   }).populate("sellerID");
+
+  console.log("----------sellers----------");
+  console.log(sellers);
 
   return sellers;
 };
