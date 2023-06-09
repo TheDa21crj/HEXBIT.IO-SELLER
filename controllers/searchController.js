@@ -8,7 +8,6 @@ const Seller = require("./../models/Seller");
 const Store = require("./../models/Store");
 const Items = require("./../models/Items");
 
-
 // Define the route for the /search API
 const search = async (req, res) => {
   const errors = validationResult(req);
@@ -75,7 +74,7 @@ const search = async (req, res) => {
 };
 
 // Helper function to search for sellers in the given city
-function searchSellersByCity(city, cityCodes) {
+const searchSellersByCity = async (city, cityCodes) => {
   // Perform the search logic based on the city
 
   console.log("--------city--------");
@@ -93,12 +92,12 @@ function searchSellersByCity(city, cityCodes) {
   console.log(finalCode[0][1]);
 
   // Placeholder, implement your actual search logic here
-  const sellers = await St
-  
-  const sellersInCity = [];
+  const sellers = await Store.find({
+    "Address.area_code": finalCode[0][1],
+  }).populate("sellerID");
 
-  return sellersInCity;
-}
+  return sellers;
+};
 
 // Helper function to calculate the buyer app finder fee
 function calculateFinderFee(type, amount) {
