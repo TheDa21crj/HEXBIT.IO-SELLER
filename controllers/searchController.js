@@ -86,7 +86,8 @@ function searchSellersByCity(city, cityCodes) {
   console.log("--------final--------");
   console.log(finalCode[0][1]);
 
-  const sellersInCity = []; // Placeholder, implement your actual search logic here
+  // Placeholder, implement your actual search logic here
+  const sellersInCity = [];
 
   return sellersInCity;
 }
