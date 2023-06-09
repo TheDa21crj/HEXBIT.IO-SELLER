@@ -5,6 +5,7 @@ Pre-order APIs:
 /init and /on_init: Buyer and seller apps specify and agree to the terms and conditions before placing the order.
 /confirm: Buyer app places the order on behalf of the buyer.
 /on_confirm: Seller app responds to the order placed, either through auto-acceptance, deferred acceptance, or rejection of the order.
+
 Post-order APIs:
 
 /status: Buyer app requests the current status of the order.
@@ -19,4 +20,3 @@ Post-order APIs:
 /on_track: Seller app responds with the URL for live tracking of the order.
 /rating: Buyer app provides a rating on behalf of the buyer.
 /on_rating: Seller app responds to the rating request from the buyer app and provides additional information, such as a feedback form.
-
