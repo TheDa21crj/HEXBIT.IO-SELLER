@@ -80,6 +80,8 @@ const searchFulfillment = async (req, res) => {
   res.json({ searchResults, finderFee });
 };
 
+// Helper functions
+
 exports.searchFulfillment = searchFulfillment;
 exports.searchCategory = searchCategory;
 exports.searchCity = searchCity;
