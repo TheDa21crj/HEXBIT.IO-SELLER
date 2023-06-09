@@ -69,6 +69,15 @@ const status = async (req, res, next) => {
   res.json(response);
 };
 
+// Function to query the order status using the transaction ID
+function queryOrderStatus(transactionId) {
+  // Perform the necessary logic to query the order status
+  // This can involve interacting with databases, external APIs, or other processes
+
+  // For demonstration purposes, let's assume a static status of "DELIVERED"
+  return "DELIVERED";
+}
+
 exports.status = status;
 exports.confirm = confirm;
 exports.on_init = on_init;
