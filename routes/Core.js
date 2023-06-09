@@ -7,6 +7,7 @@ const router = express.Router();
 const searchController = require("../controllers/searchController");
 const selectController = require("../controllers/selectController");
 const supportController = require("../controllers/support");
+const trackController = require("../controllers/track");
 
 // search
 router.post(
@@ -26,5 +27,6 @@ router.post(
 
 // support
 router.post("/support", supportController.support);
+router.post("/track", trackController.track);
 
 module.exports = router;
