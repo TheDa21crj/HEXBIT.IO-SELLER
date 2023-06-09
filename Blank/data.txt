@@ -1,0 +1,22 @@
+Pre-order APIs:
+
+/select: Buyer app specifies the items and quantity selected.
+/on_select: Seller app responds with serviceability information, quote, and order-to-delivery time for the selected items.
+/init and /on_init: Buyer and seller apps specify and agree to the terms and conditions before placing the order.
+/confirm: Buyer app places the order on behalf of the buyer.
+/on_confirm: Seller app responds to the order placed, either through auto-acceptance, deferred acceptance, or rejection of the order.
+Post-order APIs:
+
+/status: Buyer app requests the current status of the order.
+/on_status: Seller app provides the current status of the order.
+/cancel: Buyer app places a cancellation request for the order.
+/on_cancel: Seller app responds to the buyer app cancellation request or cancels the order directly.
+/update: Buyer app initiates a partial return or cancel request for specific items on behalf of the buyer.
+/on_update: Seller app responds to the buyer app's partial return or cancel request or initiates a partial cancel request directly.
+/support: Buyer app requests seller contact details.
+/on_support: Seller app responds with seller contact details.
+/track: Buyer app requests live tracking of the order.
+/on_track: Seller app responds with the URL for live tracking of the order.
+/rating: Buyer app provides a rating on behalf of the buyer.
+/on_rating: Seller app responds to the rating request from the buyer app and provides additional information, such as a feedback form.
+
