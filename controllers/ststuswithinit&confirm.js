@@ -1,8 +1,5 @@
 const express = require("express");
 const { validationResult } = require("express-validator");
-const Seller = require("./../models/Seller");
-const Store = require("./../models/Store");
-const Items = require("./../models/Items");
 const HttpError = require("./../models/HttpError");
 
 // models
@@ -20,22 +17,40 @@ const on_init = async (req, res, next) => {
   let { context, message } = req.body;
 
   // Extract the necessary information from the request
-  const orderId = req.body.message.order.id;
-  const transactionId = req.body.context.transaction_id;
+  const orderId = message.message.order.id;
+  const transactionId = message.context.transaction_id;
 
   // Perform any necessary logic or validations for order initialization
+  let stockItem = await Items.find({
+    _id: message.order.item[0].id,
+    stock: { $gt: qt - 1 },
+  });
 
-  // Prepare the response
-  const response = {
-    context: req.body.context,
-    message: {
-      order_id: orderId,
-      transaction_id: transactionId,
-      status: "INITIALIZED",
-    },
-  };
+  if (stockItem.length > 0) {
+    // Prepare the response
+    const response = {
+      context: req.body.context,
+      message: {
+        order_id: orderId,
+        transaction_id: transactionId,
+        status: "INITIALIZED",
+      },
+    };
 
-  res.json(response);
+    res.json(response);
+  } else {
+    // Prepare the response
+    const response = {
+      context: req.body.context,
+      message: {
+        order_id: orderId,
+        transaction_id: transactionId,
+        status: "INITIALIZED",
+      },
+    };
+
+    res.json(response);
+  }
 };
 
 // Endpoint for /confirm
