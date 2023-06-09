@@ -6,6 +6,7 @@ const router = express.Router();
 // controllers
 const searchController = require("../controllers/searchController");
 const selectController = require("../controllers/selectController");
+const confirmwithCOD = require("../controllers/confirmwithCOD");
 
 // search
 router.post(
@@ -21,6 +22,14 @@ router.post(
   check("context", "context is Required").not().isEmpty(),
   check("message", "message is Required").not().isEmpty(),
   selectController.select
+);
+
+// confirmwithCOD
+router.post(
+  "/confirmwithCOD",
+  check("context", "context is Required").not().isEmpty(),
+  check("message", "message is Required").not().isEmpty(),
+  confirmwithCOD.confirmwithCOD
 );
 
 module.exports = router;
