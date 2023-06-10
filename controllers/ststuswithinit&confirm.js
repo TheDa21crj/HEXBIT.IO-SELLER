@@ -71,8 +71,8 @@ const confirm = async (req, res, next) => {
   let { context, message } = req.body;
 
   // Extract the necessary information from the request
-  const orderId = req.body.message.order.id;
-  const transactionId = req.body.context.transaction_id;
+  const orderId = message.order.id;
+  const transactionId = context.transaction_id;
 
   // Perform any necessary logic or validations for order confirmation
 
