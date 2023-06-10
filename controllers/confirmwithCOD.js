@@ -160,8 +160,6 @@ const select = async (req, res, next) => {
   console.log(response.message.order.fulfillment.state.descriptor);
 
   res.status(202).json(responseData.data);
-  // return res.status(304).json({ message: "no such Id" });
-  // }
 };
 
 // Endpoint for /on_confirm
