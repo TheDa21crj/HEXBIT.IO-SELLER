@@ -74,19 +74,28 @@ const confirm = async (req, res, next) => {
   const orderId = message.order.id;
   const transactionId = context.transaction_id;
 
+  let response = {};
+
   // Perform any necessary logic or validations for order confirmation
+  if (message.order.state == "CONFIRMED") {
+    // Prepare the response
+    const response = {
+      context: context,
+      message: {
+        order_id: orderId,
+        transaction_id: transactionId,
+        state: "CONFIRMED",
+      },
+    };
+  }
 
-  // Prepare the response
-  const response = {
-    context: req.body.context,
-    message: {
-      order_id: orderId,
-      transaction_id: transactionId,
-      status: "CONFIRMED",
+  const responseData = await axios.post(process.env.ON_CONFIRM, response, {
+    headers: {
+      Authorization: process.env.Authorization,
     },
-  };
+  });
 
-  res.json(response);
+  res.status(202).json(responseData.data);
 };
 
 // Endpoint for /status
