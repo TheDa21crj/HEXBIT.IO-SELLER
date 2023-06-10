@@ -79,12 +79,22 @@ const confirm = async (req, res, next) => {
   // Perform any necessary logic or validations for order confirmation
   if (message.order.state == "CONFIRMED") {
     // Prepare the response
-    const response = {
+    response = {
       context: context,
       message: {
         order_id: orderId,
         transaction_id: transactionId,
         state: "CONFIRMED",
+      },
+    };
+  } else {
+    // Prepare the response
+    response = {
+      context: context,
+      message: {
+        order_id: orderId,
+        transaction_id: transactionId,
+        state: "Cancelled",
       },
     };
   }
@@ -94,6 +104,8 @@ const confirm = async (req, res, next) => {
       Authorization: process.env.Authorization,
     },
   });
+
+  console.log(response);
 
   res.status(202).json(responseData.data);
 };
