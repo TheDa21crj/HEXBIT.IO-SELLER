@@ -1,6 +1,7 @@
 const express = require("express");
 const { validationResult } = require("express-validator");
 const HttpError = require("./../models/HttpError");
+const axios = require("axios");
 
 // models
 const Seller = require("./../models/Seller");
@@ -78,94 +79,95 @@ const select = async (req, res, next) => {
 
   let response = {};
 
-  // if (stockItem.length > 0) {
-  //   response = {
-  //     context: {
-  //       domain: context.domain,
-  //       country: context.country,
-  //       city: context.city,
-  //       action: context.action,
-  //       core_version: context.core_version,
-  //       bap_id: context.bap_id,
-  //       bap_uri: context.bap_uri,
-  //       transaction_id: context.transaction_id,
-  //       message_id: context.message_id,
-  //       timestamp: context.timestamp,
-  //       ttl: context.ttl,
-  //     },
-  //     message: {
-  //       order: {
-  //         id: message.order.id,
-  //         items: [
-  //           {
-  //             id: message.order.item[0].id,
-  //             quantity: {
-  //               available: {
-  //                 count: stockItem[0].stock,
-  //               },
-  //             },
-  //           },
-  //         ],
-  //         fulfillment: {
-  //           state: {
-  //             descriptor: {
-  //               code: "Serviceable",
-  //             },
-  //           },
-  //         },
-  //       },
-  //     },
-  //   };
-  // } else {
-  //   response = {
-  //     context: {
-  //       domain: context.domain,
-  //       country: context.country,
-  //       city: context.city,
-  //       action: context.action,
-  //       core_version: context.core_version,
-  //       bap_id: context.bap_id,
-  //       bap_uri: context.bap_uri,
-  //       transaction_id: context.transaction_id,
-  //       message_id: context.message_id,
-  //       timestamp: context.timestamp,
-  //       ttl: context.ttl,
-  //     },
-  //     message: {
-  //       order: {
-  //         id: message.order.item[0].id,
-  //         items: [
-  //           {
-  //             id: message.order.item[0].id,
-  //             quantity: {
-  //               available: {
-  //                 count: 0,
-  //               },
-  //             },
-  //           },
-  //         ],
-  //         fulfillment: {
-  //           state: {
-  //             descriptor: {
-  //               code: "Non-serviceable",
-  //             },
-  //           },
-  //         },
-  //       },
-  //     },
-  //   };
+  if (stockItem.length > 0) {
+    response = {
+      context: {
+        domain: context.domain,
+        country: context.country,
+        city: context.city,
+        action: context.action,
+        core_version: context.core_version,
+        bap_id: context.bap_id,
+        bap_uri: context.bap_uri,
+        transaction_id: context.transaction_id,
+        message_id: context.message_id,
+        timestamp: context.timestamp,
+        ttl: context.ttl,
+      },
+      message: {
+        order: {
+          id: message.order.id,
+          items: [
+            {
+              id: message.order.item[0].id,
+              quantity: {
+                available: {
+                  count: stockItem[0].stock,
+                },
+              },
+            },
+          ],
+          fulfillment: {
+            state: {
+              descriptor: {
+                code: "Serviceable",
+              },
+            },
+          },
+        },
+      },
+    };
+  } else {
+    response = {
+      context: {
+        domain: context.domain,
+        country: context.country,
+        city: context.city,
+        action: context.action,
+        core_version: context.core_version,
+        bap_id: context.bap_id,
+        bap_uri: context.bap_uri,
+        transaction_id: context.transaction_id,
+        message_id: context.message_id,
+        timestamp: context.timestamp,
+        ttl: context.ttl,
+      },
+      message: {
+        order: {
+          id: message.order.item[0].id,
+          items: [
+            {
+              id: message.order.item[0].id,
+              quantity: {
+                available: {
+                  count: 0,
+                },
+              },
+            },
+          ],
+          fulfillment: {
+            state: {
+              descriptor: {
+                code: "Non-serviceable",
+              },
+            },
+          },
+        },
+      },
+    };
+  }
 
-  //   const responseData = await axios.post(process.env.SELECT, response, {
-  //     headers: {
-  //       Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
-  //     },
-  //   });
+  const responseData = await axios.post(process.env.SELECT, response, {
+    headers: {
+      Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
+    },
+  });
 
-  //   console.log("----------response-------");
-  //   console.log(response);
+  console.log(response.message.order.items[0]);
+  console.log(response.message.order.fulfillment.state.descriptor);
 
-  //   res.status(202).json(responseData);
-  //   // return res.status(304).json({ message: "no such Id" });
+  res.status(202).json(responseData.data);
+  // return res.status(304).json({ message: "no such Id" });
   // }
 };
 
