@@ -68,6 +68,8 @@ const confirm = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
+  let { context, message } = req.body;
+
   // Extract the necessary information from the request
   const orderId = req.body.message.order.id;
   const transactionId = req.body.context.transaction_id;
