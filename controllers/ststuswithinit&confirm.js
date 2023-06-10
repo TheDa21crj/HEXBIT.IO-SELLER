@@ -29,7 +29,7 @@ const on_init = async (req, res, next) => {
   let response = {};
   if (stockItem.length > 0) {
     // Prepare the response
-    const response = {
+    response = {
       context: req.body.context,
       message: {
         order_id: orderId,
@@ -39,7 +39,7 @@ const on_init = async (req, res, next) => {
     };
   } else {
     // Prepare the response
-    const response = {
+    response = {
       context: req.body.context,
       message: {
         order_id: orderId,
