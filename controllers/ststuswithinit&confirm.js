@@ -16,41 +16,43 @@ const on_init = async (req, res, next) => {
 
   let { context, message } = req.body;
 
-  // Extract the necessary information from the request
-  const orderId = message.message.order.id;
-  const transactionId = message.context.transaction_id;
+  res.status(200).json({ context, message });
 
-  // Perform any necessary logic or validations for order initialization
-  let stockItem = await Items.find({
-    _id: message.order.item[0].id,
-    stock: { $gt: qt - 1 },
-  });
+  // // Extract the necessary information from the request
+  // const orderId = message.message.order.id;
+  // const transactionId = message.context.transaction_id;
 
-  if (stockItem.length > 0) {
-    // Prepare the response
-    const response = {
-      context: req.body.context,
-      message: {
-        order_id: orderId,
-        transaction_id: transactionId,
-        status: "Serviceable",
-      },
-    };
+  // // Perform any necessary logic or validations for order initialization
+  // let stockItem = await Items.find({
+  //   _id: message.order.item[0].id,
+  //   stock: { $gt: qt - 1 },
+  // });
 
-    res.json(response);
-  } else {
-    // Prepare the response
-    const response = {
-      context: req.body.context,
-      message: {
-        order_id: orderId,
-        transaction_id: transactionId,
-        status: "Non-Serviceable",
-      },
-    };
+  // if (stockItem.length > 0) {
+  //   // Prepare the response
+  //   const response = {
+  //     context: req.body.context,
+  //     message: {
+  //       order_id: orderId,
+  //       transaction_id: transactionId,
+  //       status: "Serviceable",
+  //     },
+  //   };
 
-    res.json(response);
-  }
+  //   res.json(response);
+  // } else {
+  //   // Prepare the response
+  //   const response = {
+  //     context: req.body.context,
+  //     message: {
+  //       order_id: orderId,
+  //       transaction_id: transactionId,
+  //       status: "Non-Serviceable",
+  //     },
+  //   };
+
+  //   res.json(response);
+  // }
 };
 
 // Endpoint for /confirm
