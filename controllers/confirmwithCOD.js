@@ -60,9 +60,6 @@ const select = async (req, res, next) => {
 
   let { context, message } = req.body;
 
-  console.log(context);
-  console.log(message);
-
   // Set payment mode as ON-FULFILLMENT
   message.order.payment.type = "ON-FULFILLMENT";
   let qt = message.order.item[0].quantity.count;
@@ -71,11 +68,6 @@ const select = async (req, res, next) => {
     _id: message.order.item[0].id,
     stock: { $gt: qt - 1 },
   });
-
-  console.log("---------stockItem---------");
-  console.log(stockItem);
-  console.log("---------message---------");
-  console.table(message.order);
 
   let response = {};
 
@@ -163,6 +155,7 @@ const select = async (req, res, next) => {
     },
   });
 
+  console.log("-----------------response.message-----------------");
   console.log(response.message.order.items[0]);
   console.log(response.message.order.fulfillment.state.descriptor);
 
