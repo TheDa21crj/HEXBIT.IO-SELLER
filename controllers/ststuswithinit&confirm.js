@@ -16,8 +16,6 @@ const on_init = async (req, res, next) => {
 
   let { context, message } = req.body;
 
-  res.status(200).json({ context, message });
-
   // // Extract the necessary information from the request
   const orderId = message.order.id;
   // const transactionId = message.context.transaction_id;
@@ -28,31 +26,31 @@ const on_init = async (req, res, next) => {
     stock: { $gt: qt - 1 },
   });
 
-  // if (stockItem.length > 0) {
-  //   // Prepare the response
-  //   const response = {
-  //     context: req.body.context,
-  //     message: {
-  //       order_id: orderId,
-  //       transaction_id: transactionId,
-  //       status: "Serviceable",
-  //     },
-  //   };
+  if (stockItem.length > 0) {
+    // Prepare the response
+    const response = {
+      context: req.body.context,
+      message: {
+        order_id: orderId,
+        transaction_id: transactionId,
+        status: "Serviceable",
+      },
+    };
 
-  //   res.json(response);
-  // } else {
-  //   // Prepare the response
-  //   const response = {
-  //     context: req.body.context,
-  //     message: {
-  //       order_id: orderId,
-  //       transaction_id: transactionId,
-  //       status: "Non-Serviceable",
-  //     },
-  //   };
+    //   res.json(response);
+  } else {
+    // Prepare the response
+    const response = {
+      context: req.body.context,
+      message: {
+        order_id: orderId,
+        transaction_id: transactionId,
+        status: "Non-Serviceable",
+      },
+    };
+  }
 
-  //   res.json(response);
-  // }
+  res.status(202).json(response);
 };
 
 // Endpoint for /confirm
