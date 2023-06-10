@@ -2,13 +2,18 @@ Post-order APIs:
 
 /status: Buyer app requests the current status of the order.
 /on_status: Seller app provides the current status of the order.
+
 /cancel: Buyer app places a cancellation request for the order.
 /on_cancel: Seller app responds to the buyer app cancellation request or cancels the order directly.
 /update: Buyer app initiates a partial return or cancel request for specific items on behalf of the buyer.
 /on_update: Seller app responds to the buyer app's partial return or cancel request or initiates a partial cancel request directly.
+
+/rating: Buyer app provides a rating on behalf of the buyer.
+/on_rating: Seller app responds to the rating request from the buyer app and provides additional information, such as a feedback form.
+
+
+// optional
 /support: Buyer app requests seller contact details.
 /on_support: Seller app responds with seller contact details.
 /track: Buyer app requests live tracking of the order.
 /on_track: Seller app responds with the URL for live tracking of the order.
-/rating: Buyer app provides a rating on behalf of the buyer.
-/on_rating: Seller app responds to the rating request from the buyer app and provides additional information, such as a feedback form.
