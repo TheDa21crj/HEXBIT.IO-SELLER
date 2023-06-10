@@ -59,6 +59,9 @@ const select = async (req, res, next) => {
 
   let { context, message } = req.body;
 
+  console.log(context);
+  console.log(message);
+
   // Set payment mode as ON-FULFILLMENT
   message.order.payment.type = "ON-FULFILLMENT";
   let qt = message.order.item[0].quantity.count;
@@ -68,95 +71,102 @@ const select = async (req, res, next) => {
     stock: { $gt: qt - 1 },
   });
 
+  console.log("---------stockItem---------");
+  console.log(stockItem);
+  console.log("---------message---------");
+  console.table(message.order);
+
   let response = {};
 
-  if (stockItem.length > 0) {
-    response = {
-      context: {
-        domain: context.domain,
-        country: context.country,
-        city: context.city,
-        action: context.action,
-        core_version: context.core_version,
-        bap_id: context.bap_id,
-        bap_uri: context.bap_uri,
-        transaction_id: context.transaction_id,
-        message_id: context.message_id,
-        timestamp: context.timestamp,
-        ttl: context.ttl,
-      },
-      message: {
-        order: {
-          id: message.order.id,
-          items: [
-            {
-              id: message.order.item[0].id,
-              quantity: {
-                available: {
-                  count: stockItem[0].stock,
-                },
-              },
-            },
-          ],
-          fulfillment: {
-            state: {
-              descriptor: {
-                code: "Serviceable",
-              },
-            },
-          },
-        },
-      },
-    };
-  } else {
-    response = {
-      context: {
-        domain: context.domain,
-        country: context.country,
-        city: context.city,
-        action: context.action,
-        core_version: context.core_version,
-        bap_id: context.bap_id,
-        bap_uri: context.bap_uri,
-        transaction_id: context.transaction_id,
-        message_id: context.message_id,
-        timestamp: context.timestamp,
-        ttl: context.ttl,
-      },
-      message: {
-        order: {
-          id: message.order.item[0].id,
-          items: [
-            {
-              id: message.order.item[0].id,
-              quantity: {
-                available: {
-                  count: 0,
-                },
-              },
-            },
-          ],
-          fulfillment: {
-            state: {
-              descriptor: {
-                code: "Non-serviceable",
-              },
-            },
-          },
-        },
-      },
-    };
+  // if (stockItem.length > 0) {
+  //   response = {
+  //     context: {
+  //       domain: context.domain,
+  //       country: context.country,
+  //       city: context.city,
+  //       action: context.action,
+  //       core_version: context.core_version,
+  //       bap_id: context.bap_id,
+  //       bap_uri: context.bap_uri,
+  //       transaction_id: context.transaction_id,
+  //       message_id: context.message_id,
+  //       timestamp: context.timestamp,
+  //       ttl: context.ttl,
+  //     },
+  //     message: {
+  //       order: {
+  //         id: message.order.id,
+  //         items: [
+  //           {
+  //             id: message.order.item[0].id,
+  //             quantity: {
+  //               available: {
+  //                 count: stockItem[0].stock,
+  //               },
+  //             },
+  //           },
+  //         ],
+  //         fulfillment: {
+  //           state: {
+  //             descriptor: {
+  //               code: "Serviceable",
+  //             },
+  //           },
+  //         },
+  //       },
+  //     },
+  //   };
+  // } else {
+  //   response = {
+  //     context: {
+  //       domain: context.domain,
+  //       country: context.country,
+  //       city: context.city,
+  //       action: context.action,
+  //       core_version: context.core_version,
+  //       bap_id: context.bap_id,
+  //       bap_uri: context.bap_uri,
+  //       transaction_id: context.transaction_id,
+  //       message_id: context.message_id,
+  //       timestamp: context.timestamp,
+  //       ttl: context.ttl,
+  //     },
+  //     message: {
+  //       order: {
+  //         id: message.order.item[0].id,
+  //         items: [
+  //           {
+  //             id: message.order.item[0].id,
+  //             quantity: {
+  //               available: {
+  //                 count: 0,
+  //               },
+  //             },
+  //           },
+  //         ],
+  //         fulfillment: {
+  //           state: {
+  //             descriptor: {
+  //               code: "Non-serviceable",
+  //             },
+  //           },
+  //         },
+  //       },
+  //     },
+  //   };
 
-    const responseData = await axios.post(process.env.SELECT, response, {
-      headers: {
-        Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
-      },
-    });
+  //   const responseData = await axios.post(process.env.SELECT, response, {
+  //     headers: {
+  //       Authorization: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
+  //     },
+  //   });
 
-    // console.log("no such Id");
-    res.status(202).json(responseData, response);
-    // return res.status(304).json({ message: "no such Id" });
-  }
+  //   console.log("----------response-------");
+  //   console.log(response);
+
+  //   res.status(202).json(responseData);
+  //   // return res.status(304).json({ message: "no such Id" });
+  // }
 };
 
 // Endpoint for /on_confirm
