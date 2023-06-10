@@ -217,6 +217,13 @@ const on_status = async (req, res, next) => {
       settlement_timestamp: "2022-12-06T00:00:00.000Z",
     },
   ];
+
+  const responseData = await axios.post(process.env.ON_STATUS, response, {
+    headers: {
+      Authorization: process.env.Authorization,
+    },
+  });
+
   res.json(req.body);
 };
 
