@@ -190,8 +190,6 @@ const on_confirm = async (req, res, next) => {
 
 // Endpoint for /on_status and /on_update
 const on_status = async (req, res, next) => {
-  // app.post(["/on_status", "/on_update"], (req, res) => {
-
   // Update payment details and settlement information
   req.body.payment.type = "ON-FULFILLMENT";
   req.body.payment.collected_by = "BPP";
