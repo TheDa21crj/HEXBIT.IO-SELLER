@@ -6,10 +6,10 @@ const router = express.Router();
 // controllers
 const PostOrder = require("../controllers/PostOrder");
 
-// Endpoint for /confirm
+// Endpoint for /cancel
 router.post("/cancel", PostOrder.confirm);
 
-// Function to query the order status using the transaction ID
+// Endpoint for /update
 router.post("/update", PostOrder.status);
 
 module.exports = router;
