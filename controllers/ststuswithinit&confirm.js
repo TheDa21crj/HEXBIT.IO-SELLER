@@ -63,6 +63,11 @@ const on_init = async (req, res, next) => {
 
 // Endpoint for /confirm
 const confirm = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   // Extract the necessary information from the request
   const orderId = req.body.message.order.id;
   const transactionId = req.body.context.transaction_id;
