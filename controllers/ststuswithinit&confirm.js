@@ -1,6 +1,7 @@
 const express = require("express");
 const { validationResult } = require("express-validator");
 const HttpError = require("./../models/HttpError");
+const axios = require("axios");
 
 // models
 const Seller = require("./../models/Seller");
@@ -51,7 +52,13 @@ const on_init = async (req, res, next) => {
     };
   }
 
-  res.status(202).json(response);
+  const responseData = await axios.post(process.env.ON_INIT, response, {
+    headers: {
+      Authorization: process.env.Authorization,
+    },
+  });
+
+  res.status(202).json(responseData.data);
 };
 
 // Endpoint for /confirm
