@@ -18,9 +18,11 @@ const on_init = async (req, res, next) => {
 
   // // Extract the necessary information from the request
   const orderId = message.order.id;
-  // const transactionId = message.context.transaction_id;
+  const transactionId = context.transaction_id;
 
   // // Perform any necessary logic or validations for order initialization
+  let qt = message.order.item[0].quantity.count;
+
   let stockItem = await Items.find({
     _id: message.order.item[0].id,
     stock: { $gt: qt - 1 },
