@@ -36,8 +36,6 @@ const on_init = async (req, res, next) => {
         status: "Serviceable",
       },
     };
-
-    //   res.json(response);
   } else {
     // Prepare the response
     const response = {
