@@ -26,6 +26,7 @@ const on_init = async (req, res, next) => {
     stock: { $gt: qt - 1 },
   });
 
+  let response = {};
   if (stockItem.length > 0) {
     // Prepare the response
     const response = {
