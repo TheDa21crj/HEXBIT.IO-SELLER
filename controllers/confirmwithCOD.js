@@ -224,7 +224,9 @@ const on_status = async (req, res, next) => {
     },
   });
 
-  res.json(req.body);
+  console.log(req.body);
+
+  res.json(responseData.data);
 };
 
 exports.search = search;
