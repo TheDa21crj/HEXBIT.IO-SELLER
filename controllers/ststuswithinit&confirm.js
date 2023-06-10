@@ -33,7 +33,7 @@ const on_init = async (req, res, next) => {
       message: {
         order_id: orderId,
         transaction_id: transactionId,
-        status: "INITIALIZED",
+        status: "Serviceable",
       },
     };
 
@@ -45,7 +45,7 @@ const on_init = async (req, res, next) => {
       message: {
         order_id: orderId,
         transaction_id: transactionId,
-        status: "INITIALIZED",
+        status: "Non-Serviceable",
       },
     };
 
