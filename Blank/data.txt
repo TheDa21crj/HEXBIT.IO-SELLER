@@ -1,6 +1,5 @@
 Pre-order APIs:
 
-/init and /on_init: Buyer and seller apps specify and agree to the terms and conditions before placing the order.
 /confirm: Buyer app places the order on behalf of the buyer.
 /on_confirm: Seller app responds to the order placed, either through auto-acceptance, deferred acceptance, or rejection of the order.
 
