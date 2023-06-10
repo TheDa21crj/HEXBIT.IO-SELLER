@@ -28,8 +28,14 @@ const update = async (req, res) => {
     console.log(`Images: ${images}`);
   });
 
+  const responseData = await axios.post(process.env.ON_UPDATE, response, {
+    headers: {
+      Authorization: process.env.Authorization,
+    },
+  });
+
   // Send a response back
-  res.status(200).json({ message: "Update received successfully" });
+  res.status(200).json(responseData.data);
 };
 
 exports.update = update;
