@@ -35,6 +35,7 @@ app.get("/test", (req, res) => {
 });
 
 // route
+//      || ondc
 app.use("/api/Core", require("./routes/Core"));
 app.use("/api/User", require("./routes/Login"));
 app.use("/api/confirmwithCOD", require("./routes/confirmwithCOD"));
@@ -45,6 +46,10 @@ app.use(
   require("./routes/ststuswithinit&confirm")
 );
 
+//      || App
+app.use("/api/Core", require("./routes/Core"));
+
+// Route not found
 app.use((req, res, next) => {
   console.log(req.url);
   const error = new HttpError("Route not found", 404);
