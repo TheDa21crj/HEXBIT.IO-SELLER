@@ -48,7 +48,7 @@ app.use(
 );
 
 //      || App
-app.use("/api/Core", require("./routes/Core"));
+app.use("/api/App/onborading", require("./routes/App/onborading"));
 
 // Route not found
 app.use((req, res, next) => {
