@@ -30,7 +30,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/test", (req, res) => {
+// test route
+app.get("/7SYS9SrnCNXvzxm0", (req, res) => {
   res.send("Hello World");
 });
 
