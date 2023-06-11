@@ -1,5 +1,5 @@
 const express = require("express");
-const auth = require("../middleWare/auth");
+const auth = require("./../../middleWare/auth");
 const { check } = require("express-validator");
 
 // Controller
@@ -9,9 +9,9 @@ const router = express.Router();
 
 // Register Seller
 router.post(
-  "/register",
-  [check("name", "name is Required").not().isEmpty()],
-  LoginController.registerUser
+  "/WhatsAppNumber",
+  //   [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
+  onboardingController.WhatsAppNumber
 );
 
 // router.use(auth);
