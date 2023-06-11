@@ -7,6 +7,6 @@ const router = express.Router();
 const PostOrder = require("../controllers/PostOrder");
 
 // Endpoint for /cancel
-router.post("/cancel", PostOrder.confirm);
+router.post("/cancel", PostOrder.cancel);
 
 module.exports = router;
