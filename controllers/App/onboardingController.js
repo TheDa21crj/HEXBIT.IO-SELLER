@@ -166,14 +166,24 @@ const Company = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, type, nature } = req.body;
+  const { WhatsAppNumber, name, type, nature } = req.body;
 
   let users;
   try {
     users = await Seller.findOne({ WhatsAppNumber });
 
     if (users) {
-      console.log(name, "-------", type, "-------", nature);
+      console.log(
+        WhatsAppNumber,
+        "-->",
+        name,
+        "-------",
+        type,
+        "-------",
+        nature
+      );
+
+      res.status(202).json({ status: true });
     } else {
       res
         .status(304)
