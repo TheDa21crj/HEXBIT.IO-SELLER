@@ -16,9 +16,10 @@ router.post(
 
 // Register Seller
 router.get(
-  "/WhatsAppNumber",
-  //   [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
-  onboardingController.WhatsAppNumberGet
+  "/OptVer",
+  [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
+  [check("Otp", "Otp is Required").not().isEmpty()],
+  onboardingController.OptVer
 );
 
 // router.use(auth);
