@@ -35,8 +35,8 @@ router.post(
 router.post(
   "/Company",
   [check("name", "name is Required").not().isEmpty()],
-  [check("feild", "feild is Required").not().isEmpty()],
-  [check("value", "value is Required").not().isEmpty()],
+  [check("type", "type is Required").not().isEmpty()],
+  [check("nature", "nature is Required").not().isEmpty()],
   onboardingController.Company
 );
 
