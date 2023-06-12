@@ -54,6 +54,10 @@ const userSchema = new mongoose.Schema({
     // required: true,
     default: "",
   },
+  verifiedOTP: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {
