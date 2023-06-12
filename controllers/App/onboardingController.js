@@ -183,6 +183,18 @@ const Company = async (req, res, next) => {
         nature
       );
 
+      await Seller.updateOne(
+        { WhatsAppNumber },
+        {
+          $set: {
+            CompanyName: name,
+            CompanyType: type,
+            CompanyNature: nature,
+          },
+        },
+        { upsert: true }
+      );
+
       res.status(202).json({ status: true });
     } else {
       res
