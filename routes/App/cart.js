@@ -3,7 +3,7 @@ const auth = require("./../../middleWare/auth");
 const { check } = require("express-validator");
 
 // Controller
-const onboardingController = require("./../../controllers/App/cartcontroller");
+const cartcontroller = require("./../../controllers/App/cartcontroller");
 
 const router = express.Router();
 
@@ -14,8 +14,9 @@ router.post(
   [check("StoreName", "StoreName is Required").not().isEmpty()],
   [check("StoreType", "StoreType is Required").not().isEmpty()],
   [check("Location", "Location is Required").not().isEmpty()],
-  [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
-  onboardingController.WhatsAppNumber
+  [check("Website", "Website is Required").not().isEmpty()],
+  [check("StoreDescription", "StoreDescription is Required").not().isEmpty()],
+  cartcontroller.AddStore
 );
 
 // router.use(auth);
