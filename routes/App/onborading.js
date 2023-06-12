@@ -14,6 +14,13 @@ router.post(
   onboardingController.WhatsAppNumber
 );
 
+// Register Seller
+router.get(
+  "/WhatsAppNumber",
+  //   [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
+  onboardingController.WhatsAppNumberGet
+);
+
 // router.use(auth);
 
 module.exports = router;
