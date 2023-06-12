@@ -46,6 +46,11 @@ const userSchema = new mongoose.Schema({
     // required: true,
     default: "",
   },
+  GSTIN: {
+    type: String,
+    // required: true,
+    default: "",
+  },
   Store: [
     {
       StoreID: {
