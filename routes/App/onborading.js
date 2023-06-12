@@ -26,8 +26,8 @@ router.post(
 router.post(
   "/name&Email",
   [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
-  [check("feild", "Otp is Required").not().isEmpty()],
-  onboardingController.OptVer
+  [check("feild", "feild is Required").not().isEmpty()],
+  onboardingController.nameEmail
 );
 
 // router.use(auth);
