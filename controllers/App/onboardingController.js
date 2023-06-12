@@ -215,6 +215,36 @@ const CompanyLicense = async (req, res, next) => {
   }
 
   const { WhatsAppNumber, GSTIN, License } = req.body;
+
+  let users;
+  try {
+    users = await Seller.findOne({ WhatsAppNumber });
+
+    if (users) {
+      console.log(WhatsAppNumber, "-->", GSTIN, "-------", License);
+
+      await Seller.updateOne(
+        { WhatsAppNumber },
+        {
+          $set: {
+            GSTIN,
+            License,
+          },
+        },
+        { upsert: true }
+      );
+
+      res.status(202).json({ status: true });
+    } else {
+      res
+        .status(304)
+        .json({ status: false, message: "Number Does not Exists" });
+    }
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Cannot add user", 400);
+    return next(error);
+  }
 };
 
 exports.OptVer = OptVer;
