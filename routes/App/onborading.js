@@ -27,6 +27,7 @@ router.post(
   "/name&Email",
   [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
   [check("feild", "feild is Required").not().isEmpty()],
+  [check("value", "value is Required").not().isEmpty()],
   onboardingController.nameEmail
 );
 
