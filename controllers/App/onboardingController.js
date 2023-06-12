@@ -127,7 +127,7 @@ const nameEmail = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { WhatsAppNumber, feild } = req.body;
+  const { WhatsAppNumber, feild, value } = req.body;
 
   let users;
 
@@ -135,7 +135,17 @@ const nameEmail = async (req, res, next) => {
     users = await Seller.findOne({ WhatsAppNumber });
 
     if (users) {
-      console.log(feild);
+      console.log(feild, "=====", value);
+
+      await Seller.updateOne(
+        { WhatsAppNumber },
+        {
+          $set: {
+            [feild]: value,
+          },
+        },
+        { upsert: true }
+      );
 
       res.status(202).json({ status: true });
     } else {
