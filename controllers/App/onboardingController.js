@@ -208,7 +208,17 @@ const Company = async (req, res, next) => {
   }
 };
 
+const CompanyLicense = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { WhatsAppNumber, GSTIN, License } = req.body;
+};
+
 exports.OptVer = OptVer;
 exports.Company = Company;
 exports.nameEmail = nameEmail;
+exports.CompanyLicense = CompanyLicense;
 exports.WhatsAppNumber = WhatsAppNumber;
