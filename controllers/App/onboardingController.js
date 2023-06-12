@@ -20,11 +20,65 @@ const WhatsAppNumber = async (req, res, next) => {
 
   const { WhatsAppNumber } = req.body;
 
-  console.log(req.body);
-
   console.log("WhatsAppNumber==", WhatsAppNumber);
 
-  res.status(202).json({ message: "Hello", WhatsAppNumber });
+  let users;
+  try {
+    users = await Seller.findOne({ WhatsAppNumber });
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong Email Credentials", 400);
+    return next(error);
+  }
+
+  if (users) {
+    res.json({ exists: true });
+    return;
+  } else {
+    let image;
+    try {
+      image = gravatar.url(WhatsAppNumber, { s: "200", r: "pg", d: "mm" });
+    } catch (e) {
+      const error = new HttpError("gravatar error", 400);
+      return next(error);
+    }
+
+    const newUser = new Seller({
+      WhatsAppNumber,
+      image,
+      Store: [],
+    });
+
+    try {
+      const createduser = await newUser.save();
+
+      let token;
+      try {
+        token = jwt.sign(
+          { userWhatsAppNumber: WhatsAppNumber },
+          process.env.JWT_SECRATE,
+          {
+            expiresIn: "5hr",
+          }
+        );
+      } catch (err) {
+        const error = new HttpError("Error logging user", 401);
+        console.log(err);
+        return next(error);
+      }
+
+      var userinfo = {
+        pic: createduser.image,
+        WhatsAppNumber,
+      };
+
+      res.json({ exists: false, token: token, user: userinfo });
+    } catch (err) {
+      console.log(err);
+      const error = new HttpError("Cannot add user", 400);
+      return next(error);
+    }
+  }
 };
 
 const WhatsAppNumberGet = async (req, res, next) => {
