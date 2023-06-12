@@ -31,6 +31,15 @@ router.post(
   onboardingController.nameEmail
 );
 
+// Register Company
+router.post(
+  "/Company",
+  [check("name", "name is Required").not().isEmpty()],
+  [check("feild", "feild is Required").not().isEmpty()],
+  [check("value", "value is Required").not().isEmpty()],
+  onboardingController.Company
+);
+
 // router.use(auth);
 
 module.exports = router;
