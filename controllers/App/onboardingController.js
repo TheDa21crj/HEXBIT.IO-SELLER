@@ -72,6 +72,9 @@ const WhatsAppNumber = async (req, res, next) => {
         WhatsAppNumber,
       };
 
+      const OTP = Math.floor(Math.random() * 9000 + 1000);
+      console.log(OTP);
+
       res.json({ exists: false, token: token, user: userinfo });
     } catch (err) {
       console.log(err);
@@ -81,9 +84,42 @@ const WhatsAppNumber = async (req, res, next) => {
   }
 };
 
-const WhatsAppNumberGet = async (req, res, next) => {
-  res.status(202).json({ message: "Hello" });
+const OptVer = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { WhatsAppNumber, Otp } = req.body;
+
+  let users;
+
+  try {
+    users = await Seller.findOne({ WhatsAppNumber });
+
+    if (users) {
+      console.log(Otp, "=========", WhatsAppNumber);
+
+      await Seller.updateOne(
+        { WhatsAppNumber },
+        {
+          $set: {
+            verifiedOTP: true,
+          },
+        },
+        { upsert: true }
+      );
+
+      res.status(202).json({ status: true });
+    } else {
+      res.status(304).json({ message: "Wrong OTP" });
+    }
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Cannot add user", 400);
+    return next(error);
+  }
 };
 
-exports.WhatsAppNumberGet = WhatsAppNumberGet;
+exports.OptVer = OptVer;
 exports.WhatsAppNumber = WhatsAppNumber;
