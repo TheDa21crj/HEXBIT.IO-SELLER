@@ -4,15 +4,18 @@ const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    // required: true,
+    default: "",
   },
   email: {
     type: String,
-    required: true,
+    // required: true,
+    default: "",
   },
   Pan: {
     type: String,
-    required: true,
+    // required: true,
+    default: "",
   },
   image: {
     type: String,
@@ -25,15 +28,18 @@ const userSchema = new mongoose.Schema({
   },
   CompanyName: {
     type: String,
-    required: true,
+    // required: true,
+    default: "",
   },
   CompanyType: {
     type: String,
-    required: true,
+    // required: true,
+    default: "",
   },
   License: {
     type: String,
-    required: true,
+    // required: true,
+    default: "",
   },
   Store: [
     {
