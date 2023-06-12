@@ -13,10 +13,10 @@ const Store = require("./../../models/Store");
 const Items = require("./../../models/Items");
 
 const WhatsAppNumber = async (req, res, next) => {
-  //   const errors = validationResult(req);
-  //   if (!errors.isEmpty()) {
-  //     return res.status(400).json({ errors: errors.array() });
-  //   }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
   const { WhatsAppNumber } = req.body;
 
