@@ -133,6 +133,13 @@ const nameEmail = async (req, res, next) => {
 
   try {
     users = await Seller.findOne({ WhatsAppNumber });
+
+    if (users) {
+    } else {
+      res
+        .status(304)
+        .json({ status: false, message: "Number Does not Exists" });
+    }
   } catch (err) {
     console.log(err);
     const error = new HttpError("Cannot add user", 400);
