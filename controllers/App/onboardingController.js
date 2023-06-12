@@ -160,6 +160,9 @@ const nameEmail = async (req, res, next) => {
   }
 };
 
+const Company = async (req, res, next) => {};
+
 exports.OptVer = OptVer;
+exports.Company = Company;
 exports.nameEmail = nameEmail;
 exports.WhatsAppNumber = WhatsAppNumber;
