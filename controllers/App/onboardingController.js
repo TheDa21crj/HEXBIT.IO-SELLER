@@ -121,5 +121,15 @@ const OptVer = async (req, res, next) => {
   }
 };
 
+const nameEmail = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { WhatsAppNumber, feild } = req.body;
+};
+
 exports.OptVer = OptVer;
+exports.nameEmail = nameEmail;
 exports.WhatsAppNumber = WhatsAppNumber;
