@@ -160,7 +160,22 @@ const nameEmail = async (req, res, next) => {
   }
 };
 
-const Company = async (req, res, next) => {};
+const Company = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { name, type, nature } = req.body;
+
+  let users;
+  try {
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Cannot add user", 400);
+    return next(error);
+  }
+};
 
 exports.OptVer = OptVer;
 exports.Company = Company;
