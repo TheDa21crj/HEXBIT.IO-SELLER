@@ -34,6 +34,7 @@ router.post(
 // Register Company
 router.post(
   "/Company",
+  [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
   [check("name", "name is Required").not().isEmpty()],
   [check("type", "type is Required").not().isEmpty()],
   [check("nature", "nature is Required").not().isEmpty()],
