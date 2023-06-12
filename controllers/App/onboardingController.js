@@ -135,6 +135,9 @@ const nameEmail = async (req, res, next) => {
     users = await Seller.findOne({ WhatsAppNumber });
 
     if (users) {
+      console.log(feild);
+
+      res.status(202).json({ status: true });
     } else {
       res
         .status(304)
