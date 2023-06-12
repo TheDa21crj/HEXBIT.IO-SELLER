@@ -36,6 +36,11 @@ const userSchema = new mongoose.Schema({
     // required: true,
     default: "",
   },
+  CompanyNature: {
+    type: String,
+    // required: true,
+    default: "",
+  },
   License: {
     type: String,
     // required: true,
