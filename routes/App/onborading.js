@@ -14,11 +14,19 @@ router.post(
   onboardingController.WhatsAppNumber
 );
 
-// Register Seller
-router.get(
+// Register OTP
+router.post(
   "/OptVer",
   [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
   [check("Otp", "Otp is Required").not().isEmpty()],
+  onboardingController.OptVer
+);
+
+// Register Name
+router.post(
+  "/name&Email",
+  [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
+  [check("feild", "Otp is Required").not().isEmpty()],
   onboardingController.OptVer
 );
 
