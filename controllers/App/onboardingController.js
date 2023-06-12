@@ -24,7 +24,7 @@ const WhatsAppNumber = async (req, res, next) => {
 
   console.log("WhatsAppNumber==", WhatsAppNumber);
 
-  res.status(202).json({ message: "Hello" });
+  res.status(202).json({ message: "Hello", WhatsAppNumber });
 };
 
 const WhatsAppNumberGet = async (req, res, next) => {
