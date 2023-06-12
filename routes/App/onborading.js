@@ -10,7 +10,7 @@ const router = express.Router();
 // Register Seller
 router.post(
   "/WhatsAppNumber",
-  //   [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
+  [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
   onboardingController.WhatsAppNumber
 );
 
