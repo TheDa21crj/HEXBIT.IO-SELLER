@@ -128,6 +128,16 @@ const nameEmail = async (req, res, next) => {
   }
 
   const { WhatsAppNumber, feild } = req.body;
+
+  let users;
+
+  try {
+    users = await Seller.findOne({ WhatsAppNumber });
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Cannot add user", 400);
+    return next(error);
+  }
 };
 
 exports.OptVer = OptVer;
