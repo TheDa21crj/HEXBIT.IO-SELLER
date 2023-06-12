@@ -170,6 +170,15 @@ const Company = async (req, res, next) => {
 
   let users;
   try {
+    users = await Seller.findOne({ WhatsAppNumber });
+
+    if (users) {
+      console.log(name, "-------", type, "-------", nature);
+    } else {
+      res
+        .status(304)
+        .json({ status: false, message: "Number Does not Exists" });
+    }
   } catch (err) {
     console.log(err);
     const error = new HttpError("Cannot add user", 400);
