@@ -32,26 +32,72 @@ const AddStore = async (req, res, next) => {
     StoreDescription,
   } = req.body;
 
-  console.log(
-    WhatsAppNumber,
-    StoreName,
-    StoreType,
-    PinCode,
-    Add,
-    Locality,
-    City,
-    State,
-    Country,
-    StoreDescription,
-    Website
-  );
+  // console.log(
+  //   WhatsAppNumber,
+  //   StoreName,
+  //   StoreType,
+  //   PinCode,
+  //   Add,
+  //   Locality,
+  //   City,
+  //   State,
+  //   Country,
+  //   StoreDescription,
+  //   Website
+  // );
 
   try {
     let users = await Seller.findOne({ WhatsAppNumber });
 
-    console.log("userID", users);
+    if (users) {
+      console.log("userID", users._id);
 
-    res.status(202).json({ status: true });
+      const newStore = new Store({
+        StoreName,
+        StoreType,
+        Website,
+        StoreDescription,
+        Items: [],
+        Address: {
+          door: Add,
+          name: users.name,
+          locality: Locality,
+          city: City,
+          state: State,
+          country: Country,
+          area_code: PinCode,
+        },
+        sellerID: users._id,
+      });
+
+      try {
+        const createduser = await newStore.save();
+
+        console.log(createduser);
+
+        let store = {
+          StoreID: createduser._id,
+        };
+
+        await Seller.findOneAndUpdate(
+          { WhatsAppNumber },
+          {
+            $push: {
+              Store: store,
+            },
+          }
+          // { upsert: true }
+        );
+
+        res.status(202).json({ status: true });
+      } catch (err) {
+        console.log(err);
+        const error = new HttpError("Cannot add user", 400);
+        return next(error);
+      }
+    } else {
+      res.status(202).json({ message: "User: Does Not " });
+    }
   } catch (e) {
     console.log(e);
     const error = new HttpError("Wrong Email Credentials", 400);
