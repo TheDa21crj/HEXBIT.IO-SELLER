@@ -52,21 +52,6 @@ const WhatsAppNumber = async (req, res, next) => {
     try {
       const createduser = await newUser.save();
 
-      let token;
-      try {
-        token = jwt.sign(
-          { userWhatsAppNumber: WhatsAppNumber },
-          process.env.JWT_SECRATE,
-          {
-            expiresIn: "5hr",
-          }
-        );
-      } catch (err) {
-        const error = new HttpError("Error logging user", 401);
-        console.log(err);
-        return next(error);
-      }
-
       var userinfo = {
         pic: createduser.image,
         WhatsAppNumber,
@@ -75,7 +60,7 @@ const WhatsAppNumber = async (req, res, next) => {
       const OTP = Math.floor(Math.random() * 9000 + 1000);
       console.log(OTP);
 
-      res.json({ exists: false, token: token, user: userinfo });
+      res.json({ exists: false, user: userinfo });
     } catch (err) {
       console.log(err);
       const error = new HttpError("Cannot add user", 400);
@@ -234,7 +219,22 @@ const CompanyLicense = async (req, res, next) => {
         { upsert: true }
       );
 
-      res.status(202).json({ status: true });
+      let token;
+      try {
+        token = jwt.sign(
+          { WhatsAppNumber: WhatsAppNumber },
+          process.env.JWT_SECRATE,
+          {
+            expiresIn: "5hr",
+          }
+        );
+
+        res.status(202).json({ status: true, token: token });
+      } catch (err) {
+        const error = new HttpError("Error logging user", 401);
+        console.log(err);
+        return next(error);
+      }
     } else {
       res
         .status(304)
