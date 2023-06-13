@@ -13,11 +13,23 @@ router.post(
   [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
   [check("StoreName", "StoreName is Required").not().isEmpty()],
   [check("StoreType", "StoreType is Required").not().isEmpty()],
-  [check("Location", "Location is Required").not().isEmpty()],
+  [check("PinCode", "PinCode is Required").not().isEmpty()],
+  [check("Add", "Add is Required").not().isEmpty()],
+  [check("Locality", "Locality is Required").not().isEmpty()],
+  [check("City", "City is Required").not().isEmpty()],
+  [check("State", "State is Required").not().isEmpty()],
+  [check("Country", "Country is Required").not().isEmpty()],
   [check("Website", "Website is Required").not().isEmpty()],
   [check("StoreDescription", "StoreDescription is Required").not().isEmpty()],
   cartcontroller.AddStore
 );
+
+// PinCode;
+// Add;
+// Locality;
+// City;
+// State;
+// Country;
 
 // router.use(auth);
 
