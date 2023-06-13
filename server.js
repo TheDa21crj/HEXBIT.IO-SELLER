@@ -50,6 +50,7 @@ app.use(
 //      || App
 app.use("/api/App/onborading", require("./routes/App/onborading"));
 app.use("/api/App/cart", require("./routes/App/cart"));
+app.use("/api/App/Inventory", require("./routes/App/Inventory"));
 
 // Route not found
 app.use((req, res, next) => {
