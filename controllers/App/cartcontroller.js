@@ -23,42 +23,54 @@ const AddStore = async (req, res, next) => {
     StoreName,
     StoreType,
     Website,
-    Location,
+    PinCode,
+    Add,
+    Locality,
+    City,
+    State,
+    Country,
     StoreDescription,
   } = req.body;
 
-  console.table(
+  console.log(
     WhatsAppNumber,
     StoreName,
     StoreType,
-    Location,
+    PinCode,
+    Add,
+    Locality,
+    City,
+    State,
+    Country,
     StoreDescription,
     Website
   );
 
-  let users;
   try {
-    users = await Seller.findOne({ WhatsAppNumber });
+    let users = await Seller.findOne({ WhatsAppNumber });
+
+    console.log("userID", users);
+
+    res.status(202).json({ status: true });
   } catch (e) {
     console.log(e);
     const error = new HttpError("Wrong Email Credentials", 400);
     return next(error);
   }
 
-  if (users) {
-    //     res.json({ exists: true });
-    //     return;
-    res.status(202).json({ status: true });
-  } else {
-    res.status(202).json({ status: false });
+  // if (users) {
+  //     res.json({ exists: true });
+  //     return;
+  // } else {
+  // res.status(202).json({ status: false });
 
-    //     let image;
-    //     try {
-    //       image = gravatar.url(WhatsAppNumber, { s: "200", r: "pg", d: "mm" });
-    //     } catch (e) {
-    //       const error = new HttpError("gravatar error", 400);
-    //       return next(error);
-  }
+  //     let image;
+  //     try {
+  //       image = gravatar.url(WhatsAppNumber, { s: "200", r: "pg", d: "mm" });
+  //     } catch (e) {
+  //       const error = new HttpError("gravatar error", 400);
+  //       return next(error);
+  // }
 
   //     const newUser = new Seller({
   //       WhatsAppNumber,
