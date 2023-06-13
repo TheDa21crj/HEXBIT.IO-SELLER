@@ -18,7 +18,10 @@ const InventoryGet = async (req, res, next) => {
     res
       .status(202)
       .json({ status: true, NumberOFItems: itemData.length, itemData });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(304).json({ status: false, message: "Number Does not Exists" });
+  }
 };
 
 exports.InventoryGet = InventoryGet;
