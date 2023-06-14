@@ -102,7 +102,9 @@ const getStoreItems = async (req, res, next) => {
 
     console.log(StoreID);
 
-    const sotreData = await Store.find({ _id: StoreID });
+    const sotreData = await Store.find({ _id: StoreID }).populate(
+      "Items.ItemID"
+    );
 
     console.log(sotreData[0].Items);
 
