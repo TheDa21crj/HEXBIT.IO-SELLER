@@ -122,5 +122,32 @@ const GetStoreOrder = async (req, res, next) => {
   }
 };
 
+const orderDetails = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { id } = req.body;
+
+  try {
+    let data = await Order.find({ _id: id }).populate("Items.ItemID");
+
+    if (data) {
+      res.status(202).json({ status: true, data });
+    } else {
+      res
+        .status(304)
+        .json({ status: false, message: "Store Does Not Exisits" });
+    }
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong Email Credentials", 400);
+    return next(error);
+  }
+};
+
 exports.AddOrder = AddOrder;
+exports.orderDetails = orderDetails;
 exports.GetStoreOrder = GetStoreOrder;
