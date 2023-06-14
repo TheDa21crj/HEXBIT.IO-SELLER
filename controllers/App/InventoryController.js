@@ -14,6 +14,8 @@ const Items = require("./../../models/Items");
 
 const InventoryGet = async (req, res, next) => {
   try {
+    console.log("Get Inventory Data");
+
     const itemData = await Items.find({});
     res
       .status(202)
