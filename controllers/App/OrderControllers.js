@@ -51,16 +51,16 @@ const AddOrder = async (req, res, next) => {
     return next(error);
   }
 
-  let Items;
+  let ItemsData;
   try {
-    Items = await Items.findOne({ _id: ItemID });
+    ItemsData = await Items.find({ _id: ItemID });
   } catch (e) {
     console.log(e);
     const error = new HttpError("Wrong Email Credentials", 400);
     return next(error);
   }
 
-  if (users && stores && Items) {
+  if (users && stores && ItemsData) {
     let data = {
       ItemID,
       quantity: Quantity,
