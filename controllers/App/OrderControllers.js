@@ -100,6 +100,20 @@ const GetStoreOrder = async (req, res, next) => {
     let storeData = await Store.find({ _id: StoreID });
 
     if (storeData) {
+      try {
+        let orders = await Order.find({ StoreID });
+
+        if (orders) {
+          res
+            .status(202)
+            .json({ status: true, Order: orders })
+            .populate("Items.ItemID");
+        }
+      } catch (e) {
+        console.log(e);
+        const error = new HttpError("Wrong Email Credentials", 400);
+        return next(error);
+      }
     } else {
       res
         .status(304)
