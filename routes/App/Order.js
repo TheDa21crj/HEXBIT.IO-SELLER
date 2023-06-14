@@ -25,9 +25,9 @@ router.post(
 
 // Register Seller
 router.post(
-  "/AddOrder",
+  "/GetStoreOrder",
   [check("StoreID", "StoreID is Required").not().isEmpty()],
-  OrderControllers.AddOrder
+  OrderControllers.GetStoreOrder
 );
 
 // router.use(auth);
