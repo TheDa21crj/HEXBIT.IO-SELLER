@@ -15,7 +15,7 @@ router.post(
   [check("Date", "Date is Required").not().isEmpty()],
   [check("Status", "Status is Required").not().isEmpty()],
   [check("method", "method is Required").not().isEmpty()],
-  [check("ammount", "ammount is Required").not().isEmpty()],
+  [check("amount", "ammount is Required").not().isEmpty()],
   [check("ShippingAddress", "ShippingAddress is Required").not().isEmpty()],
   [check("CustormerID", "CustormerID is Required").not().isEmpty()],
   OrderControllers.AddOrder
