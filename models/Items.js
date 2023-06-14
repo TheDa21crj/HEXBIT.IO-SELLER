@@ -17,6 +17,10 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  des: {
+    type: String,
+    required: true,
+  },
   rating: {
     type: Number,
     default: 0,
@@ -25,9 +29,9 @@ const ItemSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  StoreID: {
-    type: mongoose.Types.ObjectId,
-    ref: "Store",
+  Img: {
+    type: String,
+    required: true,
   },
   SellerID: {
     type: mongoose.Types.ObjectId,
