@@ -21,7 +21,8 @@ const AddOrder = async (req, res, next) => {
   }
 
   const {
-    Items,
+    ItemID,
+    Quantity,
     SellerID,
     StoreID,
     Date,
@@ -50,9 +51,23 @@ const AddOrder = async (req, res, next) => {
     return next(error);
   }
 
-  if (usersb && stores) {
+  let Items;
+  try {
+    Items = await Items.findOne({ _id: ItemID });
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong Email Credentials", 400);
+    return next(error);
+  }
+
+  if (users && stores && Items) {
+    let data = {
+      ItemID,
+      quantity: Quantity,
+    };
+
     const OrderNew = new Order({
-      Items,
+      Items: data,
       SellerID,
       Date,
       Status,
