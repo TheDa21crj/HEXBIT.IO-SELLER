@@ -24,12 +24,12 @@ router.post(
   cartcontroller.AddStore
 );
 
-// PinCode;
-// Add;
-// Locality;
-// City;
-// State;
-// Country;
+// Get Store Items
+router.post(
+  "/getStoreItems",
+  [check("StoreID", "StoreID is Required").not().isEmpty()],
+  cartcontroller.getStoreItems
+);
 
 // router.use(auth);
 
