@@ -224,15 +224,17 @@ const AddItem = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, price, stock, StoreID, type, Img, des } = req.body;
+  const { name, price, stock, StoreID, type, Img, des, wa } = req.body;
 
   try {
     try {
-      users = await Seller.findOne({ email: res.locals.userData.userEmail });
+      users = await Seller.findOne({ WhatsAppNumber: wa });
     } catch (err) {
       const error = new HttpError("User not found", 500);
       return next(error);
     }
+
+    console.log(name, price, stock, StoreID, type, Img, des);
 
     if (users) {
       const newUser = new Items({
@@ -258,7 +260,7 @@ const AddItem = async (req, res, next) => {
 
       console.log(storeFind);
 
-      res.status(202).json({ success: true, createduser });
+      res.status(202).json({ status: true });
     }
   } catch (err) {
     console.log(err);
