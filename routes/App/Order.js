@@ -17,6 +17,7 @@ router.post(
   [check("method", "method is Required").not().isEmpty()],
   [check("ammount", "ammount is Required").not().isEmpty()],
   [check("ShippingAddress", "ShippingAddress is Required").not().isEmpty()],
+  [check("CustormerID", "CustormerID is Required").not().isEmpty()],
   OrderControllers.AddOrder
 );
 
