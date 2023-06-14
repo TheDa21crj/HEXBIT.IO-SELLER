@@ -32,20 +32,6 @@ const AddStore = async (req, res, next) => {
     StoreDescription,
   } = req.body;
 
-  // console.log(
-  //   WhatsAppNumber,
-  //   StoreName,
-  //   StoreType,
-  //   PinCode,
-  //   Add,
-  //   Locality,
-  //   City,
-  //   State,
-  //   Country,
-  //   StoreDescription,
-  //   Website
-  // );
-
   try {
     let users = await Seller.findOne({ WhatsAppNumber });
 
@@ -89,7 +75,7 @@ const AddStore = async (req, res, next) => {
           // { upsert: true }
         );
 
-        res.status(202).json({ status: true });
+        res.status(202).json({ status: true, storeID: createduser._id });
       } catch (err) {
         console.log(err);
         const error = new HttpError("Cannot add user", 400);
@@ -103,60 +89,30 @@ const AddStore = async (req, res, next) => {
     const error = new HttpError("Wrong Email Credentials", 400);
     return next(error);
   }
-
-  // if (users) {
-  //     res.json({ exists: true });
-  //     return;
-  // } else {
-  // res.status(202).json({ status: false });
-
-  //     let image;
-  //     try {
-  //       image = gravatar.url(WhatsAppNumber, { s: "200", r: "pg", d: "mm" });
-  //     } catch (e) {
-  //       const error = new HttpError("gravatar error", 400);
-  //       return next(error);
-  // }
-
-  //     const newUser = new Seller({
-  //       WhatsAppNumber,
-  //       image,
-  //       Store: [],
-  //     });
-
-  //     try {
-  //       const createduser = await newUser.save();
-
-  //       let token;
-  //       try {
-  //         token = jwt.sign(
-  //           { userWhatsAppNumber: WhatsAppNumber },
-  //           process.env.JWT_SECRATE,
-  //           {
-  //             expiresIn: "5hr",
-  //           }
-  //         );
-  //       } catch (err) {
-  //         const error = new HttpError("Error logging user", 401);
-  //         console.log(err);
-  //         return next(error);
-  //       }
-
-  //       var userinfo = {
-  //         pic: createduser.image,
-  //         WhatsAppNumber,
-  //       };
-
-  //       const OTP = Math.floor(Math.random() * 9000 + 1000);
-  //       console.log(OTP);
-
-  //       res.json({ exists: false, token: token, user: userinfo });
-  //     } catch (err) {
-  //       console.log(err);
-  //       const error = new HttpError("Cannot add user", 400);
-  //       return next(error);
-  //     }
-  //   }
 };
 
+const getStoreItems = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { StoreID } = req.body;
+
+    console.log(StoreID);
+
+    const sotreData = await Store.find({ _id: StoreID });
+
+    console.log(sotreData[0].Items);
+
+    res.status(202).json({ status: true, Store: sotreData[0].Items });
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong Email Credentials", 400);
+    return next(error);
+  }
+};
+
+exports.getStoreItems = getStoreItems;
 exports.AddStore = AddStore;
