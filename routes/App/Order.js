@@ -1,0 +1,25 @@
+const express = require("express");
+const auth = require("./../../middleWare/auth");
+const { check } = require("express-validator");
+
+// Controller
+const OrderControllers = require("./../../controllers/App/OrderControllers");
+
+const router = express.Router();
+
+// Register Seller
+router.post(
+  "/WhatsAppNumber",
+  [check("Items", "Items is Required").not().isEmpty()],
+  [check("SellerID", "SellerID is Required").not().isEmpty()],
+  [check("Date", "Date is Required").not().isEmpty()],
+  [check("Status", "Status is Required").not().isEmpty()],
+  [check("method", "method is Required").not().isEmpty()],
+  [check("ammount", "ammount is Required").not().isEmpty()],
+  [check("ShippingAddress", "ShippingAddress is Required").not().isEmpty()],
+  OrderControllers.AddOrder
+);
+
+// router.use(auth);
+
+module.exports = router;
