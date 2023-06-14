@@ -9,7 +9,7 @@ const router = express.Router();
 
 // Register Seller
 router.post(
-  "/WhatsAppNumber",
+  "/AddOrder",
   [check("Items", "Items is Required").not().isEmpty()],
   [check("SellerID", "SellerID is Required").not().isEmpty()],
   [check("Date", "Date is Required").not().isEmpty()],
