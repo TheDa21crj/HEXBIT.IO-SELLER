@@ -30,6 +30,13 @@ router.post(
   OrderControllers.GetStoreOrder
 );
 
+// Register Order Details
+router.post(
+  "/orderDetails",
+  [check("id", "id is Required").not().isEmpty()],
+  OrderControllers.orderDetails
+);
+
 // router.use(auth);
 
 module.exports = router;
