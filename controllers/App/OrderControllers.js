@@ -19,8 +19,16 @@ const AddOrder = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { Items, SellerID, Date, Status, method, ammount, ShippingAddress } =
-    req.body;
+  const {
+    Items,
+    SellerID,
+    Date,
+    Status,
+    method,
+    CustormerID,
+    amount,
+    ShippingAddress,
+  } = req.body;
 
   let users;
   try {
