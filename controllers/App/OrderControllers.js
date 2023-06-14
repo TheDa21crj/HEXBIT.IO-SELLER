@@ -101,13 +101,9 @@ const GetStoreOrder = async (req, res, next) => {
 
     if (storeData) {
       try {
-        let orders = await Order.find({ StoreID });
-
+        let orders = await Order.find({ StoreID }).populate("Items.ItemID");
         if (orders) {
-          res
-            .status(202)
-            .json({ status: true, Order: orders })
-            .populate("Items.ItemID");
+          res.status(202).json({ status: true, Order: orders });
         }
       } catch (e) {
         console.log(e);
