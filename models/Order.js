@@ -13,6 +13,12 @@ const OrderSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "users",
   },
+  CustormerID: {
+    // type: mongoose.Types.ObjectId,
+    type: String,
+    required: true,
+    // ref: "",
+  },
   Date: {
     type: String,
     required: true,
