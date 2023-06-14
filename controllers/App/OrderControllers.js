@@ -120,8 +120,6 @@ const GetStoreOrder = async (req, res, next) => {
     const error = new HttpError("Wrong Email Credentials", 400);
     return next(error);
   }
-
-  res.status(202).json({ status: true, StoreID });
 };
 
 exports.AddOrder = AddOrder;
