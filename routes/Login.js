@@ -27,8 +27,6 @@ router.post(
   LoginController.login
 );
 
-router.use(auth);
-
 // Add Store
 router.post(
   "/AddStore",
@@ -56,5 +54,7 @@ router.post(
   [check("StoreID", "StoreID is Required").not().isEmpty()],
   LoginController.AddItem
 );
+
+router.use(auth);
 
 module.exports = router;
