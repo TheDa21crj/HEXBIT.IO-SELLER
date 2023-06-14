@@ -51,6 +51,8 @@ router.post(
   [check("price", "price is Required").not().isEmpty()],
   [check("stock", "stock is Required").not().isEmpty()],
   [check("type", "type is Required").not().isEmpty()],
+  [check("Img", "Img is Required").not().isEmpty()],
+  [check("des", "des is Required").not().isEmpty()],
   [check("StoreID", "StoreID is Required").not().isEmpty()],
   LoginController.AddItem
 );
