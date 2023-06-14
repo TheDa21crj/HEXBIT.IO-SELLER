@@ -7,7 +7,7 @@ const OrderControllers = require("./../../controllers/App/OrderControllers");
 
 const router = express.Router();
 
-// Register Seller
+// Register Order
 router.post(
   "/AddOrder",
   [check("ItemID", "ItemID is Required").not().isEmpty()],
@@ -20,6 +20,13 @@ router.post(
   [check("amount", "amount is Required").not().isEmpty()],
   [check("ShippingAddress", "ShippingAddress is Required").not().isEmpty()],
   [check("CustormerID", "CustormerID is Required").not().isEmpty()],
+  OrderControllers.AddOrder
+);
+
+// Register Seller
+router.post(
+  "/AddOrder",
+  [check("StoreID", "StoreID is Required").not().isEmpty()],
   OrderControllers.AddOrder
 );
 
