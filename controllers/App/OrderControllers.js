@@ -11,6 +11,7 @@ const path = require("path");
 const Seller = require("./../../models/Seller");
 const Store = require("./../../models/Store");
 const Items = require("./../../models/Items");
+const Order = require("./../../models/Order");
 
 const AddOrder = async (req, res, next) => {
   const errors = validationResult(req);
@@ -22,6 +23,7 @@ const AddOrder = async (req, res, next) => {
   const {
     Items,
     SellerID,
+    StoreID,
     Date,
     Status,
     method,
@@ -32,7 +34,16 @@ const AddOrder = async (req, res, next) => {
 
   let users;
   try {
-    users = await Seller.findOne({ WhatsAppNumber });
+    users = await Seller.findOne({ _id: SellerID });
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong Email Credentials", 400);
+    return next(error);
+  }
+
+  let stores;
+  try {
+    stores = await Store.findOne({ _id: StoreID });
   } catch (e) {
     console.log(e);
     const error = new HttpError("Wrong Email Credentials", 400);
@@ -40,40 +51,21 @@ const AddOrder = async (req, res, next) => {
   }
 
   if (users) {
-    res.json({ exists: true });
-    return;
-  } else {
-    let image;
-    try {
-      image = gravatar.url(WhatsAppNumber, { s: "200", r: "pg", d: "mm" });
-    } catch (e) {
-      const error = new HttpError("gravatar error", 400);
-      return next(error);
-    }
-
-    const newUser = new Seller({
-      WhatsAppNumber,
-      image,
-      Store: [],
+    const OrderNew = new Order({
+      Items,
+      SellerID,
+      Date,
+      Status,
+      method,
+      CustormerID,
+      amount,
+      ShippingAddress,
     });
 
-    try {
-      const createduser = await newUser.save();
-
-      var userinfo = {
-        pic: createduser.image,
-        WhatsAppNumber,
-      };
-
-      const OTP = Math.floor(Math.random() * 9000 + 1000);
-      console.log(OTP);
-
-      res.json({ exists: false, user: userinfo });
-    } catch (err) {
-      console.log(err);
-      const error = new HttpError("Cannot add user", 400);
-      return next(error);
-    }
+    let createduser = await OrderNew.save();
+  } else {
+    const error = new HttpError("Seller Does Not --", 400);
+    return next(error);
   }
 };
 
