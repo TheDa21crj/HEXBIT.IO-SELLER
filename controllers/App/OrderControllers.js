@@ -88,3 +88,4 @@ const AddOrder = async (req, res, next) => {
 };
 
 exports.AddOrder = AddOrder;
+exports.GetStoreOrder = GetStoreOrder;
