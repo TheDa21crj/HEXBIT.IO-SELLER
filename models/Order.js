@@ -19,6 +19,10 @@ const OrderSchema = new mongoose.Schema({
     required: true,
     // ref: "",
   },
+  StoreID: {
+    type: mongoose.Types.ObjectId,
+    ref: "Store",
+  },
   Date: {
     type: String,
     required: true,
