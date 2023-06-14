@@ -10,7 +10,8 @@ const router = express.Router();
 // Register Seller
 router.post(
   "/AddOrder",
-  [check("Items", "Items is Required").not().isEmpty()],
+  [check("ItemID", "ItemID is Required").not().isEmpty()],
+  [check("Quantity", "Quantity is Required").not().isEmpty()],
   [check("SellerID", "SellerID is Required").not().isEmpty()],
   [check("Date", "Date is Required").not().isEmpty()],
   [check("Status", "Status is Required").not().isEmpty()],
