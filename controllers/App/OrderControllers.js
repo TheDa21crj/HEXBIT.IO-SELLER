@@ -50,7 +50,7 @@ const AddOrder = async (req, res, next) => {
     return next(error);
   }
 
-  if (users) {
+  if (usersb && stores) {
     const OrderNew = new Order({
       Items,
       SellerID,
@@ -60,9 +60,12 @@ const AddOrder = async (req, res, next) => {
       CustormerID,
       amount,
       ShippingAddress,
+      StoreID,
     });
 
     let createduser = await OrderNew.save();
+
+    res.status(202).json({ status: true, order: createduser });
   } else {
     const error = new HttpError("Seller Does Not --", 400);
     return next(error);
