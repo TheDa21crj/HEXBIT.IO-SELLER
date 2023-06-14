@@ -36,7 +36,7 @@ app.get("/7SYS9SrnCNXvzxm0", (req, res) => {
 });
 
 // route
-//      || ondc
+//      || ondcs
 app.use("/api/Core", require("./routes/Core"));
 app.use("/api/User", require("./routes/Login"));
 app.use("/api/confirmwithCOD", require("./routes/confirmwithCOD"));
