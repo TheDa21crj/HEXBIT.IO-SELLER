@@ -232,7 +232,7 @@ const CompanyLicense = async (req, res, next) => {
           }
         );
 
-        res.status(202).json({ status: true, token: token });
+        res.status(202).json({ status: true, token: token, userInfo: users });
       } catch (err) {
         const error = new HttpError("Error logging user", 401);
         console.log(err);
@@ -275,7 +275,7 @@ const Login = async (req, res, next) => {
           }
         );
 
-        res.status(202).json({ status: true, token: token });
+        res.status(202).json({ status: true, token: token, userInfo: user });
       } catch (err) {
         const error = new HttpError("Error error generating token", 401);
         console.log(err);
