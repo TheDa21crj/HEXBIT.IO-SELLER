@@ -50,7 +50,7 @@ router.post(
   onboardingController.CompanyLicense
 );
 
-// Register License
+// Register Login
 router.post(
   "/Login",
   [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
