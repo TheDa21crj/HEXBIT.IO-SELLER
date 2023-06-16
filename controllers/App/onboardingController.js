@@ -250,6 +250,48 @@ const CompanyLicense = async (req, res, next) => {
   }
 };
 
+const Login = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { WhatsAppNumber, email } = req.body;
+
+  let user;
+  try {
+    user = await Seller.findOne({ WhatsAppNumber, email });
+
+    if (user) {
+      console.log(WhatsAppNumber, "----------", email);
+
+      let token;
+      try {
+        token = jwt.sign(
+          { WhatsAppNumber: WhatsAppNumber },
+          process.env.JWT_SECRATE,
+          {
+            expiresIn: "5hr",
+          }
+        );
+
+        res.status(202).json({ status: true, token: token });
+      } catch (err) {
+        const error = new HttpError("Error error generating token", 401);
+        console.log(err);
+        return next(error);
+      }
+    } else {
+      res.status(200).json({ status: false });
+    }
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Cannot add user", 400);
+    return next(error);
+  }
+};
+
+exports.Login = Login;
 exports.OptVer = OptVer;
 exports.Company = Company;
 exports.nameEmail = nameEmail;
