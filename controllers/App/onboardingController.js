@@ -9,6 +9,7 @@ const path = require("path");
 
 // models
 const Seller = require("./../../models/Seller");
+const OtpSchema = require("./../../models/Otp");
 const Store = require("./../../models/Store");
 const Items = require("./../../models/Items");
 
@@ -61,6 +62,13 @@ const WhatsAppNumber = async (req, res, next) => {
       const OTP = Math.floor(Math.random() * 9000 + 1000);
       console.log(OTP);
 
+      const newOtp = new OtpSchema({
+        WhatsAppNumber,
+        OTP,
+      });
+      const generatedOtp = await newOtp.save();
+      console.log(generatedOtp);
+
       res.json({ exists: false, user: userinfo });
     } catch (err) {
       console.log(err);
@@ -87,18 +95,27 @@ const OptVer = async (req, res, next) => {
 
     if (users) {
       console.log(Otp, "=========", WhatsAppNumber);
+      const verOtp = await OtpSchema.findOne({ WhatsAppNumber });
+      console.log("Verified otp schema->", verOtp);
+      console.log("otp is->", verOtp.OTP);
+      if (verOtp) {
+        if (Otp === verOtp.OTP) {
+          await Seller.updateOne(
+            { WhatsAppNumber },
+            {
+              $set: {
+                verifiedOTP: true,
+              },
+            },
+            { upsert: true }
+          );
 
-      await Seller.updateOne(
-        { WhatsAppNumber },
-        {
-          $set: {
-            verifiedOTP: true,
-          },
-        },
-        { upsert: true }
-      );
-
-      res.status(202).json({ status: true });
+          return res.status(202).json({ status: true });
+        } else {
+          console.log("Wrong otp");
+          return res.status(304).json({ message: "Wrong OTP" });
+        }
+      }
     } else {
       res.status(304).json({ message: "Wrong OTP" });
     }
