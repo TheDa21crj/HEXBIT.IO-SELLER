@@ -50,6 +50,14 @@ router.post(
   onboardingController.CompanyLicense
 );
 
+// Register License
+router.post(
+  "/Login",
+  [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
+  [check("email", "email is Required").not().isEmpty()],
+  onboardingController.Login
+);
+
 // router.use(auth);
 
 module.exports = router;
