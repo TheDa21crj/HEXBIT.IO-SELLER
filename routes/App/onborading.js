@@ -58,6 +58,13 @@ router.post(
   onboardingController.Login
 );
 
+// Register Login
+router.post(
+  "/StoreData",
+  [check("WhatsAppNumber", "WhatsAppNumber is Required").not().isEmpty()],
+  onboardingController.StoreData
+);
+
 // router.use(auth);
 
 module.exports = router;
