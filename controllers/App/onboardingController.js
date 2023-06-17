@@ -95,27 +95,27 @@ const OptVer = async (req, res, next) => {
 
     if (users) {
       console.log(Otp, "=========", WhatsAppNumber);
-      const verOtp = await OtpSchema.findOne({ WhatsAppNumber });
+      const verOtp = await OtpSchema.findOne({ WhatsAppNumber, OTP: Otp });
       console.log("Verified otp schema->", verOtp);
       console.log("otp is->", verOtp.OTP);
       if (verOtp) {
-        if (Otp === verOtp.OTP) {
-          await Seller.updateOne(
-            { WhatsAppNumber },
-            {
-              $set: {
-                verifiedOTP: true,
-              },
+        // if (Otp === verOtp.OTP) {
+        await Seller.updateOne(
+          { WhatsAppNumber },
+          {
+            $set: {
+              verifiedOTP: true,
             },
-            { upsert: true }
-          );
+          },
+          { upsert: true }
+        );
 
-          return res.status(202).json({ status: true });
-        } else {
-          console.log("Wrong otp");
-          return res.status(304).json({ message: "Wrong OTP" });
-        }
+        return res.status(202).json({ status: true });
+      } else {
+        console.log("Wrong otp");
+        return res.status(304).json({ message: "Wrong OTP" });
       }
+      // }
     } else {
       res.status(304).json({ message: "Wrong OTP" });
     }
