@@ -310,6 +310,44 @@ const Login = async (req, res, next) => {
   }
 };
 
+const StoreData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { WhatsAppNumber } = req.body;
+
+  console.log(WhatsAppNumber);
+
+  let sotreData;
+  try {
+    sotreData = await Seller.find({ WhatsAppNumber }).populate("Store.StoreID");
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong Email Credentials", 400);
+    return next(error);
+  }
+
+  console.log("sotreData == true");
+  console.log(sotreData == true);
+
+  try {
+    if (sotreData.length > 0) {
+      res
+        .status(202)
+        .json({ status: true, User: sotreData, length: sotreData.length });
+    } else {
+      res.status(202).json({ status: false });
+    }
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong Email Credentials", 400);
+    return next(error);
+  }
+};
+
+exports.StoreData = StoreData;
 exports.Login = Login;
 exports.OptVer = OptVer;
 exports.Company = Company;
