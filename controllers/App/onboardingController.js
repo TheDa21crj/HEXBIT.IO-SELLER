@@ -223,7 +223,7 @@ const CompanyLicense = async (req, res, next) => {
 
   let users;
   try {
-    users = await Seller.findOne({ WhatsAppNumber });
+    users = await Seller.findOne({ WhatsAppNumber }).populate("Store.StoreID");
 
     if (users) {
       console.log(WhatsAppNumber, "-->", GSTIN, "-------", License);
@@ -277,7 +277,9 @@ const Login = async (req, res, next) => {
 
   let user;
   try {
-    user = await Seller.findOne({ WhatsAppNumber, email });
+    user = await Seller.findOne({ WhatsAppNumber, email }).populate(
+      "Store.StoreID"
+    );
 
     if (user) {
       console.log(WhatsAppNumber, "----------", email);
