@@ -22,11 +22,11 @@ const getStoreList = async (req, res, next) => {
 
   const { SellerID } = req.body;
 
-  console.log("SellerID =" + SellerID);
+  console.log("SellerID = " + SellerID);
 
   let user;
   try {
-    user = await Seller.find({ _id: SellerID });
+    user = await Seller.find({ _id: SellerID }).populate("Store.StoreID");
 
     if (user) {
       res.status(202).json({ status: true, StoresList: user });
@@ -35,8 +35,6 @@ const getStoreList = async (req, res, next) => {
     console.log(error);
     res.status(304).json({ status: false, message: "Number Does not Exists" });
   }
-
-  res.json({ status: true });
 };
 
 exports.getStoreList = getStoreList;
