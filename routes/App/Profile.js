@@ -14,6 +14,12 @@ router.post(
   ProfileController.getStoreList
 );
 
+router.post(
+  "/getStoreData",
+  [check("SellerID", "SellerID is Required").not().isEmpty()],
+  ProfileController.getStoreData
+);
+
 // router.use(auth);
 
 module.exports = router;
