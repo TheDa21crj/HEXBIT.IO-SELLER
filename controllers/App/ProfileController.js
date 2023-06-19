@@ -47,7 +47,9 @@ const getStoreData = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  console.log("first");
+  const { StoreID } = req.body;
+
+  console.log("StoreID = " + StoreID);
 };
 
 exports.getStoreData = getStoreData;
