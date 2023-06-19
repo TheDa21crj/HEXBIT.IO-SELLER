@@ -16,7 +16,7 @@ router.post(
 
 router.post(
   "/getStoreData",
-  [check("SellerID", "SellerID is Required").not().isEmpty()],
+  [check("StoreID", "StoreID is Required").not().isEmpty()],
   ProfileController.getStoreData
 );
 
