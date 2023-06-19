@@ -26,12 +26,13 @@ const getStoreList = async (req, res, next) => {
 
   let user;
   try {
-    user = await Seller.find({ _id: SellerID }).populate("Store.StoreID");
+    user = await Seller.find({ _id: SellerID }).populate(
+      "Store.StoreID",
+      "StoreName StoreType"
+    );
 
     if (user) {
-      console.log(user[0].Store);
-
-      res.status(202).json({ status: true, StoresList: user });
+      res.status(202).json({ status: true, StoresList: user[0].Store });
     }
   } catch (error) {
     console.log(error);
