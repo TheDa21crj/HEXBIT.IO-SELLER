@@ -156,7 +156,32 @@ const UpdateStatus = async (req, res, next) => {
   }
   const { id, val } = req.body;
 
-  res.status(202).json({ status: true, id, val });
+  let orderData;
+  try {
+    orderData = await Order.find({ _id: id });
+
+    if (orderData.length > 0) {
+      await Order.updateOne(
+        { _id: id },
+        {
+          $set: {
+            Status: val,
+          },
+        },
+        { upsert: true }
+      );
+
+      res.status(202).json({ status: true, orderData });
+    } else {
+      res
+        .status(204)
+        .json({ status: false, message: "Store Does Not Exisits" });
+    }
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong", 400);
+    return next(error);
+  }
 };
 
 exports.AddOrder = AddOrder;
