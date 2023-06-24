@@ -116,5 +116,27 @@ const getStoreItems = async (req, res, next) => {
   }
 };
 
-exports.getStoreItems = getStoreItems;
+const getItemInfo = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { ItemID } = req.body;
+
+    console.log(ItemID);
+
+    const sotreData = await Items.find({ _id: ItemID });
+
+    res.status(202).json({ status: true, Item: sotreData });
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong Email Credentials", 400);
+    return next(error);
+  }
+};
+
 exports.AddStore = AddStore;
+exports.getItemInfo = getItemInfo;
+exports.getStoreItems = getStoreItems;
