@@ -145,14 +145,29 @@ const EditItem = async (req, res, next) => {
   const { ItemID, name, price, stock, type, Img, des } = req.body;
 
   try {
-    const sotreData = await Items.find({ _id: ItemID });
+    let sotreData = await Items.find({ _id: ItemID });
 
     if (sotreData) {
+      let add = await Items.findOneAndUpdate(
+        { _id: ItemID },
+        {
+          $set: {
+            name: name,
+            price: price,
+            stock: stock,
+            type: type,
+            Img: Img,
+            des: des,
+          },
+        }
+      );
+
       res.status(202).json({ status: true, Item: sotreData });
     } else {
       res.status(204).json({ status: false });
     }
   } catch (err) {
+    console.log(err);
     const error = new HttpError("User not found", 500);
     return next(error);
   }
