@@ -73,5 +73,30 @@ const getStoreData = async (req, res, next) => {
   }
 };
 
+const UpdateProfile = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { SellerID, StoreID, Name, Email, StoreName, Nature } = req.body;
+
+  console.log(SellerID, StoreID, Name, Email, StoreName, Nature);
+
+  try {
+    let sellerData = await Seller.find({ _id: SellerID });
+    if (sellerData) {
+      res.status(202).json({ status: true, sellerData });
+    } else {
+      res.status(204).json({ status: false });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(304).json({ status: false, message: "Number Does not Exists" });
+  }
+};
+
+exports.UpdateProfile = UpdateProfile;
 exports.getStoreData = getStoreData;
 exports.getStoreList = getStoreList;
