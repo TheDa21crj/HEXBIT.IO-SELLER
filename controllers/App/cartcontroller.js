@@ -137,6 +137,28 @@ const getItemInfo = async (req, res, next) => {
   }
 };
 
+const EditItem = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const { ItemID, name, price, stock, type, Img, des } = req.body;
+
+  try {
+    const sotreData = await Items.find({ _id: ItemID });
+
+    if (sotreData) {
+      res.status(202).json({ status: true, Item: sotreData });
+    } else {
+      res.status(204).json({ status: false });
+    }
+  } catch (err) {
+    const error = new HttpError("User not found", 500);
+    return next(error);
+  }
+};
+
 exports.AddStore = AddStore;
+exports.EditItem = EditItem;
 exports.getItemInfo = getItemInfo;
 exports.getStoreItems = getStoreItems;
