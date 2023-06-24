@@ -31,6 +31,20 @@ router.post(
   cartcontroller.getStoreItems
 );
 
+// Get Items Info
+router.post(
+  "/getItemInfo",
+  [check("ItemID", "ItemID is Required").not().isEmpty()],
+  cartcontroller.getItemInfo
+);
+
+// Get Items Info
+router.post(
+  "/EditItem",
+  [check("ItemID", "ItemID is Required").not().isEmpty()],
+  cartcontroller.EditItem
+);
+
 // router.use(auth);
 
 module.exports = router;
