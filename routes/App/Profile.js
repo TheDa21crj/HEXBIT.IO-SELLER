@@ -20,6 +20,14 @@ router.post(
   ProfileController.getStoreData
 );
 
+// Get Store Items
+router.post(
+  "/UpdateProfile",
+  [check("SellerID", "SellerID is Required").not().isEmpty()],
+  [check("StoreID", "StoreID is Required").not().isEmpty()],
+  ProfileController.UpdateProfile
+);
+
 // router.use(auth);
 
 module.exports = router;
