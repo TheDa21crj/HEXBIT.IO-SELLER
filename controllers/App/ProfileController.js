@@ -87,6 +87,28 @@ const UpdateProfile = async (req, res, next) => {
   try {
     let sellerData = await Seller.find({ _id: SellerID });
     if (sellerData) {
+      await Seller.updateOne(
+        { _id: SellerID },
+        {
+          $set: {
+            name: Name,
+            email: Email,
+            CompanyNature: Nature,
+          },
+        },
+        { upsert: true }
+      );
+
+      await Store.updateOne(
+        { _id: StoreID },
+        {
+          $set: {
+            StoreName: StoreName,
+          },
+        },
+        { upsert: true }
+      );
+
       res.status(202).json({ status: true, sellerData });
     } else {
       res.status(204).json({ status: false });
