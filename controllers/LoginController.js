@@ -226,47 +226,50 @@ const AddItem = async (req, res, next) => {
 
   const { name, price, stock, StoreID, type, Img, des, wa } = req.body;
 
+  // try {
   try {
-    try {
-      users = await Seller.findOne({ WhatsAppNumber: wa });
-    } catch (err) {
-      const error = new HttpError("User not found", 500);
-      return next(error);
-    }
-
-    console.log(name, price, stock, StoreID, type, Img, des);
-
-    if (users) {
-      const newUser = new Items({
-        name,
-        price,
-        stock,
-        type,
-        Img,
-        des,
-        StoreID,
-        SellerID: users._id,
-      });
-
-      let createduser = await newUser.save();
-
-      let Item = {};
-      Item.ItemID = createduser._id;
-
-      let storeFind = await Store.findOneAndUpdate(
-        { _id: StoreID },
-        { $push: { Items: Item } }
-      );
-
-      console.log(storeFind);
-
-      res.status(202).json({ status: true });
-    }
+    users = await Seller.findOne({ _id: wa });
   } catch (err) {
-    console.log(err);
-    const error = new HttpError("Item not Added", 500);
+    const error = new HttpError("User not found", 500);
     return next(error);
   }
+
+  console.log("--- name, price, stock, StoreID, type, Img, des, wa ---");
+  console.log(name, price, stock, StoreID, type, Img, des, wa);
+
+  if (users) {
+    const newUser = new Items({
+      name,
+      price,
+      stock,
+      type,
+      Img,
+      des,
+      StoreID: "648d8501bfce7f0ab166a93f",
+      SellerID: users._id,
+    });
+
+    let createduser = await newUser.save();
+
+    let Item = {};
+    Item.ItemID = createduser._id;
+
+    let storeFind = await Store.findOneAndUpdate(
+      { _id: StoreID },
+      { $push: { Items: Item } }
+    );
+
+    console.log(storeFind);
+
+    res.status(202).json({ status: true });
+  } else {
+    res.status(202).json({ status: false });
+  }
+  // } catch (err) {
+  //   console.log(err);
+  //   const error = new HttpError("Item not Added", 500);
+  //   return next(error);
+  // }
 };
 
 const searchSellersByCity = async (city) => {
