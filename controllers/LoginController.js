@@ -219,52 +219,65 @@ const AddStore = async (req, res, next) => {
 };
 
 const AddItem = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   return res.status(400).json({ errors: errors.array() });
+  // }
+
+  let videosPaths = [];
+
+  if (Array.isArray(req.files.Img) && req.files.Img.length > 0) {
+    for (let video of req.files.Img) {
+      videosPaths.push("/" + video.path);
+    }
   }
 
-  const { name, price, stock, StoreID, type, Img, des, wa } = req.body;
+  console.log("**************");
+  console.log(videosPaths);
+
+  res.status(202).json({ status: true });
+
+  // const { name, price, stock, StoreID, type, Img, des, wa } = req.body;
 
   // try {
-  try {
-    users = await Seller.findOne({ _id: wa });
-  } catch (err) {
-    const error = new HttpError("User not found", 500);
-    return next(error);
-  }
+  // try {
+  //   users = await Seller.findOne({ _id: wa });
+  // } catch (err) {
+  //   const error = new HttpError("User not found", 500);
+  //   return next(error);
+  // }
 
-  console.log("--- name, price, stock, StoreID, type, Img, des, wa ---");
-  console.log(name, price, stock, StoreID, type, Img, des, wa);
+  // console.log("--- name, price, stock, StoreID, type, Img, des, wa ---");
+  // console.log(name, price, stock, StoreID, type, Img, des, wa);
 
-  if (users) {
-    const newUser = new Items({
-      name,
-      price,
-      stock,
-      type,
-      Img,
-      des,
-      StoreID: "648d8501bfce7f0ab166a93f",
-      SellerID: users._id,
-    });
+  // if (users) {
+  //   const newUser = new Items({
+  //     name,
+  //     price,
+  //     stock,
+  //     type,
+  //     Img,
+  //     des,
+  //     StoreID: "648d8501bfce7f0ab166a93f",
+  //     SellerID: users._id,
+  //   });
 
-    let createduser = await newUser.save();
+  //   let createduser = await newUser.save();
 
-    let Item = {};
-    Item.ItemID = createduser._id;
+  //   let Item = {};
+  //   Item.ItemID = createduser._id;
 
-    let storeFind = await Store.findOneAndUpdate(
-      { _id: StoreID },
-      { $push: { Items: Item } }
-    );
+  //   let storeFind = await Store.findOneAndUpdate(
+  //     { _id: StoreID },
+  //     { $push: { Items: Item } }
+  //   );
 
-    console.log(storeFind);
+  //   console.log(storeFind);
 
-    res.status(202).json({ status: true });
-  } else {
-    res.status(202).json({ status: false });
-  }
+  //   res.status(202).json({ status: true });
+  // } else {
+  //   res.status(202).json({ status: false });
+  // }
   // } catch (err) {
   //   console.log(err);
   //   const error = new HttpError("Item not Added", 500);
