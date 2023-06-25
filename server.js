@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
 // test route
 app.get("/7SYS9SrnCNXvzxm0", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello World 🚀");
 });
 
 // route
