@@ -42,53 +42,16 @@ router.post(
   LoginController.AddStore
 );
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    if (!fs.existsSync("public")) {
-      fs.mkdirSync("public");
-    }
-
-    if (!fs.existsSync("public/Images")) {
-      fs.mkdirSync("public/Images");
-    }
-
-    cb(null, "public/Images");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  },
-});
-
-const upload = multer({
-  storage: storage,
-  fileFilter: function (req, file, cb) {
-    var ext = path.extname(file.originalname);
-
-    console.log(ext);
-
-    if (ext != ".png" && ext != ".jpeg" && ext != ".jpg") {
-      return cb(new Error("Only Images are allowed!"));
-    }
-    cb(null, true);
-  },
-});
-
 // Add Item
 router.post(
   "/AddItem",
-  // [check("name", "name is Required").not().isEmpty()],
-  // [check("price", "price is Required").not().isEmpty()],
-  // [check("stock", "stock is Required").not().isEmpty()],
-  // [check("type", "type is Required").not().isEmpty()],
-  // [check("Img", "Img is Required").not().isEmpty()],
-  // [check("des", "des is Required").not().isEmpty()],
-  // [check("StoreID", "StoreID is Required").not().isEmpty()],
-  upload.fields([
-    {
-      name: "Img",
-      maxCount: 1,
-    },
-  ]),
+  [check("name", "name is Required").not().isEmpty()],
+  [check("price", "price is Required").not().isEmpty()],
+  [check("stock", "stock is Required").not().isEmpty()],
+  [check("type", "type is Required").not().isEmpty()],
+  [check("Img", "Img is Required").not().isEmpty()],
+  [check("des", "des is Required").not().isEmpty()],
+  [check("StoreID", "StoreID is Required").not().isEmpty()],
   LoginController.AddItem
 );
 
