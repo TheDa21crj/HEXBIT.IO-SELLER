@@ -32,6 +32,7 @@ app.use((req, res, next) => {
 
 // test route
 app.get("/7SYS9SrnCNXvzxm0", (req, res) => {
+  console.log("Tech HEXBit -> Test Route Working");
   res.send("Hello World 🚀");
 });
 
