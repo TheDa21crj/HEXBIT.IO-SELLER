@@ -1,14 +1,14 @@
 const axios = require("axios");
 const { validationResult } = require("express-validator");
-const orderSchema = require('../models/Order');
-const { ObjectId, BSON } = require("mongodb");
+const orderSchema = require("../models/Order");
+
 // Extract relevant data from the request
 const update = async (req, res) => {
   const orderId = req.body.message.order.id;
   const itemUpdates = req.body.message.order.items;
-  let order;
+
   // Process item updates
-  itemUpdates.forEach(async(itemUpdate) => {
+  itemUpdates.forEach(async (itemUpdate) => {
     const itemId = itemUpdate.id;
     const returnQuantity = itemUpdate.quantity.count;
     const reasonCode = itemUpdate.tags.reason_code;
@@ -22,23 +22,25 @@ const update = async (req, res) => {
     // handle the return process, update inventory, etc.
     console.log(itemId);
 
-      const filter = {'Items.ItemID' : itemId}
-      const options = {upsert:true}
-      const updateDoc = {
-        $set:{
-          Status:updateType
-        }
-      }
-      const updatedValue = await orderSchema.updateOne(filter, updateDoc, options); 
-      console.log(updatedValue);
-      if(updatedValue.matchedCount === 1)
-      {
-        const order = await findOrder(itemId);
-        return res.status(200).json({message:"Order found",order:order});
-      }
-      else{
-        return res.status(400).json({messag: "Order not found"});
-      }
+    const filter = { "Items.ItemID": itemId };
+    const options = { upsert: true };
+    const updateDoc = {
+      $set: {
+        Status: updateType,
+      },
+    };
+    const updatedValue = await orderSchema.updateOne(
+      filter,
+      updateDoc,
+      options
+    );
+    console.log(updatedValue);
+    if (updatedValue.matchedCount === 1) {
+      const order = await findOrder(itemId);
+      return res.status(200).json({ message: "Order found", order: order });
+    } else {
+      return res.status(400).json({ messag: "Order not found" });
+    }
   });
 
   // const responseData = await axios.post(process.env.ON_UPDATE, response, {
@@ -48,21 +50,16 @@ const update = async (req, res) => {
   // });
 
   // Send a response back
-  
-  
+
   // return res.status(400).json({messag: "Order not found"});
 };
-const findOrder = async(itemId)=>{
-  try{
-
-    const order = await orderSchema.findOne({'Items.ItemID' : itemId});
+const findOrder = async (itemId) => {
+  try {
+    const order = await orderSchema.findOne({ "Items.ItemID": itemId });
     return order;
+  } catch (err) {
+    console.log("error->", err);
   }
-  catch(err)
-  {
-    console.log("error->",err)
-  }
-}
-
+};
 
 exports.update = update;
