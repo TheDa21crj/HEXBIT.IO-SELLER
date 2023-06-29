@@ -6,10 +6,13 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const xlsx = require("xlsx");
 const path = require("path");
+const {TWILIO_ACCOUNT_SID,TWILIO_AUTH_TOKEN,TWILIO_SERVICE_SID} = process.env;
+const client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, {
+  lazyLoading: true
+})
 
 // models
 const Seller = require("./../../models/Seller");
-const OtpSchema = require("./../../models/Otp");
 const Store = require("./../../models/Store");
 const Items = require("./../../models/Items");
 
@@ -20,7 +23,7 @@ const WhatsAppNumber = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { WhatsAppNumber } = req.body;
+  const { WhatsAppNumber, countryCode } = req.body;
 
   console.log("WhatsAppNumber==", WhatsAppNumber);
 
@@ -58,18 +61,12 @@ const WhatsAppNumber = async (req, res, next) => {
         pic: createduser.image,
         WhatsAppNumber,
       };
-
-      const OTP = Math.floor(Math.random() * 9000 + 1000);
-      console.log(OTP);
-
-      const newOtp = new OtpSchema({
-        WhatsAppNumber,
-        OTP,
+      const sentOtp = await client.verify.v2.services(TWILIO_SERVICE_SID).verifications.create({
+        to: `+${countryCode}${WhatsAppNumber}`,
+        channel: "sms",
       });
-      const generatedOtp = await newOtp.save();
-      console.log(generatedOtp);
-
-      res.json({ exists: false, user: userinfo });
+      console.log(sentOtp);
+      res.json({ exists: false, user: userinfo, message:sentOtp});
     } catch (err) {
       console.log(err);
       const error = new HttpError("Cannot add user", 400);
@@ -86,7 +83,7 @@ const OptVer = async (req, res, next) => {
 
   console.log("first");
 
-  const { WhatsAppNumber, Otp } = req.body;
+  const { WhatsAppNumber, Otp, countryCode } = req.body;
 
   let users;
 
@@ -95,29 +92,28 @@ const OptVer = async (req, res, next) => {
 
     if (users) {
       console.log(Otp, "=========", WhatsAppNumber);
-      const verOtp = await OtpSchema.findOne({ WhatsAppNumber });
-      console.log("Verified otp schema->", verOtp);
-      console.log("otp is->", verOtp.OTP);
-      if (verOtp) {
-        if (Otp === verOtp.OTP) {
-          await Seller.updateOne(
-            { WhatsAppNumber },
-            {
-              $set: {
-                verifiedOTP: true,
-              },
-            },
-            { upsert: true }
-          );
+      try{
+        const verifiedOtp = await client.verify.v2.services(TWILIO_SERVICE_SID).verificationChecks.create({
+          to: `+${countryCode}${WhatsAppNumber}`,
+          code: Otp,
+        })
+        console.log(verifiedOtp);
+        if(verifiedOtp.valid == true)
+        {
+          return res.status(200).json({message:"Otp verified successfully"});
 
-          return res.status(202).json({ status: true });
-        } else {
-          console.log("Wrong otp");
-          return res.status(304).json({ message: "Wrong OTP" });
         }
+        else{
+          return res.status(400).json({message:"Wrong otp"})
+
+        }
+      }catch(err)
+      {
+        return res.status(400).json({message:"Something went wrong"})
+
       }
     } else {
-      res.status(304).json({ message: "Wrong OTP" });
+      res.status(304).json({ message: "User do not exists" });
     }
   } catch (err) {
     console.log(err);
