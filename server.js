@@ -62,15 +62,7 @@ app.use("/api/App/Profile", require("./routes/App/Profile"));
 app.use((req, res, next) => {
   console.log(req.url);
   return res.status(404).send("404 not found");
-  // const error = new HttpError("Route not found", 404);
-  // return next(error);
 });
-
-// app.use("*", (req, res) => {
-//   console.log(req.url);
-//   console.log("Route Does not Exists");
-//   return res.status(404).send("404 not found");
-// });
 
 const port = process.env.PORT || 5000;
 
