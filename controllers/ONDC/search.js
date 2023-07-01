@@ -9,7 +9,7 @@ const Items = require("./../../models/Items");
 const search = async (req, res) => {
   console.log(req);
 
-  res.status(202).json({
+  res.status(200).json({
     message: {
       ack: {
         status: "ACK",
