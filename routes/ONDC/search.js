@@ -5,6 +5,6 @@ const search = require("./../../controllers/ONDC/search");
 const router = express.Router();
 
 // Register Seller
-router.post("/register", search.search);
+router.post("/", search.search);
 
 module.exports = router;
