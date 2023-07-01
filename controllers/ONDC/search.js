@@ -13,7 +13,6 @@ const search = async (req, res) => {
   console.log(req.body.message);
   console.log("------------------------------------------------------------");
   console.log(req.body.context);
-  // console.log(req.context);
 
   res.status(200).json({
     message: {
