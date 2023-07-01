@@ -226,7 +226,6 @@ const AddItem = async (req, res, next) => {
 
   const { name, price, stock, StoreID, type, Img, des, wa } = req.body;
 
-  // try {
   try {
     users = await Seller.findOne({ _id: wa });
   } catch (err) {
