@@ -1,5 +1,4 @@
 const express = require("express");
-const auth = require("../middleWare/auth");
 const { check } = require("express-validator");
 const LoginController = require("../controllers/LoginController");
 
