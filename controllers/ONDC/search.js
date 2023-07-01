@@ -6,7 +6,7 @@ const Store = require("./../models/Store");
 const Items = require("./../models/Items");
 
 // Define the route for the /search API
-const cancel = async (req, res) => {
+const search = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -25,4 +25,4 @@ const cancel = async (req, res) => {
   res.status(202).json(responseData.data);
 };
 
-exports.cancel = cancel;
+exports.search = search;
