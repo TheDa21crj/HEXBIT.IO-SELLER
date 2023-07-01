@@ -11,7 +11,7 @@ const search = async (req, res) => {
     "------------------------------req.body------------------------------"
   );
   console.log("req.body.message");
-  console.log(req.body.message);
+  console.log(req.body.message.intent.item);
 
   res.status(200).json({
     message: {
