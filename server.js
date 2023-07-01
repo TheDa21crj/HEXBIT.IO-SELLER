@@ -37,7 +37,7 @@ app.get("/7SYS9SrnCNXvzxm0", (req, res) => {
 });
 
 // route
-//      || ondcs
+//      || test
 app.use("/api/Core", require("./routes/Core"));
 app.use("/api/User", require("./routes/Login"));
 app.use("/api/confirmwithCOD", require("./routes/confirmwithCOD"));
@@ -48,6 +48,8 @@ app.use(
   "/api/ststuswithinit&confirm",
   require("./routes/ststuswithinit&confirm")
 );
+//      || ONDC
+app.use("/search", require("./routes/ONDC/search"));
 
 //      || App
 app.use("/api/App/onborading", require("./routes/App/onborading"));
