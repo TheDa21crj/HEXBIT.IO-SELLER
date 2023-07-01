@@ -224,7 +224,8 @@ const AddItem = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, price, stock, StoreID, type, Img, des, wa } = req.body;
+  const { name, price, stock, StoreID, type, des, wa } = req.body;
+  console.log(req.file)
 
   try {
     try {
@@ -242,7 +243,7 @@ const AddItem = async (req, res, next) => {
         price,
         stock,
         type,
-        Img,
+        Img:Img.path,
         des,
         StoreID,
         SellerID: users._id,

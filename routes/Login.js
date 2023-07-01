@@ -2,8 +2,49 @@ const express = require("express");
 const auth = require("../middleWare/auth");
 const { check } = require("express-validator");
 const LoginController = require("../controllers/LoginController");
-
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 const router = express.Router();
+
+
+
+//file storage
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    if (!fs.existsSync("public")) {
+      fs.mkdirSync("public");
+    }
+
+    if (!fs.existsSync("public/images")) {
+      fs.mkdirSync("public/images");
+    }
+
+    cb(null, "public/images");
+    // cb(null, path.resolve(__dirname, "public/videos"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  fileFilter: function (req, file, cb) {
+    var ext = path.extname(file.originalname);
+
+    console.log(ext);
+
+    if (
+      ext != ".png" &&
+      ext != ".jpeg" &&
+      ext != ".jpg"
+    ) {
+      return cb(new Error("Only videos and audio are allowed!"));
+    }
+    cb(null, true);
+  },
+});
 
 // Register Seller
 router.post(
@@ -52,6 +93,10 @@ router.post(
   [check("Img", "Img is Required").not().isEmpty()],
   [check("des", "des is Required").not().isEmpty()],
   [check("StoreID", "StoreID is Required").not().isEmpty()],
+  upload.fields([{
+    name: "Img",
+    maxCount:1
+  }]),
   LoginController.AddItem
 );
 
