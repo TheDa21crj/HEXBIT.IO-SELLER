@@ -148,6 +148,43 @@ const orderDetails = async (req, res, next) => {
   }
 };
 
+const UpdateStatus = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const { id, val } = req.body;
+
+  let orderData;
+  try {
+    orderData = await Order.find({ _id: id });
+
+    if (orderData.length > 0) {
+      await Order.updateOne(
+        { _id: id },
+        {
+          $set: {
+            Status: val,
+          },
+        },
+        { upsert: true }
+      );
+
+      res.status(202).json({ status: true, orderData });
+    } else {
+      res
+        .status(204)
+        .json({ status: false, message: "Store Does Not Exisits" });
+    }
+  } catch (e) {
+    console.log(e);
+    const error = new HttpError("Wrong", 400);
+    return next(error);
+  }
+};
+
 exports.AddOrder = AddOrder;
 exports.orderDetails = orderDetails;
+exports.UpdateStatus = UpdateStatus;
 exports.GetStoreOrder = GetStoreOrder;

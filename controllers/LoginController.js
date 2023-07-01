@@ -227,15 +227,16 @@ const AddItem = async (req, res, next) => {
   const { name, price, stock, StoreID, type, des, wa } = req.body;
   console.log(req.file)
 
+  // try {
   try {
-    try {
-      users = await Seller.findOne({ WhatsAppNumber: wa });
-    } catch (err) {
-      const error = new HttpError("User not found", 500);
-      return next(error);
-    }
+    users = await Seller.findOne({ _id: wa });
+  } catch (err) {
+    const error = new HttpError("User not found", 500);
+    return next(error);
+  }
 
-    console.log(name, price, stock, StoreID, type, Img, des);
+  console.log("--- name, price, stock, StoreID, type, Img, des, wa ---");
+  console.log(name, price, stock, StoreID, type, Img, des, wa);
 
     if (users) {
       const newUser = new Items({
@@ -249,25 +250,27 @@ const AddItem = async (req, res, next) => {
         SellerID: users._id,
       });
 
-      let createduser = await newUser.save();
+    let createduser = await newUser.save();
 
-      let Item = {};
-      Item.ItemID = createduser._id;
+    let Item = {};
+    Item.ItemID = createduser._id;
 
-      let storeFind = await Store.findOneAndUpdate(
-        { _id: StoreID },
-        { $push: { Items: Item } }
-      );
+    let storeFind = await Store.findOneAndUpdate(
+      { _id: StoreID },
+      { $push: { Items: Item } }
+    );
 
-      console.log(storeFind);
+    console.log(storeFind);
 
-      res.status(202).json({ status: true });
-    }
-  } catch (err) {
-    console.log(err);
-    const error = new HttpError("Item not Added", 500);
-    return next(error);
+    res.status(202).json({ status: true });
+  } else {
+    res.status(202).json({ status: false });
   }
+  // } catch (err) {
+  //   console.log(err);
+  //   const error = new HttpError("Item not Added", 500);
+  //   return next(error);
+  // }
 };
 
 const searchSellersByCity = async (city) => {

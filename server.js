@@ -32,7 +32,8 @@ app.use((req, res, next) => {
 
 // test route
 app.get("/7SYS9SrnCNXvzxm0", (req, res) => {
-  res.send("Hello World");
+  console.log("Tech HEXBit -> Test Route Working");
+  res.send("Hello World 🚀");
 });
 
 // route
@@ -41,6 +42,7 @@ app.use("/api/Core", require("./routes/Core"));
 app.use("/api/User", require("./routes/Login"));
 app.use("/api/confirmwithCOD", require("./routes/confirmwithCOD"));
 app.use("/api/updatedsearch4cat", require("./routes/updatedsearch4cat"));
+app.use("/api/update", require("./routes/update"));
 app.use("/api/PostOrder", require("./routes/PostOrder"));
 app.use(
   "/api/ststuswithinit&confirm",
@@ -52,6 +54,7 @@ app.use("/api/App/onborading", require("./routes/App/onborading"));
 app.use("/api/App/cart", require("./routes/App/cart"));
 app.use("/api/App/Inventory", require("./routes/App/Inventory"));
 app.use("/api/App/Order", require("./routes/App/Order"));
+app.use("/api/App/Profile", require("./routes/App/Profile"));
 
 // Route not found
 app.use((req, res, next) => {
