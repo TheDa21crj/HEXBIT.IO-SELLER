@@ -11,8 +11,16 @@ const search = async (req, res) => {
     "------------------------------req.body------------------------------"
   );
   console.log("req.body.message");
-  console.log(req.body.message.intent);
+  console.log(
+    "Payment Type" +
+      req.body.message.intent.payment["@ondc/org/buyer_app_finder_fee_type"]
+  );
+  console.log(
+    "Payment Amount" +
+      req.body.message.intent.payment["@ondc/org/buyer_app_finder_fee_amount"]
+  );
 
+  console.log("Location -> " + req.body.message.intent.fulfillment.location);
   // console.log("Delivery TYPE -> " + req.body.message.intent.fulfillment.type);
   // console.log("Search Word -> ", req.body.message.intent.item.descriptor.name);
 
