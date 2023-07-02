@@ -11,7 +11,7 @@ const search = async (req, res) => {
     "------------------------------req.body------------------------------"
   );
   console.log("req.body.message");
-  console.log(req.body.message.intent.fulfillment);
+  console.log("TYPE -> " + req.body.message.intent.fulfillment.type);
   // console.log("Search Word -> ", req.body.message.intent.item.descriptor.name);
 
   res.status(200).json({
