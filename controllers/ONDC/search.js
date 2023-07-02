@@ -20,7 +20,7 @@ const search = async (req, res) => {
       req.body.message.intent.payment["@ondc/org/buyer_app_finder_fee_amount"]
   );
 
-  console.log("Location -> " + req.body.message.intent.fulfillment);
+  console.log(req.body.message.intent.fulfillment);
   // console.log("Delivery TYPE -> " + req.body.message.intent.fulfillment.type);
   // console.log("Search Word -> ", req.body.message.intent.item.descriptor.name);
 
