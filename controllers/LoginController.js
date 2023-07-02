@@ -273,6 +273,40 @@ const AddItem = async (req, res, next) => {
   // }
 };
 
+const AddBulk = async (req,res,next)=>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const file = req.files.Excel[0];
+  console.log("File->",file);
+  try{
+    const filepath = path.join(
+      __dirname,
+      "..",
+      "public",
+      "files",
+      `${file.originalname}`
+    )
+    console.log(filepath);
+    const workbook = xlsx.readFile(filepath);
+    if(workbook){
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const jsonData = xlsx.utils.sheet_to_json(sheet, { header: 1 });
+      console.log(jsonData)
+      return res.status(200).json({message:"File found",data:jsonData});
+    }else{
+
+      return res.status(400).json({message:"File not available"});
+    }
+
+  }catch(err){
+    console.log(err);
+  }
+
+
+}
+
 const searchSellersByCity = async (city) => {
   const filePath = path.join(
     __dirname,
@@ -299,3 +333,4 @@ exports.login = login;
 exports.AddItem = AddItem;
 exports.AddStore = AddStore;
 exports.registerUser = registerUser;
+exports.AddBulk = AddBulk;

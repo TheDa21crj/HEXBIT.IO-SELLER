@@ -19,12 +19,19 @@ const storage = multer.diskStorage({
     if (!fs.existsSync("public/images")) {
       fs.mkdirSync("public/images");
     }
+    if(!fs.existsSync("public/files")){
+      fs.mkdirSync("public/files") ;
+    }
+    if(file.mimetype ==='image/jpeg'){
 
-    cb(null, "public/images");
-    // cb(null, path.resolve(__dirname, "public/videos"));
+      cb(null, "public/images");
+    }
+    if(file.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
+      cb(null,"public/files");
+    }
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
+    cb(null,file.originalname);
   },
 });
 
@@ -33,14 +40,14 @@ const upload = multer({
   fileFilter: function (req, file, cb) {
     var ext = path.extname(file.originalname);
 
-    console.log(ext);
-
     if (
       ext != ".png" &&
       ext != ".jpeg" &&
-      ext != ".jpg"
+      ext != ".jpg"&&
+      ext !=".xls"&&
+      ext !=".xlsx"
     ) {
-      return cb(new Error("Only videos and audio are allowed!"));
+      return cb(new Error("File type not supported"));
     }
     cb(null, true);
   },
@@ -99,6 +106,15 @@ router.post(
   }]),
   LoginController.AddItem
 );
+
+router.post(
+  "/AddBulk",
+  upload.fields([{
+    name: "Excel",
+    maxCount:1
+  }]),
+  LoginController.AddBulk
+)
 
 router.use(auth);
 

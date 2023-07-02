@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const HttpError = require("./models/HttpError");
 const connectDB = require("./config/db");
+const bb = require("express-busboy");
 
 dotenv.config();
 
@@ -13,6 +14,11 @@ const app = express();
 connectDB();
 
 app.use(bodyParser.json());
+// bb.extend(app,{
+//   upload: true,
+//   path: '/public',
+//   allowedPath: /./
+// })
 
 // cros
 app.use((req, res, next) => {
