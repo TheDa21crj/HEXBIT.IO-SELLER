@@ -34,15 +34,11 @@ const search = async (req, res) => {
     },
   };
 
-  const responseData = await axios.post(
-    "https://buyer-app.ondc.org/protocol/v1/on_search",
-    response,
-    {
-      headers: {
-        Authorization: process.env.Authorization,
-      },
-    }
-  );
+  const responseData = await axios.post(process.env.SEARCH, response, {
+    headers: {
+      Authorization: process.env.Authorization,
+    },
+  });
 
   console.log(responseData);
 
