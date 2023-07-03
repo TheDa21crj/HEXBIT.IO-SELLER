@@ -40,6 +40,7 @@ app.get("/7SYS9SrnCNXvzxm0", (req, res) => {
 app.use("/api/Core", require("./routes/Core"));
 app.use("/api/User", require("./routes/Login"));
 app.use("/api/confirmwithCOD", require("./routes/confirmwithCOD"));
+app.use("/api/update", require("./routes/update"));
 app.use("/api/updatedsearch4cat", require("./routes/updatedsearch4cat"));
 app.use("/api/PostOrder", require("./routes/PostOrder"));
 app.use(
