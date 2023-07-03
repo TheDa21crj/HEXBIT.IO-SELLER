@@ -1,4 +1,5 @@
 const { validationResult } = require("express-validator");
+const axios = require("axios");
 
 // models
 const Seller = require("./../../models/Seller");
