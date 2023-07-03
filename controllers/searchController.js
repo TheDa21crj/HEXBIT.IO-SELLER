@@ -60,8 +60,8 @@ const search = async (req, res) => {
       ttl: context.ttl,
     },
     message: {
-      sellers: sellersInCity,
-      finder_fee: finderFee,
+      sellers: "std:080",
+      finder_fee: 106,
     },
   };
 
