@@ -1,0 +1,15 @@
+[
+  {
+    "domain": "nic2004:52110",
+    "country": "IND",
+    "city": "std:080",
+    "action": "search",
+    "core_version": "1.1.0",
+    "bap_id": "buyer-app.ondc.org",
+    "bap_uri": "https://buyer-app.ondc.org/protocol/v1",
+    "transaction_id": "3e324494-382c-4011-b7a9-fa2014ef6d0d",
+    "message_id": "b336faa2-3820-4342-a293-543ba2cc941c",
+    "timestamp": "2023-07-03T15:01:35.655Z",
+    "ttl": "PT30S"
+  }
+]

@@ -30,11 +30,19 @@ router.post(
   OrderControllers.GetStoreOrder
 );
 
-// Register Order Details
+// Order Details
 router.post(
   "/orderDetails",
   [check("id", "id is Required").not().isEmpty()],
   OrderControllers.orderDetails
+);
+
+// Update Status
+router.post(
+  "/UpdateStatus",
+  [check("id", "id is Required").not().isEmpty()],
+  [check("val", "val is Required").not().isEmpty()],
+  OrderControllers.UpdateStatus
 );
 
 // router.use(auth);

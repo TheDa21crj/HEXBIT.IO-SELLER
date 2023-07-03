@@ -32,33 +32,37 @@ app.use((req, res, next) => {
 
 // test route
 app.get("/7SYS9SrnCNXvzxm0", (req, res) => {
-  res.send("Hello World");
+  console.log("Tech HEXBit -> Test Route Working");
+  res.send("Hello World 🚀");
 });
 
 // route
-//      || ondcs
+//      || test
 app.use("/api/Core", require("./routes/Core"));
 app.use("/api/User", require("./routes/Login"));
 app.use("/api/confirmwithCOD", require("./routes/confirmwithCOD"));
 app.use("/api/update", require("./routes/update"));
 app.use("/api/updatedsearch4cat", require("./routes/updatedsearch4cat"));
+app.use("/api/update", require("./routes/update"));
 app.use("/api/PostOrder", require("./routes/PostOrder"));
 app.use(
   "/api/ststuswithinit&confirm",
   require("./routes/ststuswithinit&confirm")
 );
+//      || ONDC
+app.use("/search", require("./routes/ONDC/search"));
 
 //      || App
 app.use("/api/App/onborading", require("./routes/App/onborading"));
 app.use("/api/App/cart", require("./routes/App/cart"));
 app.use("/api/App/Inventory", require("./routes/App/Inventory"));
 app.use("/api/App/Order", require("./routes/App/Order"));
+app.use("/api/App/Profile", require("./routes/App/Profile"));
 
 // Route not found
 app.use((req, res, next) => {
   console.log(req.url);
-  const error = new HttpError("Route not found", 404);
-  return next(error);
+  return res.status(404).send("404 not found");
 });
 
 const port = process.env.PORT || 5000;
