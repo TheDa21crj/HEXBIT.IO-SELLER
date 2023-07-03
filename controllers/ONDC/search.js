@@ -10,14 +10,46 @@ const search = async (req, res) => {
   console.log(
     "------------------------------req.body------------------------------"
   );
-  console.log("req.body.message");
-  console.log(req.body.context);
 
-  // console.log("Payment Type -> " + req.body.message.intent.payment["@ondc/org/buyer_app_finder_fee_type"]);
-  // console.log("Payment Amount -> " + req.body.message.intent.payment["@ondc/org/buyer_app_finder_fee_amount"]);
-  // console.log("GPS -> " + req.body.message.intent.fulfillment.end.location.gps);
-  // console.log("Delivery TYPE -> " + req.body.message.intent.fulfillment.type);
-  // console.log("Search Word -> ", req.body.message.intent.item.descriptor.name);
+  const { context, message } = req.body;
+
+  const response = {
+    context: {
+      domain: context.domain,
+      country: context.country,
+      city: context.city,
+      action: "on_search",
+      core_version: context.core_version,
+      bap_id: context.bap_id,
+      bap_uri: context.bap_uri,
+      transaction_id: context.transaction_id,
+      message_id: context.message_id,
+      timestamp: context.timestamp,
+      ttl: context.ttl,
+    },
+    message: {
+      sellers: sellersInCity,
+      finder_fee: finderFee,
+    },
+  };
+
+  const responseData = await axios.post(
+    "https://buyer-app.ondc.org/protocol/v1/on_search",
+    response,
+    {
+      headers: {
+        Authorization: process.env.Authorization,
+      },
+    }
+  );
+
+  console.log(responseData);
+
+  // console.log("Payment Type -> " + message.intent.payment["@ondc/org/buyer_app_finder_fee_type"]);
+  // console.log("Payment Amount -> " + message.intent.payment["@ondc/org/buyer_app_finder_fee_amount"]);
+  // console.log("GPS -> " + message.intent.fulfillment.end.location.gps);
+  // console.log("Delivery TYPE -> " + message.intent.fulfillment.type);
+  // console.log("Search Word -> ", message.intent.item.descriptor.name);
 
   res.status(200).json({
     message: {
