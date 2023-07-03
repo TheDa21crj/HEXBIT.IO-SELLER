@@ -297,7 +297,7 @@ const AddBulk = async (req,res,next)=>{
       return res.status(200).json({message:"File found",data:jsonData});
     }else{
 
-      return res.status(400).json({message:"File not available"});
+      return res.status(404).json({message:"File not available"});
     }
 
   }catch(err){

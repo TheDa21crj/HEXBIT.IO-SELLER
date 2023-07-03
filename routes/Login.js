@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
     if(!fs.existsSync("public/files")){
       fs.mkdirSync("public/files") ;
     }
-    if(file.mimetype ==='image/jpeg'){
+    if(file.mimetype ==='image/jpeg' || file.mimetype ==='image/png' || file.mimetype ==='image/jpg'){
 
       cb(null, "public/images");
     }

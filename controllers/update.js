@@ -6,6 +6,7 @@ const orderSchema = require("../models/Order");
 const update = async (req, res) => {
   const orderId = req.body.message.order.id;
   const itemUpdates = req.body.message.order.items;
+  let order;
 
   // Process item updates
   itemUpdates.forEach(async (itemUpdate) => {
@@ -21,37 +22,38 @@ const update = async (req, res) => {
     // Here, you can update your seller records with the return information,
     // handle the return process, update inventory, etc.
     console.log(itemId);
-
-    const filter = { "Items.ItemID": itemId };
-    const options = { upsert: true };
-    const updateDoc = {
-      $set: {
-        Status: updateType,
-      },
-    };
     const updatedValue = await orderSchema.updateOne(
-      filter,
-      updateDoc,
-      options
+      { "Items.ItemID": itemId },
+      {
+        $set: {
+          Status: updateType,
+        },
+      },
+      { upsert: true }
     );
     console.log(updatedValue);
     if (updatedValue.matchedCount === 1) {
-      const order = await findOrder(itemId);
-      return res.status(200).json({ message: "Order found", order: order });
+      order = await findOrder(itemId);
     } else {
-      return res.status(400).json({ messag: "Order not found" });
+      return res.status(400).json({ messag: "Could not update" });
     }
   });
 
-  // const responseData = await axios.post(process.env.ON_UPDATE, response, {
-  //   headers: {
-  //     Authorization: process.env.Authorization,
-  //   },
-  // });
+  const responseData = await axios.post(process.env.ON_UPDATE, order, {
+    headers: {
+      Authorization: process.env.Authorization,
+    },
+  });
+  console.log(responseData.data);
 
   // Send a response back
-
-  // return res.status(400).json({messag: "Order not found"});
+ if(responseData.status === 200)
+ {
+   return res.status(200).json({message: "Order found",data:responseData.data});
+ }
+ else{
+  return res.status(400).json({message:"Order not found"});
+ }
 };
 const findOrder = async (itemId) => {
   try {
