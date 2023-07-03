@@ -34,11 +34,15 @@ const search = async (req, res) => {
     },
   };
 
-  const responseData = await axios.post(process.env.SEARCH, response, {
-    headers: {
-      Authorization: process.env.Authorization,
-    },
-  });
+  const responseData = await axios.post(
+    "https://virtserver.swaggerhub.com/ONDCTech/ONDC-Protocol-Core/1.0.0/on_search",
+    response,
+    {
+      headers: {
+        Authorization: process.env.Authorization,
+      },
+    }
+  );
 
   console.log(responseData);
 
