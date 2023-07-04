@@ -54,13 +54,49 @@ const search = async (req, res) => {
               },
             ],
             descriptor: {
-              name: "Store 1",
+              name: "Rishav 1",
               symbol:
                 "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/646cac0619c19a4236fb6608_328999565_448149590771366_6119874079180001204_n.jpeg",
               short_desc: "Store 1",
               long_desc: "Store 1",
-              images: ["https://sellerNP.com/images/store1.png"],
+              images: [
+                "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/64971d22eaa2f396e6c5d9c4_41caP08gttL.jpg",
+              ],
             },
+            "@ondc/org/fssai_license_no": "12345678901234",
+            ttl: "P1D",
+            locations: [
+              {
+                id: "L1",
+                time: {
+                  days: "1,2,3,4,5,6,7",
+                  schedule: {
+                    holidays: ["2023-08-15"],
+                    frequency: "PT4H",
+                    times: ["1100", "1900"],
+                  },
+                  range: {
+                    start: "1100",
+                    end: "2100",
+                  },
+                },
+                gps: "12.967555,77.749666",
+                address: {
+                  locality: "Jayanagar",
+                  street: "Jayanagar 4th Block",
+                  city: "Bengaluru",
+                  area_code: "560076",
+                  state: "KA",
+                },
+                circle: {
+                  gps: "12.967555,77.749666",
+                  radius: {
+                    unit: "km",
+                    value: "3",
+                  },
+                },
+              },
+            ],
           },
         ],
       },
