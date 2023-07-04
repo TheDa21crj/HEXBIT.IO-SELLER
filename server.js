@@ -51,6 +51,12 @@ app.use(
 );
 //      || ONDC
 app.use("/search", require("./routes/ONDC/search"));
+app.use("/select", require("./routes/ONDC/select"));
+app.use("/init", require("./routes/ONDC/init"));
+app.use("/update", require("./routes/ONDC/update"));
+app.use("/confirm", require("./routes/ONDC/confirm"));
+app.use("/status", require("./routes/ONDC/status"));
+app.use("/cancel", require("./routes/ONDC/cancel"));
 
 //      || App
 app.use("/api/App/onborading", require("./routes/App/onborading"));

@@ -7,6 +7,7 @@ const axios = require("axios");
 const Seller = require("./../models/Seller");
 const Store = require("./../models/Store");
 const Items = require("./../models/Items");
+const orders = require("./../models/Order");
 
 // Endpoint for /on_init
 const on_init = async (req, res, next) => {
@@ -129,16 +130,30 @@ const status = async (req, res, next) => {
     },
   };
 
-  res.json(response);
+  const responseData = axios.post(process.env.ON_STATUS,response,{
+    headers: {
+      Authorization: process.env.Authorization,
+    },
+  })
+  res.json(responseData.data);
 };
 
 // Function to query the order status using the transaction ID
-function queryOrderStatus(transactionId) {
+async function queryOrderStatus(transactionId) {
   // Perform the necessary logic to query the order status
   // This can involve interacting with databases, external APIs, or other processes
+  try{
+    const order = await orders.findOne({transactionId: transactionId});
+    const status = order.status;
+    return status;
+
+  }catch(err)
+  {
+    console.log(err);
+    return "Error";
+  }
 
   // For demonstration purposes, let's assume a static status of "DELIVERED"
-  return "DELIVERED";
 }
 
 exports.status = status;

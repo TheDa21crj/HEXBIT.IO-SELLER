@@ -19,7 +19,7 @@ const cancel = async (req, res) => {
 
   let response = { context };
 
-  const responseData = await axios.post(process.env.SEARCH, response, {
+  const responseData = await axios.post(process.env.ON_CANCEL, response, {
     headers: {
       Authorization: process.env.Authorization,
     },

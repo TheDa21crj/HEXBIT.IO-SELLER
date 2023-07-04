@@ -42,7 +42,7 @@ const select = async (req, res) => {
     },
   };
 
-  const responseData = await axios.post(process.env.SELECT, response, {
+  const responseData = await axios.post(process.env.ON_SELECT, response, {
     headers: {
       Authorization: process.env.Authorization,
     },
