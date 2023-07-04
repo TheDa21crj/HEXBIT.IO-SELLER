@@ -64,7 +64,7 @@ const search = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.log(error.config);
     res.status(404).json({
       message: "error",
     });
