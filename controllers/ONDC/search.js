@@ -97,6 +97,77 @@ const search = async (req, res) => {
                 },
               },
             ],
+            items: [
+              {
+                id: "C1",
+                descriptor: {
+                  name: "Rishav Hand Tossed",
+                },
+                quantity: {
+                  unitized: {
+                    measure: {
+                      unit: "unit",
+                      value: "1",
+                    },
+                  },
+                  available: {
+                    count: "99",
+                  },
+                  maximum: {
+                    count: "99",
+                  },
+                },
+                price: {
+                  currency: "INR",
+                  value: "110.0",
+                  maximum_value: "0.0",
+                },
+                category_id: "F&B",
+                related: true,
+                tags: [
+                  {
+                    code: "type",
+                    list: [
+                      {
+                        code: "type",
+                        value: "1",
+                      },
+                    ],
+                  },
+                  {
+                    code: "parent",
+                    list: [
+                      {
+                        code: "id",
+                        value: "CG1",
+                      },
+                      {
+                        code: "default",
+                        value: "yes",
+                      },
+                    ],
+                  },
+                  {
+                    code: "child",
+                    list: [
+                      {
+                        code: "id",
+                        value: "CG2",
+                      },
+                    ],
+                  },
+                  {
+                    code: "veg_nonveg",
+                    list: [
+                      {
+                        code: "veg",
+                        value: "yes",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
