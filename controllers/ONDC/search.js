@@ -212,10 +212,10 @@ const search = async (req, res) => {
         },
       },
       error: {
-        type: "CONTEXT-ERROR",
-        code: "string",
-        path: "string",
-        message: "string",
+        type: null,
+        code: null,
+        path: null,
+        message: null,
       },
     });
   } catch (error) {
