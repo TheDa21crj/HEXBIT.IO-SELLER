@@ -168,6 +168,17 @@ const search = async (req, res) => {
                 ],
               },
             ],
+            tags: [
+              {
+                code: "order_value",
+                list: [
+                  {
+                    code: "min_value",
+                    value: "5.00",
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
