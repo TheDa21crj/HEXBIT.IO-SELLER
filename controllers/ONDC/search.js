@@ -25,8 +25,45 @@ const search = async (req, res) => {
       ttl: context.ttl,
     },
     message: {
-      sellers: "std:080",
-      finder_fee: "106",
+      catalog: {
+        "bpp/descriptor": {
+          name: "Rishav",
+          symbol:
+            "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/646cac0619c19a4236fb6608_328999565_448149590771366_6119874079180001204_n.jpeg",
+          short_desc: "Seller Marketplace",
+          long_desc: "Seller Marketplace",
+          images: [
+            "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/64971d22eaa2f396e6c5d9c4_41caP08gttL.jpg",
+          ],
+        },
+        "bpp/providers": [
+          {
+            id: "P1",
+            time: {
+              label: "enable",
+              timestamp: "2023-06-03T08:00:30.000Z",
+            },
+            fulfillments: [
+              {
+                id: "F1",
+                type: "Delivery",
+                contact: {
+                  phone: "9886098860",
+                  email: "abc@xyz.com",
+                },
+              },
+            ],
+            descriptor: {
+              name: "Store 1",
+              symbol:
+                "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/646cac0619c19a4236fb6608_328999565_448149590771366_6119874079180001204_n.jpeg",
+              short_desc: "Store 1",
+              long_desc: "Store 1",
+              images: ["https://sellerNP.com/images/store1.png"],
+            },
+          },
+        ],
+      },
     },
   };
 
