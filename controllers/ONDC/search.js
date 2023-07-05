@@ -132,7 +132,7 @@ const search = async (req, res) => {
     console.log(
       "-----------------------------responseData-----------------------------"
     );
-    console.log(responseData.message.ack);
+    console.log(responseData.message);
 
     // console.log("Payment Type -> " + message.intent.payment["@ondc/org/buyer_app_finder_fee_type"]);
     // console.log("Payment Amount -> " + message.intent.payment["@ondc/org/buyer_app_finder_fee_amount"]);
