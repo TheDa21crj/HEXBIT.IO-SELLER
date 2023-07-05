@@ -52,27 +52,69 @@ const search = async (req, res) => {
       name: "Is Going Online",
       bap_id: context.bap_id,
       images: [
-        "https://www.ndhgo.com/wp-content/uploads/2021/05/NDHGO-Logo-2021-01.png",
+        "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/646cac0619c19a4236fb6608_328999565_448149590771366_6119874079180001204_n.jpeg",
       ],
       long_desc:
         "Is Going Online lets you sell products directly to your customers globally or locally, including online marketplaces like Amazon, Flipkart, and eBay. Our expert support team will help you to setup the online store and increase revenue by selling to more customers. At Is Going Online, accessible from isgoing.online, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Is Going Online and how we use it. rishav",
       short_desc:
         "Is Going Online lets you sell products directly to your customers globally or locally, including online marketplaces like Amazon, Flipkart, and eBay. rishav",
       symbol:
-        "https://www.ndhgo.com/wp-content/uploads/2021/05/NDHGO-Logo-2021-01.png",
+        "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/646cac0619c19a4236fb6608_328999565_448149590771366_6119874079180001204_n.jpeg",
     },
     category_details: {},
     category_id: "RET-12-14",
     descriptor: {
       images: [
-        "https://rukminim1.flixcart.com/image/832/832/xif0q/shoe/g/q/l/12-ga1142-12-adidas-cblack-sonink-ftwwht-original-imageh7fdcyg8cvu-bb.jpeg?q=70",
+        "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/64971d22eaa2f396e6c5d9c4_41caP08gttL.jpg",
       ],
-      long_desc: "addidas shoe1  long desc",
-      name: "Addidas Shoe 1",
-      short_desc: "addidas shoe 1 short desc",
+      long_desc: "rishav shoe1  long desc rishav",
+      name: "rishav Shoe 1",
+      short_desc: "rishav shoe 1 short desc rishav",
       symbol:
-        "https://rukminim1.flixcart.com/image/832/832/xif0q/shoe/g/q/l/12-ga1142-12-adidas-cblack-sonink-ftwwht-original-imageh7fdcyg8cvu-bb.jpeg?q=70",
+        "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/64971d22eaa2f396e6c5d9c4_41caP08gttL.jpg",
     },
+    fulfillment_details: { id: "1", type: "Delivery" },
+    fulfillment_id: "1",
+    id: "addidas_ondc_001",
+    location_details: {
+      gps: "12.967555,77.749666",
+      id: "addidas-store-location-id-1",
+      circle: {
+        gps: "12.967555,77.749666",
+        radius: { unit: "km", value: "5" },
+      },
+      area_code: "560076",
+      city: "Bengaluru",
+      state: "KA",
+      street: "Jayanagar 4th Block",
+      time: {
+        days: "1,2,3,4,5,6,7",
+        range: { start: "1100", end: "2100" },
+        schedule: {
+          holidays: ["2022-08-15", "2022-08-19"],
+          frequency: "PT4H",
+          times: ["1100", "1700"],
+        },
+      },
+    },
+    location_id: "addidas-store-location-id-1",
+    price: { currency: "INR", value: "275.0", maximum_value: "220" },
+    provider_details: {
+      id: "BANIYA_Seller_0001",
+      descriptor: {
+        images: [
+          "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/62db1dc91e10d0634e7b8bb7_friends.webp",
+        ],
+        long_desc: "seller 1 long description",
+        name: "BANIYA_Seller_0001",
+        short_desc: "seller 1 short description",
+        symbol:
+          "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/640d7823317316351292beeb_Frame%201.png",
+      },
+    },
+    quantity: { available: { count: "1" }, maximum: { count: "2" } },
+    storeOpenTillDate: "2023-07-05T21:00:00.628Z",
+    tags: { veg: "yes", non_veg: "no" },
   };
 
   try {
