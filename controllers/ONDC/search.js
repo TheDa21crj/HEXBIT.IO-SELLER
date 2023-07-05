@@ -119,7 +119,6 @@ const search = async (req, res) => {
 
   try {
     const responseData = await axios.post(
-      // "https://virtserver.swaggerhub.com/ONDCTech/ONDC-Protocol-Core/1.0.0/on_search",
       "https://pilot-gateway-1.beckn.nsdl.co.in/on_search",
       response,
       {
