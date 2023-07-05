@@ -100,13 +100,13 @@ const search = async (req, res) => {
     location_id: "addidas-store-location-id-1",
     price: { currency: "INR", value: "275.0", maximum_value: "220" },
     provider_details: {
-      id: "BANIYA_Seller_0001",
+      id: "Rishav",
       descriptor: {
         images: [
           "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/62db1dc91e10d0634e7b8bb7_friends.webp",
         ],
         long_desc: "seller 1 long description",
-        name: "BANIYA_Seller_0001",
+        name: "Rishav",
         short_desc: "rishav 1 short description",
         symbol:
           "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/640d7823317316351292beeb_Frame%201.png",
