@@ -24,164 +24,54 @@ const search = async (req, res) => {
       timestamp: context.timestamp,
       ttl: context.ttl,
     },
-    message: {
-      catalog: {
-        "bpp/descriptor": {
-          name: "Rishav",
-          symbol:
-            "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/646cac0619c19a4236fb6608_328999565_448149590771366_6119874079180001204_n.jpeg",
-          short_desc: "Seller Marketplace",
-          long_desc: "Seller Marketplace",
-          images: [
-            "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/64971d22eaa2f396e6c5d9c4_41caP08gttL.jpg",
-          ],
-        },
-        "bpp/providers": [
-          {
-            id: "P1",
-            time: {
-              label: "enable",
-              timestamp: "2023-06-03T08:00:30.000Z",
-            },
-            fulfillments: [
-              {
-                id: "F1",
-                type: "Delivery",
-                contact: {
-                  phone: "9886098860",
-                  email: "abc@xyz.com",
-                },
-              },
-            ],
-            descriptor: {
-              name: "Rishav 1",
-              symbol:
-                "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/646cac0619c19a4236fb6608_328999565_448149590771366_6119874079180001204_n.jpeg",
-              short_desc: "Store 1",
-              long_desc: "Store 1",
-              images: [
-                "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/64971d22eaa2f396e6c5d9c4_41caP08gttL.jpg",
-              ],
-            },
-            "@ondc/org/fssai_license_no": "12345678901234",
-            ttl: "P1D",
-            locations: [
-              {
-                id: "L1",
-                time: {
-                  days: "1,2,3,4,5,6,7",
-                  schedule: {
-                    holidays: ["2023-08-15"],
-                    frequency: "PT4H",
-                    times: ["1100", "1900"],
-                  },
-                  range: {
-                    start: "1100",
-                    end: "2100",
-                  },
-                },
-                gps: "12.967555,77.749666",
-                address: {
-                  locality: "Jayanagar",
-                  street: "Jayanagar 4th Block",
-                  city: "Bengaluru",
-                  area_code: "560076",
-                  state: "KA",
-                },
-                circle: {
-                  gps: "12.967555,77.749666",
-                  radius: {
-                    unit: "km",
-                    value: "3",
-                  },
-                },
-              },
-            ],
-            items: [
-              {
-                id: "C1",
-                descriptor: {
-                  name: "Rishav Hand Tossed",
-                },
-                quantity: {
-                  unitized: {
-                    measure: {
-                      unit: "unit",
-                      value: "1",
-                    },
-                  },
-                  available: {
-                    count: "99",
-                  },
-                  maximum: {
-                    count: "99",
-                  },
-                },
-                price: {
-                  currency: "INR",
-                  value: "110.0",
-                  maximum_value: "0.0",
-                },
-                category_id: "F&B",
-                related: true,
-                tags: [
-                  {
-                    code: "type",
-                    list: [
-                      {
-                        code: "type",
-                        value: "1",
-                      },
-                    ],
-                  },
-                  {
-                    code: "parent",
-                    list: [
-                      {
-                        code: "id",
-                        value: "CG1",
-                      },
-                      {
-                        code: "default",
-                        value: "yes",
-                      },
-                    ],
-                  },
-                  {
-                    code: "child",
-                    list: [
-                      {
-                        code: "id",
-                        value: "CG2",
-                      },
-                    ],
-                  },
-                  {
-                    code: "veg_nonveg",
-                    list: [
-                      {
-                        code: "veg",
-                        value: "yes",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-            tags: [
-              {
-                code: "order_value",
-                list: [
-                  {
-                    code: "min_value",
-                    value: "5.00",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
+    "@ondc/org/available_on_cod": false,
+    "@ondc/org/cancellable": true,
+    "@ondc/org/contact_details_consumer_care":
+      "Ramesh1, Koramangala, Bengaluru, ramesh@abc.com, 9876543210",
+    "@ondc/org/mandatory_reqs_veggies_fruits": { net_quantity: "100g" },
+    "@ondc/org/return_window": "P7D",
+    "@ondc/org/returnable": true,
+    "@ondc/org/seller_pickup_return": false,
+    "@ondc/org/statutory_reqs_packaged_commodities": {
+      common_or_generic_name_of_commodity: "rishav shoe 1",
+      manufacturer_or_packer_address: "123, xyz street, Bengaluru",
+      manufacturer_or_packer_name: "rishav",
+      month_year_of_manufacture_packing_import: "08/2022",
+      net_quantity_or_measure_of_commodity_in_pkg: "100",
+    },
+    "@ondc/org/statutory_reqs_prepackaged_food": {
+      additives_info: "Preservatives, Artificial Colours",
+      brand_owner_FSSAI_license_no: "1234567890",
+      importer_FSSAI_license_no: "1234567890",
+      nutritional_info:
+        "Energy(KCal)-(per 100kg) 420, (per serving 50g)250; Protein(g)-(per 100kg) 12, (per serving 50g) 6",
+      other_FSSAI_license_no: "1234567890",
+    },
+    "@ondc/org/time_to_ship": "PT45M",
+    bpp_details: {
+      name: "Is Going Online",
+      bap_id: context.bap_id,
+      images: [
+        "https://www.ndhgo.com/wp-content/uploads/2021/05/NDHGO-Logo-2021-01.png",
+      ],
+      long_desc:
+        "Is Going Online lets you sell products directly to your customers globally or locally, including online marketplaces like Amazon, Flipkart, and eBay. Our expert support team will help you to setup the online store and increase revenue by selling to more customers. At Is Going Online, accessible from isgoing.online, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Is Going Online and how we use it. rishav",
+      short_desc:
+        "Is Going Online lets you sell products directly to your customers globally or locally, including online marketplaces like Amazon, Flipkart, and eBay. rishav",
+      symbol:
+        "https://www.ndhgo.com/wp-content/uploads/2021/05/NDHGO-Logo-2021-01.png",
+    },
+    category_details: {},
+    category_id: "RET-12-14",
+    descriptor: {
+      images: [
+        "https://rukminim1.flixcart.com/image/832/832/xif0q/shoe/g/q/l/12-ga1142-12-adidas-cblack-sonink-ftwwht-original-imageh7fdcyg8cvu-bb.jpeg?q=70",
+      ],
+      long_desc: "addidas shoe1  long desc",
+      name: "Addidas Shoe 1",
+      short_desc: "addidas shoe 1 short desc",
+      symbol:
+        "https://rukminim1.flixcart.com/image/832/832/xif0q/shoe/g/q/l/12-ga1142-12-adidas-cblack-sonink-ftwwht-original-imageh7fdcyg8cvu-bb.jpeg?q=70",
     },
   };
 
@@ -197,7 +87,7 @@ const search = async (req, res) => {
       }
     );
 
-    // console.log(responseData);
+    console.log(responseData);
 
     // console.log("Payment Type -> " + message.intent.payment["@ondc/org/buyer_app_finder_fee_type"]);
     // console.log("Payment Amount -> " + message.intent.payment["@ondc/org/buyer_app_finder_fee_amount"]);
