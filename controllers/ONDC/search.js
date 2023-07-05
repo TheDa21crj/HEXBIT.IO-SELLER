@@ -107,7 +107,7 @@ const search = async (req, res) => {
         ],
         long_desc: "seller 1 long description",
         name: "BANIYA_Seller_0001",
-        short_desc: "seller 1 short description",
+        short_desc: "rishav 1 short description",
         symbol:
           "https://uploads-ssl.webflow.com/61dd733efbe56d4e2f5f701f/640d7823317316351292beeb_Frame%201.png",
       },
