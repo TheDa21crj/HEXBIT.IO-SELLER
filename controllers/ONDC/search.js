@@ -161,9 +161,10 @@ const search = async (req, res) => {
     console.log(
       "*************************************error*************************************"
     );
-    console.log(error);
+    console.log(error.message);
     res.status(404).json({
       message: "error",
+      error: error,
     });
   }
 };
