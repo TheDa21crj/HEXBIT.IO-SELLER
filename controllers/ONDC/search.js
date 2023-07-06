@@ -226,6 +226,8 @@ const search = async (req, res) => {
 
   console.table("<--------------------context-------------------->s");
   console.table(context);
+  console.table("<--------------------message-------------------->s");
+  console.log(message);
 
   try {
     const responseData = await axios.post(
