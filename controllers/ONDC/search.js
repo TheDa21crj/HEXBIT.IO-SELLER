@@ -224,9 +224,9 @@ const search = async (req, res) => {
     },
   };
 
-  console.table("<--------------------context-------------------->s");
+  console.table("<--------------------context-------------------->");
   console.table(context);
-  console.table("<--------------------message-------------------->s");
+  console.table("<--------------------message-------------------->");
   console.log(message);
 
   try {
