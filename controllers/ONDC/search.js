@@ -133,7 +133,7 @@ const search = async (req, res) => {
     );
 
     console.log(
-      "-----------------------------responseData-----------------------------"
+      "-----------------------------responseData.data.message-----------------------------"
     );
 
     console.log(responseData.data.message);
