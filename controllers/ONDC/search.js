@@ -136,6 +136,8 @@ const search = async (req, res) => {
       "-----------------------------responseData.data.message-----------------------------"
     );
 
+    console.table(context);
+
     console.log(responseData.data.message);
 
     // console.log("Payment Type -> " + message.intent.payment["@ondc/org/buyer_app_finder_fee_type"]);
