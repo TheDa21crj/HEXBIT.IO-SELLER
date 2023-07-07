@@ -50,6 +50,7 @@ const search = async (req, res) => {
       transaction_id: context.transaction_id,
       message_id: context.message_id,
       timestamp,
+      ttl: "PT60S",
     },
     bpp_details: {
       name: "Shop Eiosys",
