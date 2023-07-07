@@ -41,7 +41,7 @@ const search = async (req, res) => {
       domain: "nic2004:52110",
       country: "IND",
       city: "std:*",
-      action: "on_search",
+      action: "search",
       core_version: "1.1.0",
       bap_id: "buyer-app.ondc.org",
       bap_uri: "https://buyer-app.ondc.org/protocol/v1",
