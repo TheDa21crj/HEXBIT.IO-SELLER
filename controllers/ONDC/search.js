@@ -61,7 +61,7 @@ const search = async (req, res) => {
     },
     bpp_details: {
       name: "Shop Eiosys",
-      bpp_id: "ondc.staging.seller.eiosys.com",
+      bpp_id: "techondc.hexbit.io",
     },
     quantity: {
       available: {
