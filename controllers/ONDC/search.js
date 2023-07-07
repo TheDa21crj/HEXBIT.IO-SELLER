@@ -39,11 +39,11 @@ const search = async (req, res) => {
     category_details: {},
     fulfillment_details: {},
     context: {
-      domain: context.domain,
-      country: context.country,
-      city: "*",
+      domain: "nic2004:52110",
+      country: "IND",
+      city: "std:*",
       action: "on_search",
-      core_version: context.core_version,
+      core_version: "1.1.0",
       bap_id: "buyer-app.ondc.org",
       bap_uri: "https://buyer-app.ondc.org/protocol/v1",
       bpp_id: "techondc.hexbit.io",
@@ -86,6 +86,7 @@ const search = async (req, res) => {
       "-----------------------------responseData.data.message-----------------------------"
     );
 
+    console.log(responseData.data);
     console.log(responseData.data.message);
 
     // console.log("Payment Type -> " + message.intent.payment["@ondc/org/buyer_app_finder_fee_type"]);
