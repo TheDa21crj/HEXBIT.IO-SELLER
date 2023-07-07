@@ -26,7 +26,7 @@ const search = async (req, res) => {
     },
     message: {
       catalog: {
-        "bpp/fulfillments": [
+        fulfillments: [
           {
             id: "1",
             type: "Delivery",
@@ -40,14 +40,14 @@ const search = async (req, res) => {
             type: "Delivery and Self-Pickup",
           },
         ],
-        "bpp/descriptor": {
+        descriptor: {
           name: "ABC store",
           symbol: "https://abc.com/images/1-shop-img",
           short_desc: "Online eCommerce Store",
           long_desc: "Online eCommerce Store",
           images: ["https://abc.com/images/shop-img"],
         },
-        "bpp/providers": [
+        providers: [
           {
             id: "P1",
             time: {
