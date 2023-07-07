@@ -66,11 +66,6 @@ const search = async (req, res) => {
     },
   };
 
-  console.table("<--------------------context-------------------->");
-  console.table(context);
-  console.table("<--------------------message-------------------->");
-  console.log(message);
-
   try {
     const responseData = await axios.post(
       "https://pilot-gateway-1.beckn.nsdl.co.in/on_search",
