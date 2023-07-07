@@ -14,7 +14,7 @@ const search = async (req, res) => {
     // message: {
     id: "item_1",
     descriptor: {
-      name: "Eiosys item 1",
+      name: "Rishav item 1",
     },
     location_id: "Eiosys_location",
     price: {
@@ -25,7 +25,7 @@ const search = async (req, res) => {
     provider_details: {
       id: "eiosys1",
       descriptor: {
-        name: "Eiosys Store 1",
+        name: "Rishav Store 1",
       },
     },
     location_details: {
