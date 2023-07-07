@@ -15,7 +15,6 @@ const search = async (req, res) => {
   console.log(timestamp);
 
   const response = {
-    // message: {
     id: "item_1",
     descriptor: {
       name: "Rishav item 1",
