@@ -11,67 +11,53 @@ const search = async (req, res) => {
   const { context, message } = req.body;
 
   const response = {
+    // message: {
+    id: "item_1",
+    descriptor: {
+      name: "Eiosys item 1",
+    },
+    location_id: "Eiosys_location",
+    price: {
+      currency: "INR",
+      value: "40.0",
+    },
+    matched: true,
+    provider_details: {
+      id: "eiosys1",
+      descriptor: {
+        name: "Eiosys Store 1",
+      },
+    },
+    location_details: {
+      id: "Eiosys_location",
+      gps: "19.23587,73.1311240000001",
+    },
+    category_details: {},
+    fulfillment_details: {},
     context: {
       domain: context.domain,
       country: context.country,
-      city: context.city,
+      city: "*",
       action: "on_search",
       core_version: context.core_version,
-      bap_id: context.bap_id,
-      bap_uri: context.bap_uri,
+      bap_id: "buyer-app.ondc.org",
+      bap_uri: "https://buyer-app.ondc.org/protocol/v1",
+      bpp_id: "techondc.hexbit.io",
+      bpp_uri: "https://techondc.hexbit.io/",
       transaction_id: context.transaction_id,
       message_id: context.message_id,
       timestamp: context.timestamp,
-      ttl: context.ttl,
     },
-    message: {
-      id: "item_1",
-      descriptor: {
-        name: "Eiosys item 1",
+    bpp_details: {
+      name: "Shop Eiosys",
+      bpp_id: "ondc.staging.seller.eiosys.com",
+    },
+    quantity: {
+      available: {
+        count: 0,
       },
-      location_id: "Eiosys_location",
-      price: {
-        currency: "INR",
-        value: "40.0",
-      },
-      matched: true,
-      provider_details: {
-        id: "eiosys1",
-        descriptor: {
-          name: "Eiosys Store 1",
-        },
-      },
-      location_details: {
-        id: "Eiosys_location",
-        gps: "19.23587,73.1311240000001",
-      },
-      category_details: {},
-      fulfillment_details: {},
-      context: {
-        domain: "nic2004:52110",
-        country: "IND",
-        city: "*",
-        action: "on_search",
-        core_version: "1.0.0",
-        bap_id: "buyer-app.ondc.org",
-        bap_uri: "https://buyer-app.ondc.org/protocol/v1",
-        bpp_id: "ondc.staging.seller.eiosys.com",
-        bpp_uri: "https://ondc.staging.seller.eiosys.com",
-        transaction_id: "5fd333a6-3498-4f34-b160-e0bda9a4fa4e",
-        message_id: "f956e973-38bc-471d-9d00-8bdb4f003837",
-        timestamp: "2023-07-07T03:31:29.137Z",
-      },
-      bpp_details: {
-        name: "Shop Eiosys",
-        bpp_id: "ondc.staging.seller.eiosys.com",
-      },
-      quantity: {
-        available: {
-          count: 0,
-        },
-        maximum: {
-          count: 0,
-        },
+      maximum: {
+        count: 0,
       },
     },
   };
