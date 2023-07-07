@@ -47,6 +47,17 @@ const search = async (req, res) => {
       transaction_id: context.transaction_id,
       message_id: context.message_id,
       timestamp: context.timestamp,
+      signing_public_key: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
+      encr_public_key:
+        "MCowBQYDK2VuAyEAV4FZ4Px1z9ZUbKGTjvGrddnzqv8XCgjy28a9048cJ0M=",
+      valid_from: "2023-05-18T10:10:08.196Z",
+      valid_until: "2026-05-18T10:10:08.196Z",
+      status: "SUBSCRIBED",
+      created: "2023-05-23T18:05:52.005Z",
+      updated: "2023-05-23T18:05:52.005Z",
+      ukId: "628",
+      type: "BPP",
+      br_id: 628,
     },
     bpp_details: {
       name: "Shop Eiosys",
