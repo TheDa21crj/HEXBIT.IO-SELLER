@@ -33,5 +33,22 @@
       "ttl": "PT60S"
     },
     "message": {}
+  },
+  {
+    "br_id": 714,
+    "subscriber_id": "ondc.binoapp.com",
+    "subscriber_url": "https://ondc.binoapp.com/",
+    "type": "BAP",
+    "domain": "nic2004:52110",
+    "city": "*",
+    "country": "IND",
+    "signing_public_key": "VSvfaqkjGc6bKZG18fN1IBIIGzWfvLeqbviZ2WPsxd0=",
+    "encr_public_key": "MCowBQYDK2VuAyEAm+ws+HeWb4qiwIDKKN/qprAI/BbRBEc0en2TSR6pwko=",
+    "valid_from": "2023-07-07T05:02:39.470Z",
+    "valid_until": "2025-07-07T05:02:39.470Z",
+    "status": "SUBSCRIBED",
+    "created": "2023-07-07T17:01:52.001Z",
+    "updated": "2023-07-07T17:01:52.001Z",
+    "ukId": "714"
   }
 ]
