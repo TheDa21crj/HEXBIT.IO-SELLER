@@ -25,201 +25,53 @@ const search = async (req, res) => {
       ttl: context.ttl,
     },
     message: {
-      catalog: {
-        fulfillments: [
-          {
-            id: "1",
-            type: "Delivery",
-          },
-          {
-            id: "2",
-            type: "Self-Pickup",
-          },
-          {
-            id: "3",
-            type: "Delivery and Self-Pickup",
-          },
-        ],
+      id: "item_1",
+      descriptor: {
+        name: "Eiosys item 1",
+      },
+      location_id: "Eiosys_location",
+      price: {
+        currency: "INR",
+        value: "40.0",
+      },
+      matched: true,
+      provider_details: {
+        id: "eiosys1",
         descriptor: {
-          name: "ABC store",
-          symbol: "https://abc.com/images/1-shop-img",
-          short_desc: "Online eCommerce Store",
-          long_desc: "Online eCommerce Store",
-          images: ["https://abc.com/images/shop-img"],
+          name: "Eiosys Store 1",
         },
-        providers: [
-          {
-            id: "P1",
-            time: {
-              label: "disable",
-              timestamp: "2023-02-03T08:00:30.000Z",
-            },
-            descriptor: {
-              name: "ABC store",
-              symbol: "https://abc.com/images/shop-img",
-              short_desc: "ABC store",
-              long_desc: "ABC store_",
-              Iimages: ["https://abc.com/images/18275/18275-1-shop-img"],
-            },
-            "@ondc/org/fssai_license_no": "12345678901234",
-            ttl: ";P1D",
-            locations: [
-              {
-                id: "L1",
-                gps: "12.967555,77.749666",
-                address: {
-                  locality: "Jayanagar 4th Block",
-                  street: "Jayanagar 4th Block",
-                  city: "Bengaluru",
-                  area_code: "560076",
-                  state: "KA",
-                },
-                circle: {
-                  gps: "12.967555,77.749666",
-                  radius: {
-                    unit: "km",
-                    value: "3",
-                  },
-                },
-                time: {
-                  days: "1,2,3,4,5,6,7",
-                  schedule: {
-                    holidays: ["2022-08-15", "2022-08-19"],
-                    frequency: "PT4HPT4H",
-                    times: ["1100", "1900"],
-                  },
-                  range: {
-                    start: "1100",
-                    end: "2100",
-                  },
-                },
-              },
-            ],
-            items: [
-              {
-                id: "I1",
-                descriptor: {
-                  name: "Atta",
-                  code: "1:XXXXXXXXXXXXX",
-                  symbol: "https://abc.com/images/07.png",
-                  short_desc: "Ashirwad Atta 5kg",
-                  long_desc: "Ashirwad Atta 5kg",
-                  images: ["https://abc.com/images/07.png"],
-                },
-                quantity: {
-                  available: {
-                    count: "1",
-                  },
-                  maximum: {
-                    count: "2",
-                  },
-                },
-                price: {
-                  currency: "INR",
-                  value: "170.0",
-                  maximum_value: "180.0",
-                },
-                category_id: "Packaged Commodities",
-                fulfillment_id: "1",
-                location_id: "L1",
-                recommended: true,
-                "@ondc/org/returnable": true,
-                "@ondc/org/cancellable": true,
-                "@ondc/org/return_window": "P7D",
-                "@ondc/org/seller_pickup_return": false,
-                "@ondc/org/time_to_ship": "PT45M",
-                "@ondc/org/available_on_cod": false,
-                "@ondc/org/contact_details_consumer_care":
-                  "Ramesh,ramesh@abc.com,18004254444",
-                "@ondc/org/statutory_reqs_packaged_commodities": {
-                  manufacturer_or_packer_name: "ITC",
-                  manufacturer_or_packer_address:
-                    "ITC Quality Care Cell,P.O Box No.592,Bangalore-560005",
-                  common_or_generic_name_of_commodity: "Ashirwad Atta",
-                  net_quantity_or_measure_of_commodity_in_pkg: "5kg",
-                  month_year_of_manufacture_packing_import: "501/2023",
-                  imported_product_country_of_origin: "IND",
-                },
-                "@ondc/org/statutory_reqs_prepackaged_food": {
-                  nutritional_info:
-                    "Energy(KCal)-(per 100kg) 420,(per serving 50g)250;Protein(g)-(per 100kg) 12,(per serving 50g) 6",
-                  additives_info: "Preservatives,Artificial Colours",
-                  brand_owner_FSSAI_license_no: "12345678901234",
-                  other_FSSAI_license_no: "12345678901234",
-                  importer_FSSAI_license_no: "12345678901234",
-                  imported_product_country_of_origin: "IND",
-                },
-                "@ondc/org/mandatory_reqs_veggies_fruits": {
-                  net_quantity: "100g",
-                },
-                tags: {
-                  veg: "yes",
-                  non_veg: "no",
-                },
-              },
-            ],
-            fulfillments: [
-              {
-                contact: {
-                  phone: "9886098860",
-                  email: "abc@xyz.com",
-                },
-              },
-            ],
-            tags: [
-              {
-                code: "serviceability",
-                list: [
-                  {
-                    code: "location",
-                    value: "L1",
-                  },
-                  {
-                    code: "category",
-                    value: "Eggs, Meat & Fish",
-                  },
-                  {
-                    code: "type",
-                    value: "10",
-                  },
-                  {
-                    code: "val",
-                    value: "3",
-                  },
-                  {
-                    code: "unit",
-                    value: "km",
-                  },
-                ],
-              },
-              {
-                code: "serviceability",
-                list: [
-                  {
-                    code: "location",
-                    value: "L1",
-                  },
-                  {
-                    code: "category",
-                    value: "Kitchen Accessories",
-                  },
-                  {
-                    code: "type",
-                    value: "12",
-                  },
-                  {
-                    code: "val",
-                    value: "IND",
-                  },
-                  {
-                    code: "unit",
-                    value: "country",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+      },
+      location_details: {
+        id: "Eiosys_location",
+        gps: "19.23587,73.1311240000001",
+      },
+      category_details: {},
+      fulfillment_details: {},
+      context: {
+        domain: "nic2004:52110",
+        country: "IND",
+        city: "*",
+        action: "on_search",
+        core_version: "1.0.0",
+        bap_id: "buyer-app.ondc.org",
+        bap_uri: "https://buyer-app.ondc.org/protocol/v1",
+        bpp_id: "ondc.staging.seller.eiosys.com",
+        bpp_uri: "https://ondc.staging.seller.eiosys.com",
+        transaction_id: "5fd333a6-3498-4f34-b160-e0bda9a4fa4e",
+        message_id: "f956e973-38bc-471d-9d00-8bdb4f003837",
+        timestamp: "2023-07-07T03:31:29.137Z",
+      },
+      bpp_details: {
+        name: "Shop Eiosys",
+        bpp_id: "ondc.staging.seller.eiosys.com",
+      },
+      quantity: {
+        available: {
+          count: 0,
+        },
+        maximum: {
+          count: 0,
+        },
       },
     },
   };
