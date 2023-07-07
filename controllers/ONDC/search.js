@@ -46,7 +46,7 @@ const search = async (req, res) => {
       bap_id: "buyer-app.ondc.org",
       bap_uri: "https://buyer-app.ondc.org/protocol/v1",
       bpp_id: "techondc.hexbit.io",
-      bpp_uri: "https://techondc.hexbit.io/",
+      bpp_uri: "https://techondc.hexbit.io",
       transaction_id: context.transaction_id,
       message_id: context.message_id,
       timestamp,
