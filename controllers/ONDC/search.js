@@ -12,7 +12,6 @@ const search = async (req, res) => {
 
   const currentDate = new Date();
   const timestamp = currentDate.toISOString();
-  console.log(timestamp);
 
   const response = {
     id: "item_1",
