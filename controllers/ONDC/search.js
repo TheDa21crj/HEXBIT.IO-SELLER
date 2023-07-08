@@ -13,6 +13,9 @@ const search = async (req, res) => {
   const currentDate = new Date();
   const timestamp = currentDate.toISOString();
 
+  console.log("context.transaction_id -> " + context.transaction_id);
+  console.log("context.message_id -> " + context.message_id);
+
   const response = {
     id: "item_1",
     descriptor: {
