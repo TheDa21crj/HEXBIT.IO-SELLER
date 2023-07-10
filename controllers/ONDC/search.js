@@ -10,11 +10,16 @@ const Items = require("./../../models/Items");
 const search = async (req, res) => {
   const { context, message } = req.body;
 
+  const currentDate = new Date();
+  const timestamp = currentDate.toISOString();
+
+  console.log("context.transaction_id -> " + context.transaction_id);
+  console.log("context.message_id -> " + context.message_id);
+
   const response = {
-    // message: {
     id: "item_1",
     descriptor: {
-      name: "Eiosys item 1",
+      name: "Rishav item 1",
     },
     location_id: "Eiosys_location",
     price: {
@@ -25,7 +30,7 @@ const search = async (req, res) => {
     provider_details: {
       id: "eiosys1",
       descriptor: {
-        name: "Eiosys Store 1",
+        name: "Rishav Store 1",
       },
     },
     location_details: {
@@ -35,22 +40,23 @@ const search = async (req, res) => {
     category_details: {},
     fulfillment_details: {},
     context: {
-      domain: context.domain,
-      country: context.country,
-      city: "*",
+      domain: "nic2004:52110",
+      country: "IND",
+      city: "std:*",
       action: "on_search",
-      core_version: context.core_version,
+      core_version: "1.1.0",
       bap_id: "buyer-app.ondc.org",
       bap_uri: "https://buyer-app.ondc.org/protocol/v1",
       bpp_id: "techondc.hexbit.io",
       bpp_uri: "https://techondc.hexbit.io/",
       transaction_id: context.transaction_id,
       message_id: context.message_id,
-      timestamp: context.timestamp,
+      timestamp,
+      ttl: "PT60S",
     },
     bpp_details: {
       name: "Shop Eiosys",
-      bpp_id: "ondc.staging.seller.eiosys.com",
+      bpp_id: "techondc.hexbit.io",
     },
     quantity: {
       available: {
@@ -61,11 +67,6 @@ const search = async (req, res) => {
       },
     },
   };
-
-  console.table("<--------------------context-------------------->");
-  console.table(context);
-  console.table("<--------------------message-------------------->");
-  console.log(message);
 
   try {
     const responseData = await axios.post(
@@ -82,6 +83,7 @@ const search = async (req, res) => {
       "-----------------------------responseData.data.message-----------------------------"
     );
 
+    console.log(responseData.data);
     console.log(responseData.data.message);
 
     // console.log("Payment Type -> " + message.intent.payment["@ondc/org/buyer_app_finder_fee_type"]);
