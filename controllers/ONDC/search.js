@@ -47,8 +47,8 @@ const search = async (req, res) => {
       core_version: "1.1.0",
       bap_id: "buyer-app.ondc.org",
       bap_uri: "https://buyer-app.ondc.org/protocol/v1",
-      bpp_id: "https://techondc.hexbit.io/ecommerce/ondc",
-      bpp_uri: "https://techondc.hexbit.io/ecommerce/ondc",
+      bpp_id: "techondc.hexbit.io",
+      bpp_uri: "https://techondc.hexbit.io/",
       transaction_id: context.transaction_id,
       message_id: context.message_id,
       timestamp,
@@ -74,7 +74,8 @@ const search = async (req, res) => {
       response,
       {
         headers: {
-          Authorization: process.env.Authorization,
+          // Authorization: process.env.Authorization,
+          "X-Gateway-Authorization": process.env.Authorization,
         },
       }
     );
