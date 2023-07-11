@@ -76,6 +76,13 @@ const search = async (req, res) => {
         headers: {
           // Authorization: process.env.Authorization,
           "X-Gateway-Authorization": {
+            "Signature keyId": "example-bg.com|bg3456|ed25519",
+            algorithm: "ed25519",
+            created: "1641287885",
+            expires: "1641287885",
+            headers: "(created) (expires) digest",
+            signature:
+              "hJ5sCmbe7s9Wateq6QAdBGloVSkLuLHWOXcRkzrMcVLthFldV4gnT9Vrnq9iDNPVSKuDqaercVjQwFlj0Ml+3Q==",
             type: "BPP",
             token: process.env.Authorization,
             valid_from: "2023-05-18T10:10:08.196Z",
