@@ -81,6 +81,9 @@ const search = async (req, res) => {
             valid_from: "2023-05-18T10:10:08.196Z",
             valid_to: "2026-05-18T10:10:08.196Z",
             status: "SUBSCRIBED",
+            signing_public_key: "iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8=",
+            encr_public_key:
+              "MCowBQYDK2VuAyEAV4FZ4Px1z9ZUbKGTjvGrddnzqv8XCgjy28a9048cJ0M=",
           },
         },
       }
