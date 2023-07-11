@@ -17,7 +17,7 @@ const select = async(req,res)=>{
         }
     }
     const responseData = await axios.post(
-        "https://virtserver.swaggerhub.com/ONDCTech/ONDC-Protocol-Core/1.0.0/on_select",
+        "https://pilot-gateway-1.beckn.nsdl.co.in/on_select",
         response,
         {
           headers: {
