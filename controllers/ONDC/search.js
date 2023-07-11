@@ -75,7 +75,13 @@ const search = async (req, res) => {
       {
         headers: {
           // Authorization: process.env.Authorization,
-          "X-Gateway-Authorization": process.env.Authorization,
+          "X-Gateway-Authorization": {
+            type: "BPP",
+            token: process.env.Authorization,
+            valid_from: "2023-05-18T10:10:08.196Z",
+            valid_to: "2026-05-18T10:10:08.196Z",
+            status: "SUBSCRIBED",
+          },
         },
       }
     );
