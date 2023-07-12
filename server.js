@@ -76,7 +76,7 @@ app.use(
   "/ondc",
   ondc.Middleware({
     on_search: handlers["onSearch"],
-    on_init: handlers[onInit],
+    on_init: handlers["onInit"],
   })
 );
 
