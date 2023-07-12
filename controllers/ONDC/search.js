@@ -98,6 +98,8 @@ const search = async (req, res) => {
   );
 
   const signingString = `created:${createdTimestamp}\nexpires:${expirationDurationInSeconds}\ndigest:${digest}`;
+  console.log("signingString");
+  console.log(signingString);
 
   const authorizationHeader = `Signature keyId="techondc.hexbit.io",algorithm="ed25519",created="${createdTimestamp}",expires="${expiresTimestamp}",headers="(created) (expires) ${digest}",signature="iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8="`;
   console.log("Authorization Header:", authorizationHeader);
