@@ -99,7 +99,7 @@ const search = async (req, res) => {
 
   const signingString = `created:${createdTimestamp}\nexpires:${expirationDurationInSeconds}\ndigest:${digest}`;
 
-  const authorizationHeader = `Signature keyId="techondc.hexbit.io",algorithm="ed25519",created="${createdTimestamp}",expires="${expiresTimestamp}",headers="(created) (expires) digest",signature="${digest}"`;
+  const authorizationHeader = `Signature keyId="techondc.hexbit.io",algorithm="ed25519",created="${createdTimestamp}",expires="${expiresTimestamp}",headers="(created) (expires) ${digest}",signature="iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8="`;
   console.log("Authorization Header:", authorizationHeader);
 
   try {
@@ -108,7 +108,6 @@ const search = async (req, res) => {
       response,
       {
         headers: {
-          // Authorization: process.env.Authorization,
           "X-Gateway-Authorization": {
             authorizationHeader,
           },
