@@ -94,7 +94,9 @@ const search = async (req, res) => {
 
   const createdTimestamp = Math.floor(Date.now() / 1000);
 
-  const expirationDurationInSeconds = 3600; // Expiration duration of 1 hour
+  // Expiration duration of 1 hour
+  const expirationDurationInSeconds = 3600;
+
   const expiresTimestamp = Math.floor(
     Date.now() / 1000 + expirationDurationInSeconds
   );
