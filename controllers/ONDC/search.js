@@ -37,28 +37,6 @@ const search = async (req, res) => {
   // console.log("context.message_id -> " + context.message_id);
 
   const response = {
-    id: "item_1",
-    descriptor: {
-      name: "Rishav item 1",
-    },
-    location_id: "Eiosys_location",
-    price: {
-      currency: "INR",
-      value: "40.0",
-    },
-    matched: true,
-    provider_details: {
-      id: "eiosys1",
-      descriptor: {
-        name: "Rishav Store 1",
-      },
-    },
-    location_details: {
-      id: "Eiosys_location",
-      gps: "19.23587,73.1311240000001",
-    },
-    category_details: {},
-    fulfillment_details: {},
     context: {
       domain: "nic2004:52110",
       country: "IND",
@@ -74,16 +52,40 @@ const search = async (req, res) => {
       timestamp,
       ttl: "PT60S",
     },
-    bpp_details: {
-      name: "Shop Eiosys",
-      bpp_id: "techondc.hexbit.io",
-    },
-    quantity: {
-      available: {
-        count: 0,
+    catalog: {
+      bpp_details: {
+        name: "Shop Eiosys",
+        bpp_id: "techondc.hexbit.io",
       },
-      maximum: {
-        count: 0,
+      quantity: {
+        available: {
+          count: 0,
+        },
+        maximum: {
+          count: 0,
+        },
+      },
+      category_details: {},
+      fulfillment_details: {},
+      id: "item_1",
+      descriptor: {
+        name: "Rishav item 1",
+      },
+      location_id: "Eiosys_location",
+      price: {
+        currency: "INR",
+        value: "40.0",
+      },
+      matched: true,
+      provider_details: {
+        id: "eiosys1",
+        descriptor: {
+          name: "Rishav Store 1",
+        },
+      },
+      location_details: {
+        id: "Eiosys_location",
+        gps: "19.23587,73.1311240000001",
       },
     },
   };
