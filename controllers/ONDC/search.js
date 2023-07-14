@@ -7,6 +7,7 @@ const Seller = require("./../../models/Seller");
 const Store = require("./../../models/Store");
 const Items = require("./../../models/Items");
 
+// Genetate the Encrypted Text
 function encryptText(text) {
   const textBytes = Buffer.from(text, "utf8");
   const hashBytes = blake.blake2b(textBytes, null, 64);
@@ -14,6 +15,7 @@ function encryptText(text) {
   return hashHex;
 }
 
+// Genetate the Digest
 function generateDigest(requestBody) {
   const requestBodyBytes = new TextEncoder().encode(requestBody);
   const digestBytes = blake.blake2b(requestBodyBytes, null, 64);
@@ -25,17 +27,19 @@ function generateDigest(requestBody) {
 const search = async (req, res) => {
   const { context, message } = req.body;
 
+  // genetate the timestamp
   const currentDate = new Date();
   const timestamp = currentDate.toISOString();
 
-  const plaintext =
-    "lP3sHA+9gileOkXYJXh4Jg8tK0gEEMbf9yCPnFpbldhrAY+NErqL9WD+Vav7TE5tyVXGXBle9ONZi2W7o144eQ==";
+  // const plaintext = "awGPjRK6i/Vg/lWr+0xObclVxlwZXvTjWYtlu6NeOHk=";
+  const plaintext = "The quick brown fox jumps over the lazy dog";
   const encryptedText = encryptText(plaintext);
   console.log("Encrypted text:", encryptedText);
 
   // console.log("context.transaction_id -> " + context.transaction_id);
   // console.log("context.message_id -> " + context.message_id);
 
+  // payload
   const response = {
     context: {
       domain: "nic2004:52110",
@@ -267,11 +271,13 @@ const search = async (req, res) => {
   // console.log("signingString");
   // console.log(signingString);
 
+  // header creation
   const authorizationHeader = `Signature keyId="techondc.hexbit.io|628|ed25519",algorithm="ed25519",created="${createdTimestamp}",expires="${expiresTimestamp}",headers="(created) (expires) digest",signature="2235617bca854dac94b6225bd660f884f06970714cf489c3de1aee033c89ee335cb08140818311fbdeba96ff2846a32b2a216f5bc3def9d8b01d8de44625d618"`;
   // const authorizationHeader = "Signature keyId="cerve.in|683|ed25519",algorithm="ed25519", created="1688122151", expires="1688182151", headers="(created) (expires) digest", signature="WYiK14BqnVNjDT0bKESZbdhITMtX5GB8Zo27wFdrHSe0ZX+N1xQhJql7SpLCpAxo7tDQJKuDFXSQ3yuZ8NSuAQ=="
   // console.log("Authorization Header:", authorizationHeader);
 
   try {
+    // sending the ON SEARCH Response
     const responseData = await axios.post(
       "https://pilot-gateway-1.beckn.nsdl.co.in/on_search",
       response,
