@@ -28,10 +28,10 @@ const search = async (req, res) => {
   const currentDate = new Date();
   const timestamp = currentDate.toISOString();
 
-  // const plaintext =
-  //   "lP3sHA+9gileOkXYJXh4Jg8tK0gEEMbf9yCPnFpbldhrAY+NErqL9WD+Vav7TE5tyVXGXBle9ONZi2W7o144eQ==";
-  // const encryptedText = encryptText(plaintext);
-  // console.log("Encrypted text:", encryptedText);
+  const plaintext =
+    "lP3sHA+9gileOkXYJXh4Jg8tK0gEEMbf9yCPnFpbldhrAY+NErqL9WD+Vav7TE5tyVXGXBle9ONZi2W7o144eQ==";
+  const encryptedText = encryptText(plaintext);
+  console.log("Encrypted text:", encryptedText);
 
   // console.log("context.transaction_id -> " + context.transaction_id);
   // console.log("context.message_id -> " + context.message_id);
@@ -263,12 +263,13 @@ const search = async (req, res) => {
     Date.now() / 1000 + expirationDurationInSeconds
   );
 
-  const signingString = `created:${createdTimestamp}\nexpires:${expirationDurationInSeconds}\ndigest:${digest}`;
-  console.log("signingString");
-  console.log(signingString);
+  // const signingString = `created:${createdTimestamp}\nexpires:${expirationDurationInSeconds}\ndigest:${digest}`;
+  // console.log("signingString");
+  // console.log(signingString);
 
-  const authorizationHeader = `Signature keyId="techondc.hexbit.io",algorithm="ed25519",created="${createdTimestamp}",expires="${expiresTimestamp}",headers="(created) (expires) ${digest}",signature="iUTpWtF68yckymVVY/aaXPHrMMPRz/dvYhXf3leVRI8="`;
-  console.log("Authorization Header:", authorizationHeader);
+  const authorizationHeader = `Signature keyId="techondc.hexbit.io|628|ed25519",algorithm="ed25519",created="${createdTimestamp}",expires="${expiresTimestamp}",headers="(created) (expires) digest",signature="2235617bca854dac94b6225bd660f884f06970714cf489c3de1aee033c89ee335cb08140818311fbdeba96ff2846a32b2a216f5bc3def9d8b01d8de44625d618"`;
+  // const authorizationHeader = "Signature keyId="cerve.in|683|ed25519",algorithm="ed25519", created="1688122151", expires="1688182151", headers="(created) (expires) digest", signature="WYiK14BqnVNjDT0bKESZbdhITMtX5GB8Zo27wFdrHSe0ZX+N1xQhJql7SpLCpAxo7tDQJKuDFXSQ3yuZ8NSuAQ=="
+  // console.log("Authorization Header:", authorizationHeader);
 
   try {
     const responseData = await axios.post(
