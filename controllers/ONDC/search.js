@@ -303,6 +303,7 @@ const search = async (req, res) => {
     // console.log("Delivery TYPE -> " + message.intent.fulfillment.type);
     // console.log("Search Word -> ", message.intent.item.descriptor.name);
 
+    // console.log(first)
     res.status(200).json({
       message: {
         ack: {
